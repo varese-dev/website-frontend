@@ -1,12 +1,18 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { routes } from './app.routes';
+import { HeaderComponent } from "./components/header/header.component";
+import { FooterComponent } from "./components/footer/footer.component"; // Importa il file routes
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
+  imports: [RouterModule, HeaderComponent, FooterComponent] // Assicurati di importare RouterModule
+ // Assicurati di importare RouterModule
+ // Assicurati di importare RouterModule
 })
 export class AppComponent {
-  title = 'front-end';
+  title = 'Varese Developer Group';
 }
