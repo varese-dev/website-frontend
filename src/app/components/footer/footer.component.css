@@ -38,7 +38,6 @@
   font-weight: 400;
   color: #333;
   text-decoration: none;
-  
 }
 
 .footer-section a:hover {
@@ -48,7 +47,6 @@
 .contact-btn {
   background-color: #c22c1e;
   color: white;
-  border: none;
   padding: 10px 20px;
   cursor: pointer;
   font-size: 14px;
@@ -73,12 +71,10 @@
 }
 
 .social-logo1 {
-    width: 40px;
-    height: auto;  /* Mantiene le proporzioni originali */
-    margin-right: 20px;
+  width: 40px;
+  height: auto; /* Mantiene le proporzioni originali */
+  margin-right: 20px;
 }
-
-
 
 .footer-bottom {
   text-align: center;
@@ -97,76 +93,123 @@
   text-decoration: underline;
 }
 
-/* Responsiveness */
+/* Responsiveness - Aggiungiamo delle regole specifiche per schermi piccoli */
+
+@media (max-width: 1024px) {
+  .footer-container {
+    padding: 20px; /* Aggiungiamo padding per schermi più piccoli */
+  }
+
+  .footer-section {
+    margin-bottom: 20px; /* Maggiore distanza tra le sezioni su schermi piccoli */
+    text-align: center; /* Centriamo il contenuto nelle sezioni */
+  }
+
+  .social-item {
+    justify-content: center; /* Centriamo gli elementi sociali */
+  }
+
+  .logo-varese {
+    width: 250px; /* Riduciamo la larghezza del logo su schermi più piccoli */
+  }
+
+  .container-social {
+    margin-right: 0; /* Rimuoviamo il margine destro */
+  }
+}
+
 @media (max-width: 768px) {
   .footer-container {
-    flex-direction: column;
+    flex-direction: column; /* Mettiamo il contenuto su una colonna */
     text-align: center;
   }
 
   .footer-section {
     margin-bottom: 15px;
+    width: 100%; /* Le sezioni occupano l'intera larghezza */
+  }
+
+  .footer-section.social {
+    margin-right: 0;
+    max-width: 100%; /* Larghezza massima 100% per le sezioni social */
+  }
+
+  .social-logo {
+    width: 50px; /* Aumentiamo leggermente la dimensione delle icone social */
+    height: 50px;
   }
 
   .social-item {
-    justify-content: center;
+    margin-bottom: 20px; /* Distanza più ampia tra le voci social */
+  }
+
+  .social-logo1 {
+    width: 50px; /* Stessa dimensione per le icone social */
+    height: 50px;
+  }
+
+  .footer-bottom {
+    font-size: 14px; /* Aumentiamo la dimensione del testo nella parte inferiore */
   }
 }
 
-.footer-section.social {
-    margin-right: auto; /* Sposta la sezione più a sinistra */
-    max-width: 300px; /* Limita la larghezza per evitare che sia troppo larga */
+@media (max-width: 480px) {
+  .footer-container {
+    padding: 15px; /* Aggiungiamo un po' di spazio in più sui dispositivi molto piccoli */
   }
-  
 
-  .container-social {
-    position: relative; /* Per posizionare facilmente sopra a tutto */
-   margin-right: 100px
-}
-
-/* Stile per il contenitore del logo */
-.logo-container {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Centra orizzontalmente il logo */
-    margin-bottom: 20px; /* Distanza dal resto del contenuto */
-}
-
-/* Stile per il logo stesso */
-.logo-varese {
-    width: 300px; /* Imposta una larghezza fissa per il logo */
-    height: auto; /* Mantiene le proporzioni del logo */
-}
-
-/* Animazione per le icone social */
-.social-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Aggiungi transizioni fluide */
+  .brand {
+    font-size: 20px; /* Riduciamo la dimensione del brand per schermi piccoli */
   }
-  
-  /* Aggiungi effetto di sollevamento e ingrandimento quando si passa sopra l'icona */
-  .social-item:hover {
-    transform: scale(1.1); /* Ingrandisce leggermente l'elemento */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Aggiungi un'ombra per dare l'effetto di sollevamento */
+
+  .footer-section h3 {
+    font-size: 18px; /* Aumentiamo la dimensione dei titoli */
   }
-  
-  /* Stile per le icone social */
-  .social-logo {
-    width: 40px;
+
+  .footer-section p,
+  .footer-section a {
+    font-size: 14px; /* Manteniamo il testo leggibile */
+  }
+
+  .contact-btn {
+    padding: 8px 16px; /* Riduciamo le dimensioni del pulsante per i dispositivi mobili */
+  }
+
+  .social-logo1 {
+    width: 40px; /* Riduciamo leggermente le dimensioni delle icone social */
     height: 40px;
-    margin-right: 10px;
-    transition: transform 0.3s ease; /* Aggiungi transizione alle icone */
   }
-  
-  /* Effetto hover sulle icone */
-  .social-logo:hover {
-    transform: scale(1.2); /* Ingrandisce l'icona quando si passa sopra */
-  }
-  
-  /* Includi anche un'ombra per le icone quando l'utente ci passa sopra */
-  .social-logo:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
+}
+
+/* Animazioni per le icone social */
+.social-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Aggiungi transizioni fluide */
+}
+
+/* Aggiungi effetto di sollevamento e ingrandimento quando si passa sopra l'icona */
+.social-item:hover {
+  transform: scale(1.1); /* Ingrandisce leggermente l'elemento */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Aggiungi un'ombra per dare l'effetto di sollevamento */
+}
+
+/* Stile per le icone social */
+.social-logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  transition: transform 0.3s ease; /* Aggiungi transizione alle icone */
+}
+
+/* Effetto hover sulle icone */
+.social-logo:hover {
+  transform: scale(1.2); /* Ingrandisce l'icona quando si passa sopra */
+}
+
+/* Includi anche un'ombra per le icone quando l'utente ci passa sopra */
+.social-logo:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
