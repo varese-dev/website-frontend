@@ -1,0 +1,95 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  color: #fff;
+  width: 100%;
+  position: fixed;
+  min-height: 70px;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  backdrop-filter: blur(3.5px);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Effetto quando si scorre */
+header.scrolled {
+  background-color: rgba(0, 0, 0, 0.8); /* Sfondo leggermente visibile */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.nav-left ul {
+  display: flex;
+  gap: 50px;
+  list-style-type: none;
+}
+
+.nav-left ul li {
+  margin: 0;
+}
+
+.nav-left ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.nav-left ul li a:hover {
+  color: #ff0000;
+}
+
+header .logo {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+
+header .logo img {
+  height: 60px;
+  margin-right: 20.5%;
+}
+
+.button {
+  cursor: pointer;
+  position: relative;
+  padding: 8px 20px;
+  font-size: 17px;
+  color: #C22C1E;
+  border: 2px solid #C22C1E;
+  border-radius: 34px;
+  background-color: transparent;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+  overflow: hidden;
+  left: -15px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 50px;
+  height: 50px;
+  border-radius: inherit;
+  scale: 0;
+  z-index: -1;
+  background-color:#C22C1E;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.button:hover::before {
+  scale: 3;
+}
+
+.button:hover {
+  color: #ffffff;
+}
+
+.button:active {
+  scale: 1;
+}
