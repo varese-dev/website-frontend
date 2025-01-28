@@ -1,1 +1,26 @@
-<p>area-utente works!</p>
+<div class="area-utente-container">
+    <h2>Area Utente</h2>
+  
+    <!-- Sezione Eventi Prenotati -->
+    <div class="section">
+      <h3>Eventi Prenotati</h3>
+      <ul>
+        <li *ngFor="let event of bookedEvents" class="event-item">
+          <span class="event-title">{{ event.title }}</span>
+          <span class="event-date">{{ event.date }}</span>
+        </li>
+      </ul>
+    </div>
+  
+    <!-- Sezione Storico Partecipazioni -->
+    <div class="section">
+      <h3>Storico Partecipazioni</h3>
+      <ul>
+        <li *ngFor="let history of participationHistory" class="history-item">
+          <span class="event-title">{{ history.eventTitle }}</span>
+          <span class="event-date">{{ history.eventDate }}</span>
+          <span class="event-status">{{ history.status }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
