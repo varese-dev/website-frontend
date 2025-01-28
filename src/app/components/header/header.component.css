@@ -14,9 +14,9 @@ header {
   transition: all 0.3s ease-in-out;
 }
 
-/* Effetto quando si scorre */
+
 header.scrolled {
-  background-color: rgba(0, 0, 0, 0.8); /* Sfondo leggermente visibile */
+  background-color: rgba(0, 0, 0, 0.8); 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 

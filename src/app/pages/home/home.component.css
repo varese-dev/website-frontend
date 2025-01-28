@@ -8,7 +8,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background: #1B1B1F;
+   
   }
   
   .hero-image {
@@ -33,17 +33,17 @@
   }
   
   .btn-primary {
-    background-color: #f56d3a;
+    background-color: #C22C1E;
     color: white;
     padding: 12px 25px;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 34px;
     font-size: 18px;
     transition: background-color 0.3s ease;
   }
   
   .btn-primary:hover {
-    background-color: #f46a2e;
+    background-color: #ae3025;
   }
 
 /*ABOUT US*/
@@ -80,7 +80,9 @@
   }
   
   .about-image {
-    width: 45%;
+    max-width: 45%;
+    min-height: 320px;
+    min-height: 320px;
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     object-fit: cover; 
