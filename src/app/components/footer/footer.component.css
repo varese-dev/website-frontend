@@ -38,6 +38,7 @@
   font-weight: 400;
   color: #333;
   text-decoration: none;
+  
 }
 
 .footer-section a:hover {
@@ -45,7 +46,7 @@
 }
 
 .contact-btn {
-  background-color: #ff5722;
+  background-color: #c22c1e;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -68,8 +69,16 @@
 .social-logo {
   width: 40px;
   height: 40px;
-  margin-right: 10px;
+  margin-right: 20px;
 }
+
+.social-logo1 {
+    width: 40px;
+    height: auto;  /* Mantiene le proporzioni originali */
+    margin-right: 20px;
+}
+
+
 
 .footer-bottom {
   text-align: center;
@@ -103,3 +112,61 @@
     justify-content: center;
   }
 }
+
+.footer-section.social {
+    margin-right: auto; /* Sposta la sezione più a sinistra */
+    max-width: 300px; /* Limita la larghezza per evitare che sia troppo larga */
+  }
+  
+
+  .container-social {
+    position: relative; /* Per posizionare facilmente sopra a tutto */
+   margin-right: 100px
+}
+
+/* Stile per il contenitore del logo */
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centra orizzontalmente il logo */
+    margin-bottom: 20px; /* Distanza dal resto del contenuto */
+}
+
+/* Stile per il logo stesso */
+.logo-varese {
+    width: 300px; /* Imposta una larghezza fissa per il logo */
+    height: auto; /* Mantiene le proporzioni del logo */
+}
+
+/* Animazione per le icone social */
+.social-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Aggiungi transizioni fluide */
+  }
+  
+  /* Aggiungi effetto di sollevamento e ingrandimento quando si passa sopra l'icona */
+  .social-item:hover {
+    transform: scale(1.1); /* Ingrandisce leggermente l'elemento */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Aggiungi un'ombra per dare l'effetto di sollevamento */
+  }
+  
+  /* Stile per le icone social */
+  .social-logo {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    transition: transform 0.3s ease; /* Aggiungi transizione alle icone */
+  }
+  
+  /* Effetto hover sulle icone */
+  .social-logo:hover {
+    transform: scale(1.2); /* Ingrandisce l'icona quando si passa sopra */
+  }
+  
+  /* Includi anche un'ombra per le icone quando l'utente ci passa sopra */
+  .social-logo:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
