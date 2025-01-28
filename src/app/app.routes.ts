@@ -11,7 +11,7 @@ import {LoginComponent} from './pages/auth/login/login.component';
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'eventi', component: EventiComponent },
-  { path: 'talk-relatori', component: TalkRelatoriComponent },
+  { path: 'meeting', component: TalkRelatoriComponent },
   { path: 'partner', component: PartnerComponent },
   { path: 'prenotazione', component: PrenotazioneComponent },
   { path: 'area-utente', component: AreaUtenteComponent },

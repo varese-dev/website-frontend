@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -7,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-  constructor() {}
+  scrolled = false;
+
+  @HostListener('window:scroll', [])
+  onScroll() {
+    this.scrolled = window.scrollY > 50;
+  }
 }
