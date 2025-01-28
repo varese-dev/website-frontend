@@ -1,0 +1,36 @@
+.area-utente-container {
+    padding: 20px;
+    background-color: white;
+    color: #a90202;
+    font-family: Arial, sans-serif;
+  }
+  
+  .section {
+    margin-bottom: 30px;
+  }
+  
+  h2, h3 {
+    color: #a90202;
+  }
+  
+  .event-item, .history-item {
+    list-style-type: none;
+    padding: 10px;
+    border-bottom: 1px solid #a90202;
+    margin-bottom: 10px;
+  }
+  
+  .event-title {
+    font-weight: bold;
+    color: #a90202;
+  }
+  
+  .event-date {
+    margin-left: 20px;
+    color: #666;
+  }
+  
+  .event-status {
+    margin-left: 20px;
+    color: #666;
+  }

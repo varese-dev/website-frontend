@@ -5,6 +5,8 @@ import { TalkRelatoriComponent } from './pages/talk-relatori/talk-relatori.compo
 import { PartnerComponent } from './pages/partner/partner.component';
 import { PrenotazioneComponent } from './pages/prenotazione/prenotazione.component';
 import { AreaUtenteComponent } from './pages/area-utente/area-utente.component';
+import {RegisterComponent} from './pages/auth/register/register.component';
+import {LoginComponent} from './pages/auth/login/login.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,4 +15,6 @@ export const routes: Routes = [
   { path: 'partner', component: PartnerComponent },
   { path: 'prenotazione', component: PrenotazioneComponent },
   { path: 'area-utente', component: AreaUtenteComponent },
+  { path: 'auth/login', component: LoginComponent },
+  { path: 'auth/register', component: RegisterComponent },
 ];

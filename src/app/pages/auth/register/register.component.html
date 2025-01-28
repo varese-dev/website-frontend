@@ -1,0 +1,27 @@
+<div class="registerContainer">
+  <h2>Registrati al tuo Account</h2>
+  <form (ngSubmit)="register()">
+    <label for="name">Nome </label>
+    <input id="name" type="text" placeholder="Inserisci il tuo nome" [(ngModel)]="name" name="name" required/>
+    <br>
+
+    <label for="surname">Cognome </label>
+    <input id="surname" type="text" placeholder="Inserisci il tuo cognome" [(ngModel)]="surname" name="surname" required/>
+    <br>
+
+    <label for="email">Email </label>
+    <input id="email" type="email" placeholder="Inserisci la tua email" [(ngModel)]="email" name="email" required/>
+    <br>
+
+    <label for="password">Password </label>
+    <input id="password" type="password" placeholder="Inserisci la tua password" [(ngModel)]="password"
+           name="password"
+           required/> <br>
+
+    <label for="phoneNumber">Numero di telefono (facoltativo) </label>
+    <input id="phoneNumber" type="number" placeholder="Inserisci il tuo numero di telefono" [(ngModel)]="phoneNumber"
+           name="phoneNumber"/> <br>
+
+    <button type="submit" [disabled]="!name || !surname || !password || (!email && !phoneNumber)">Registrati</button>
+  </form>
+</div>
