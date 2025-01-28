@@ -18,10 +18,10 @@
            name="password"
            required/> <br>
 
-    <label for="phoneNumber">Numero di telefono (facoltativo) </label>
-    <input id="phoneNumber" type="number" placeholder="Inserisci il tuo numero di telefono" [(ngModel)]="phoneNumber"
-           name="phoneNumber"/> <br>
+    <label for="phone">Numero di telefono (facoltativo) </label>
+    <input id="phone" type="number" placeholder="Inserisci il tuo numero di telefono" [(ngModel)]="phone"
+           name="phone"/> <br>
 
-    <button type="submit" [disabled]="!name || !surname || !password || (!email && !phoneNumber)">Registrati</button>
+    <button type="submit" [disabled]="!name || !surname || !password || (!email && !phone)">Registrati</button>
   </form>
 </div>

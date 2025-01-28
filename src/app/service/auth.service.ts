@@ -15,11 +15,11 @@ export class AuthService {
    * Effettua il login.
    * @param email
    * @param password
-   * @param phoneNumber
+   * @param phone
    * @returns
    */
-  login(email: string, password: string, phoneNumber: string): Observable<any> {
-    const body = { email, password, phoneNumber };
+  login(email: string, password: string, phone: string): Observable<any> {
+    const body = { email, password, phone: phone };
     return this.http.post(this.loginUrl, body);
   }
 
@@ -28,7 +28,7 @@ export class AuthService {
    * @param userData
    * @returns
    */
-  register(userData: { email?: string; phoneNumber?: string; password: string; name: string; surname: string }): Observable<any> {
+  register(userData: { email?: string; phone?: string; password: string; name: string; surname: string }): Observable<any> {
     return this.http.post(this.registerUrl, userData);
   }
 }

@@ -7,11 +7,11 @@ import { RouterLink} from '@angular/router';
   templateUrl: './area-utente.component.html',
   styleUrls: ['./area-utente.component.css'],
   imports: []
-  
+
 })
 export class AreaUtenteComponent  {
-  bookedEvents: any[] = []; // Array per gli eventi prenotati
-  participationHistory: any[] = []; // Array per lo storico delle partecipazioni
+  bookedEvents: any[] = [];
+  participationHistory: any[] = [];
 
   //constructor(private http: HttpClient) {}
 

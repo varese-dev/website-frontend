@@ -12,7 +12,7 @@ import { AuthService } from '../../../service/auth.service';
 export class RegisterComponent {
   email: string = '';
   password: string = '';
-  phoneNumber: string = '';
+  phone: string = '';
   name: string = '';
   surname: string = '';
   errorMessage: string = '';
@@ -22,7 +22,7 @@ export class RegisterComponent {
 
   register(): void {
 
-    if ((!this.email && !this.phoneNumber) || !this.password || !this.name || !this.surname) {
+    if ((!this.email && !this.phone) || !this.password || !this.name || !this.surname) {
       this.errorMessage = 'Tutti i campi sono obbligatori';
       return;
     }
@@ -33,7 +33,7 @@ export class RegisterComponent {
       surname: this.surname,
       password: this.password,
       email: this.email ? this.email : undefined,
-      phoneNumber: this.phoneNumber ? this.phoneNumber : undefined,
+      phoneNumber: this.phone ? this.phone : undefined,
     };
 
     /*Chiamata al servizio di registrazione

@@ -12,23 +12,23 @@ import { AuthService } from '../../../service/auth.service';
 export class LoginComponent {
   email: string = '';
   password: string = '';
-  phoneNumber: string = '';
+  phone: string = '';
   errorMessage: string = '';
 
   //constructor(private authService: AuthService, private router: Router) {}
 
   login(): void {
     // Controlla se almeno email/telefono e password sono stati inseriti
-    if ((!this.email && !this.phoneNumber) || !this.password) {
+    if ((!this.email && !this.phone) || !this.password) {
       this.errorMessage = 'Email/Telefono e password sono obbligatori';
       return;
     }
 
     // Determina quale campo utilizzare (email o phoneNumber)
-    const credentials = this.email ? { email: this.email } : { phoneNumber: this.phoneNumber };
+    const credentials = this.email ? { email: this.email } : { phone: this.phone };
 
     // Verifica che almeno uno tra email o phoneNumber sia presente
-    const credential = credentials.email || credentials.phoneNumber;
+    const credential = credentials.email || credentials.phone;
     if (!credential) {
       this.errorMessage = 'Inserisci un\'email o un numero di telefono valido.';
       return;
