@@ -1,0 +1,244 @@
+.containerIntroduction {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 70px;
+}
+
+p {
+  text-align: center;
+}
+
+
+/* Stile per il carousel */
+.carousel {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.carousel-container {
+  display: flex;
+  gap: 10px;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.carousel-item img {
+  max-width: 100%;
+  height: auto;
+}
+
+.carousel-item p {
+  margin-top: 10px;
+  font-size: 1.2em;
+}
+
+/* Stile per la card */
+.card {
+  --main-color: #000;
+  --submain-color: #78858F;
+  --bg-color: #fff;
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  min-width: 320px;
+  height: 384px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  background: var(--bg-color);
+  transition: transform 0.3s ease-in-out;
+  border: 1px solid #000;
+}
+
+.card__img {
+  height: 192px;
+  width: 100%;
+}
+
+.card__img svg {
+  height: 100%;
+  border-radius: 20px 20px 0 0;
+}
+
+.card__avatar {
+  position: absolute;
+  width: 114px;
+  height: 114px;
+  background: var(--bg-color);
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: calc(50% - 57px);
+}
+
+.card__avatar svg {
+  width: 100px;
+  height: 100px;
+}
+
+.card__title {
+  margin-top: 60px;
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--main-color);
+}
+
+.card__subtitle {
+  margin-top: 10px;
+  font-weight: 400;
+  font-size: 15px;
+  color: var(--submain-color);
+}
+
+.card__btn {
+  margin-top: 15px;
+  width: 76px;
+  height: 31px;
+  border: 2px solid var(--main-color);
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--main-color);
+  background: var(--bg-color);
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+
+.card__btn-solid {
+  background: var(--main-color);
+  color: var(--bg-color);
+}
+
+.card__btn:hover {
+  background: var(--main-color);
+  color: var(--bg-color);
+}
+
+.card__btn-solid:hover {
+  background: var(--bg-color);
+  color: var(--main-color);
+}
+
+/* Stile per il bottone di navigazione */
+.arrow {
+  font-size: 30px;
+  color: black;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  gap: 50px;
+  padding-top: 80px;
+  width: 100%;
+  max-width: 1000px;
+  justify-content: center;
+  margin: 0 auto 80px;
+}
+
+.grid-container > .card {
+  box-sizing: border-box;
+}
+
+.card__btn {
+  width: 100%;
+
+}
+
+
+
+
+
+
+/* Media Queries per Dispositivi Mobili */
+@media (max-width: 1200px) {
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+}
+
+@media (max-width: 992px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .carousel {
+    max-width: 100%;
+  }
+
+  .carousel-container {
+    gap: 5px;
+  }
+
+  .arrow {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .carousel-item p {
+    font-size: 1em;
+  }
+
+  .card {
+    max-width: 90%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .card__title {
+    font-size: 16px;
+  }
+
+  .card__subtitle {
+    font-size: 14px;
+  }
+
+  .arrow {
+    font-size: 24px;
+  }
+
+  .card__btn {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+
+  }
+}

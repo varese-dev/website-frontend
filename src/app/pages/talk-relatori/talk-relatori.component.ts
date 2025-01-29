@@ -1,11 +1,29 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {NgForOf} from '@angular/common';
+import {Relatore, RelatoriService} from '../../service/relatori.service';
+import Swiper from 'swiper';
 
 @Component({
-  selector: 'app-talk-relatori',
-  standalone: true,
+  selector: 'talk-relatori',
   templateUrl: './talk-relatori.component.html',
-  styleUrls: ['./talk-relatori.component.css'],
+  standalone: true,
+  imports: [NgForOf],
+  styleUrls: ['./talk-relatori.component.css']
 })
-export class TalkRelatoriComponent {
-  constructor() {}
+export class TalkRelatoriComponent implements OnInit {
+  relatori: Relatore[] = [];
+
+  constructor(private relatoriService: RelatoriService) {
+  }
+
+  ngOnInit(): void {
+    console.log('ngOnInit TalkRelatoriComponent chiamato');
+    this.relatoriService.getRelatori().subscribe((data) => {
+      this.relatori = data;
+      console.log('Relatori ricevuti:', data);
+    });
+  }
+
+
+
 }

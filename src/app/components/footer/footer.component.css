@@ -19,11 +19,7 @@
   flex: 1;
   min-width: 200px;
   margin: 10px;
-}
-
-.brand {
-  font-size: 24px;
-  font-weight: 700;
+  text-align: left;
 }
 
 .footer-section h3 {
@@ -37,26 +33,28 @@
   font-size: 14px;
   font-weight: 400;
   color: #333;
-  text-decoration: none;
-  
+  text-decoration: none; /* Rimuove la sottolineatura */
 }
 
 .footer-section a:hover {
-  text-decoration: underline;
+  text-decoration: none; /* Assicura che la sottolineatura non compaia al passaggio del mouse */
 }
 
 .contact-btn {
-  background-color: #c22c1e;
+  background-color: #C22C1E;
   color: white;
-  padding: 10px 20px;
+  padding: 12px 25px;
+  text-decoration: none;
+  border-radius: 34px;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
   cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-
+  margin-top: 5%;
+  border: none; /* Rimosso il bordo */
 }
 
 .contact-btn:hover {
-  background-color: #e64a19;
+  background-color: #ae3025;
 }
 
 /* Stile per i social */
@@ -64,37 +62,33 @@
   display: flex;
   align-items: center;
   margin-bottom: 15px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.social-item a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+/* Effetto hover */
+.social-item:hover {
+  transform: translateY(-2px); /* Solleva leggermente l'elemento */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Ombra leggera */
 }
 
 .social-logo {
   width: 40px;
   height: 40px;
-  margin-right: 20px;
+  margin-right: 10px;
+  transition: transform 0.3s ease;
 }
 
-.social-logo1 {
-    width: 40px;
-    height: auto;  /* Mantiene le proporzioni originali */
-    margin-right: 20px;
-}
-
-
-
-.footer-bottom {
-  text-align: center;
-  padding-top: 10px;
-  font-size: 12px;
-  font-weight: 300;
-}
-
-.footer-bottom a {
-  color: #333;
-  text-decoration: none;
-  font-weight: 400;
-}
-
-.footer-bottom a:hover {
-  text-decoration: underline;
+.social-logo:hover {
+  transform: scale(1.2); /* Ingrandisce l'icona al passaggio del mouse */
 }
 
 /* Responsiveness */
@@ -113,60 +107,47 @@
   }
 }
 
-.footer-section.social {
-    margin-right: auto; /* Sposta la sezione più a sinistra */
-    max-width: 300px; /* Limita la larghezza per evitare che sia troppo larga */
-  }
-  
-
-  .container-social {
-    position: relative; /* Per posizionare facilmente sopra a tutto */
-   margin-right: 100px
-}
-
 /* Stile per il contenitore del logo */
 .logo-container {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Centra orizzontalmente il logo */
-    margin-bottom: 20px; /* Distanza dal resto del contenuto */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 20px;
 }
 
 /* Stile per il logo stesso */
 .logo-varese {
-    width: 300px; /* Imposta una larghezza fissa per il logo */
-    height: auto; /* Mantiene le proporzioni del logo */
+  width: 300px;
+  height: auto;
 }
 
-/* Animazione per le icone social */
-.social-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Aggiungi transizioni fluide */
-  }
-  
-  /* Aggiungi effetto di sollevamento e ingrandimento quando si passa sopra l'icona */
-  .social-item:hover {
-    transform: scale(1.1); /* Ingrandisce leggermente l'elemento */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Aggiungi un'ombra per dare l'effetto di sollevamento */
-  }
-  
-  /* Stile per le icone social */
-  .social-logo {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-    transition: transform 0.3s ease; /* Aggiungi transizione alle icone */
-  }
-  
-  /* Effetto hover sulle icone */
-  .social-logo:hover {
-    transform: scale(1.2); /* Ingrandisce l'icona quando si passa sopra */
-  }
-  
-  /* Includi anche un'ombra per le icone quando l'utente ci passa sopra */
-  .social-logo:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
+/* Posizione dei social */
+.container-social {
+  display: flex;
+  justify-content: flex-start;
+  margin-right: 100px;
+}
+
+.social-item p {
+  margin: 0;
+  padding-left: 10px;
+}
+
+/* Testi "Termini" e "Privacy" al centro */
+.footer-bottom {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  font-size: 12px; /* Più piccoli */
+  color: #555; /* Grigio scuro */
+}
+
+.footer-bottom a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #555;
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline; /* Sottolineatura al passaggio del mouse */
+}
