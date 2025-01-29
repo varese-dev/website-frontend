@@ -1,45 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForOf } from '@angular/common';
-import {RelatoriService} from '../../service/relatori.service';
-
-
-// Definizione dell'interfaccia per i dati dei relatori
-interface Relatore {
-  biography: string;
-  name: string;
-  surname: string;
-}
+import {Component, OnInit} from '@angular/core';
+import {NgForOf} from '@angular/common';
+import {Relatore, RelatoriService} from '../../service/relatori.service';
+import Swiper from 'swiper';
 
 @Component({
   selector: 'talk-relatori',
   templateUrl: './talk-relatori.component.html',
+  standalone: true,
   imports: [NgForOf],
   styleUrls: ['./talk-relatori.component.css']
 })
-export class TalkRelatoriComponent  {
-  /*cards = [
-    { image: 'assets/image1.jpg', description: 'Descrizione 1' },
-    { image: 'assets/image2.jpg', description: 'Descrizione 2' },
-    { image: 'assets/image3.jpg', description: 'Descrizione 3' },
-    { image: 'assets/image3.jpg', description: 'Descrizione 3' },
-    { image: 'assets/image3.jpg', description: 'Descrizione 3' },
-    { image: 'assets/image3.jpg', description: 'Descrizione 3' },
-    { image: 'assets/image2.jpg', description: 'Descrizione 2' },
-    { image: 'assets/image3.jpg', description: 'Descrizione 3' },
-    { image: 'assets/image3.jpg', description: 'Descrizione 3' },
-    { image: 'assets/image3.jpg', description: 'Descrizione 3' },
-    { image: 'assets/image3.jpg', description: 'Descrizione 3' },
-    { image: 'assets/image3.jpg', description: 'Descrizione 3' }
-  ];*/
-
-  // Definisci relatori come array di oggetti del tipo 'Relatore'
+export class TalkRelatoriComponent implements OnInit {
   relatori: Relatore[] = [];
 
-  constructor(private relatoriService: RelatoriService) { }
+  constructor(private relatoriService: RelatoriService) {
+  }
 
   ngOnInit(): void {
+    console.log('ngOnInit TalkRelatoriComponent chiamato');
     this.relatoriService.getRelatori().subscribe((data) => {
-      this.relatori = data;  // Dati provenienti dall'API
+      this.relatori = data;
+      console.log('Relatori ricevuti:', data);
     });
   }
+
+
+
 }
