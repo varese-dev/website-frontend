@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Router, RouterLink} from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../service/auth.service';
 
@@ -13,9 +13,10 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
   phoneNumber: string = '';
-  errorMessage: string = '';
+  errorMessage: string = '';  // Messaggio di errore
 
-  //constructor(private authService: AuthService, private router: Router) {}
+  // Costruttore (commentato per il momento)
+  // constructor(private authService: AuthService, private router: Router) {}
 
   login(): void {
     // Controlla se almeno email/telefono e password sono stati inseriti
@@ -37,12 +38,12 @@ export class LoginComponent {
     /* Chiamata al servizio di login
     this.authService.login(credential, this.password).subscribe({
       next: (response) => {
-        this.errorMessage = '';
+        this.errorMessage = ''; // Reset messaggio errore
         console.log(response);
         this.router.navigate(['/home']);
       },
       error: (err) => {
-        this.errorMessage = 'Credenziali errate, riprova.';
+        this.errorMessage = 'Credenziali errate, riprova.'; // Errore di credenziali
         console.error(err);
       },
     });*/
