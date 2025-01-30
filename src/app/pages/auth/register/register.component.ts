@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../service/auth.service';
+import {FormsModule} from '@angular/forms';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  imports: [FormsModule],
   styleUrls: ['./register.component.css'],
+  imports: [
+    FormsModule,
+    NgIf
+  ]
 })
 export class RegisterComponent {
   email: string = '';
@@ -18,25 +22,22 @@ export class RegisterComponent {
   errorMessage: string = '';
   successMessage: string = '';
 
-  //constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   register(): void {
-
     if ((!this.email && !this.phone) || !this.password || !this.name || !this.surname) {
       this.errorMessage = 'Tutti i campi sono obbligatori';
       return;
     }
 
-    // Determina quale campo è stato compilato (email o phoneNumber)
     const userData = {
       name: this.name,
       surname: this.surname,
       password: this.password,
       email: this.email ? this.email : undefined,
-      phoneNumber: this.phone ? this.phone : undefined,
+      phone: this.phone ? this.phone : undefined,
     };
 
-    /*Chiamata al servizio di registrazione
     this.authService.register(userData).subscribe({
       next: (response) => {
         this.successMessage = 'Registrazione avvenuta con successo!';
@@ -44,10 +45,16 @@ export class RegisterComponent {
         this.router.navigate(['/login']);
       },
       error: (err) => {
-        this.errorMessage = 'Errore nella registrazione, riprova.';
-        console.error(err);
+
+        if (err.status === 400) {
+          this.errorMessage = 'Dati di registrazione non validi. Riprova.';
+        } else if (err.status === 409) {
+          this.errorMessage = 'Un account con questa email o numero di telefono esiste già.';
+        } else {
+          this.errorMessage = 'Errore nella registrazione, riprova.';
+        }
         this.successMessage = '';
       },
-    });*/
+    });
   }
 }

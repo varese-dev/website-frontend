@@ -1,1 +1,34 @@
-<p>event-card works!</p>
+<div class="carousel-container">
+  <!-- Freccia sinistra -->
+  <button class="nav-button prev" (click)="previousSlide()">&#10094;</button>
+
+  <div class="carousel">
+    <div class="slides">
+      <div *ngFor="let slide of visibleSlides; trackBy: trackByFn" class="slide">
+        <div class="card">
+          <div class="card-content">
+            <h2>{{ slide.title }}</h2>
+            <p>{{ slide.description }}</p>
+            <button class="details-button">Dettagli</button>
+            <div class="countdown">
+              <h3>Tempo Rimanente</h3>
+              <p>{{ getTimeRemaining(slide.date) }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Freccia destra -->
+  <button class="nav-button next" (click)="nextSlide()">&#10095;</button>
+
+  <!-- Indicatori -->
+  <div class="indicators">
+    <span *ngFor="let _ of getTotalPages(); let idx = index"
+          class="indicator"
+          [class.active]="idx === currentPage"
+          (click)="goToSlide(idx)">
+    </span>
+  </div>
+</div>
