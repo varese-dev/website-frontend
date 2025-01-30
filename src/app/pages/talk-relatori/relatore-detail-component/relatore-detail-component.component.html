@@ -1,0 +1,8 @@
+<div class="biography" *ngIf="biography; else loading">
+  <h2>Biografia di {{ name }} {{ surname }}</h2>
+  <p>{{ biography }}</p>
+</div>
+
+<ng-template #loading>
+  <p>Caricamento biografia...</p>
+</ng-template>
