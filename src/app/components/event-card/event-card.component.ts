@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { EventService, Event } from '../../service/event-card.service';
 
 @Component({
   selector: 'app-event-card',
@@ -8,59 +9,39 @@ import { CommonModule } from '@angular/common';
   templateUrl: './event-card.component.html',
   styleUrls: ['./event-card.component.css'],
 })
-export class EventCardComponent {
-  slides = [
-    {
-      title: 'Varese Developer Group',
-      description:
-        'Unisciti alla nostra community per eventi di coding, networking e condivisione di progetti con altri sviluppatori della zona.',
-      date: new Date('2025-03-10'),
-    },
-    {
-      title: 'Workshop Angular',
-      description:
-        'Partecipa a un workshop pratico su Angular e scopri come creare web app moderne, performanti e scalabili da zero.',
-      date: new Date('2025-04-01'),
-    },
-    {
-      title: 'Coding Marathon',
-      description:
-        "Affronta una sfida di programmazione intensa! Lavora su progetti stimolanti e dimostra le tue abilità in un'atmosfera competitiva.",
-      date: new Date('2025-05-15'),
-    },
-    {
-      title: 'Conferenza sulla tecnologia',
-      description:
-        'Scopri le ultime tendenze tech con speaker di alto livello! Un’occasione unica per aggiornarti e fare networking nel settore.',
-      date: new Date('2025-06-20'),
-    },
-    {
-      title: 'Hackathon Varese',
-      description:
-        'Collabora con altri dev, sviluppa soluzioni innovative e competi per vincere premi esclusivi in un hackathon entusiasmante.',
-      date: new Date('2025-07-05'),
-    },
-    {
-      title: 'Riunione del gruppo',
-      description:
-        'Incontra la community di sviluppatori locali, condividi esperienze, idee e scopri nuove opportunità di crescita professionale.',
-      date: new Date('2025-08-10'),
-    },
-  ];
-
+export class EventCardComponent implements OnInit, OnDestroy {
+  events: Event[] = [];
   currentIndex = 0;
-  autoplayInterval: any;
+  countdownInterval: any;
 
-  constructor() {
-    this.startAutoplay();
+  constructor(private eventService: EventService) {}
+
+  ngOnInit() {
+    this.eventService.getEvents().subscribe((data) => {
+      console.log('Event data received:', data);
+
+      this.events = data.map(event => ({
+        ...event,
+        date: new Date(event.date), // Assicura che la data sia un oggetto Date
+        timeRemaining: this.getTimeRemaining(new Date(event.date))
+      }));
+
+      this.startCountdown();
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.countdownInterval) {
+      clearInterval(this.countdownInterval);
+    }
   }
 
   get visibleSlides() {
-    return this.slides.slice(this.currentIndex, this.currentIndex + 1);
+    return this.events.slice(this.currentIndex, this.currentIndex + 1);
   }
 
   getTotalPages(): number[] {
-    return Array.from({ length: this.slides.length });
+    return Array.from({ length: this.events.length });
   }
 
   get currentPage(): number {
@@ -68,12 +49,12 @@ export class EventCardComponent {
   }
 
   nextSlide() {
-    this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+    this.currentIndex = (this.currentIndex + 1) % this.events.length;
   }
 
   previousSlide() {
     this.currentIndex =
-      this.currentIndex === 0 ? this.slides.length - 1 : this.currentIndex - 1;
+      this.currentIndex === 0 ? this.events.length - 1 : this.currentIndex - 1;
   }
 
   goToSlide(pageIndex: number) {
@@ -84,19 +65,26 @@ export class EventCardComponent {
     return index;
   }
 
-  getTimeRemaining(date: Date) {
+  startCountdown() {
+    this.countdownInterval = setInterval(() => {
+      this.events = this.events.map(event => ({
+        ...event,
+        timeRemaining: this.getTimeRemaining(new Date(event.date)) // Conversione sicura
+      }));
+    }, 1000);
+  }
+
+  getTimeRemaining(date: Date): string {
     const now = new Date();
     const timeDiff = date.getTime() - now.getTime();
+    
+    if (timeDiff <= 0) return 'Evento concluso';
+
     const days = Math.floor(timeDiff / (1000 * 3600 * 24));
     const hours = Math.floor((timeDiff % (1000 * 3600 * 24)) / (1000 * 3600));
     const minutes = Math.floor((timeDiff % (1000 * 3600)) / (1000 * 60));
     const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-    return `${days}d ${hours}h ${minutes}m ${seconds}s`;
-  }
 
-  startAutoplay() {
-    this.autoplayInterval = setInterval(() => {
-      this.nextSlide();
-    }, 3000); 
+    return `${days}d ${hours}h ${minutes}m ${seconds}s`;
   }
 }

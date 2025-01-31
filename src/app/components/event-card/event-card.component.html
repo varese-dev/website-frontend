@@ -1,5 +1,4 @@
 <div class="carousel-container">
-  <!-- Freccia sinistra -->
   <button class="nav-button prev" (click)="previousSlide()">&#10094;</button>
 
   <div class="carousel">
@@ -12,7 +11,7 @@
             <button class="details-button">Dettagli</button>
             <div class="countdown">
               <h3>Tempo Rimanente</h3>
-              <p>{{ getTimeRemaining(slide.date) }}</p>
+              <p>{{ slide.timeRemaining }}</p>
             </div>
           </div>
         </div>
@@ -20,10 +19,8 @@
     </div>
   </div>
 
-  <!-- Freccia destra -->
   <button class="nav-button next" (click)="nextSlide()">&#10095;</button>
 
-  <!-- Indicatori -->
   <div class="indicators">
     <span *ngFor="let _ of getTotalPages(); let idx = index"
           class="indicator"
