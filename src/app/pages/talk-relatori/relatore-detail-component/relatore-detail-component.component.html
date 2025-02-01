@@ -1,8 +1,76 @@
-<div class="biography" *ngIf="biography; else loading">
-  <h2>Biografia di {{ name }} {{ surname }}</h2>
-  <p>{{ biography }}</p>
-</div>
+<div class="card-carousel-container">
+  <!-- Card biography -->
+  <div class="card-biography">
+    <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="64" cy="64" fill="#ff8475" r="40"></circle>
+    </svg>
 
-<ng-template #loading>
-  <p>Caricamento biografia...</p>
-</ng-template>
+    <div class="card__title">
+      {{ name }} {{ surname }}
+    </div>
+    <p class="cardDescription">{{ biography }}</p>
+
+    <button class="card__btn card__btn-solid">Vai al profilo Linkedin</button>
+  </div>
+
+
+  <div class="carousel-container">
+    <h2 class="h2Title">I suoi Talk</h2>
+
+
+    <div class="carousel">
+      <div class="slides">
+        <div *ngFor="let slide of talks; let idx = index; trackBy: trackByFn"
+             class="slide"
+             [ngClass]="{ 'active': idx === currentIndex }">
+          <div class="card-carousel">
+            <div class="card-content">
+              <h2>{{ slide.title }}</h2>
+              <p>{{ slide.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="indicators">
+      <span *ngFor="let _ of talks; let idx = index"
+            class="indicator"
+            [class.active]="idx === currentIndex"
+            (click)="goToSlide(idx)">
+      </span>
+    </div>
+
+    <div class="distance">
+      <h2 class="h2Title">Gli Eventi a cui ha Partecipato</h2>
+
+
+      <div class="carousel">
+        <div class="slides">
+          <div *ngFor="let slide of events; let idx = index; trackBy: trackByFn"
+               class="slide"
+               [ngClass]="{ 'active': idx === currentIndexEvents }">
+            <div class="card-carousel">
+              <div class="card-content">
+                <h2>{{ slide.title }}</h2>
+                <p>{{ slide.description }}</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="indicators">
+      <span *ngFor="let _ of events; let idx = index"
+            class="indicator"
+            [class.active]="idx === currentIndexEvents"
+            (click)="goToSlide1(idx)">
+      </span>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,8 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 
 export interface Relatore {
+  talk: string[];
   userId: string;
   id: string;
   name: string;
@@ -10,26 +12,59 @@ export interface Relatore {
   biography: string;
 }
 
+export interface Talk {
+  id: string;
+  title: string;
+  description: string;
+}
+
+export interface Event {
+  id: string;
+  title: string;
+  description: string;
+}
+
+
+
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RelatoriService {
   private apiUrl = 'http://localhost:8080/speakers';
+  private talksApiUrl = 'http://localhost:8080/talks';
 
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
-
+  // Funzione per ottenere tutti i relatori
   getRelatori(): Observable<Relatore[]> {
-    return this.http.get<Relatore[]>(this.apiUrl);
+    return this.http.get<Relatore[]>(this.apiUrl).pipe(catchError(this.handleError));
   }
 
-  // Fetch a specific speaker by ID
+  // Funzione per ottenere un relatore tramite ID
   getRelatoreById(id: string): Observable<Relatore> {
-    const url = this.apiUrl + '/' + id;
-    return this.http.get<Relatore>(url);
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.get<Relatore>(url).pipe(catchError(this.handleError));
+  }
+
+  getEventsBySpeakerId(id: string): Observable<Event[]> {
+    const url = `${this.apiUrl}/${id}/events`;
+    return this.http.get<Event[]>(url).pipe(catchError(this.handleError));
   }
 
 
+  // Funzione per ottenere tutti i talk
+  getTalks(): Observable<Talk[]> {
+    return this.http.get<Talk[]>(this.talksApiUrl).pipe(catchError(this.handleError));
+  }
+
+
+
+  // Gestione degli errori
+  private handleError(error: any): Observable<never> {
+    console.error('An error occurred:', error); // Log error
+    return throwError('Something went wrong with the request. Please try again later.');
+  }
 }
+
