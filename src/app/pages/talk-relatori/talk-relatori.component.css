@@ -8,8 +8,17 @@
 
 p {
   text-align: center;
+  color: #333333;
 }
 
+h2 {
+  color: #a90202;
+}
+
+.speakersPage {
+  background-color: #f9f9f9;
+  padding: 40px 20px;
+}
 
 /* Stile per il carousel */
 .carousel {
@@ -120,18 +129,21 @@ p {
 }
 
 .card__btn-solid {
-  background: var(--main-color);
-  color: var(--bg-color);
+  background-color: #a90202;
+  color: white;
+  border: none;
+  cursor: pointer;
+
 }
 
 .card__btn:hover {
-  background: var(--main-color);
-  color: var(--bg-color);
+  background-color: #C22C1E;
+  color: white;
 }
 
 .card__btn-solid:hover {
-  background: var(--bg-color);
-  color: var(--main-color);
+  background-color: #C22C1E;
+  color: white;
 }
 
 /* Stile per il bottone di navigazione */
@@ -167,10 +179,6 @@ p {
   width: 100%;
 
 }
-
-
-
-
 
 
 /* Media Queries per Dispositivi Mobili */

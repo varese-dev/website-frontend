@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {NgForOf} from '@angular/common';
-import {Relatore, RelatoriService} from '../../service/relatori.service';
-import Swiper from 'swiper';
-import {RouterLink} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NgForOf } from '@angular/common';
+import { Relatore, RelatoriService } from '../../service/relatori.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'talk-relatori',
@@ -14,16 +13,11 @@ import {RouterLink} from '@angular/router';
 export class TalkRelatoriComponent implements OnInit {
   relatori: Relatore[] = [];
 
-  constructor(private relatoriService: RelatoriService) {
-  }
+  constructor(private relatoriService: RelatoriService) {}
 
   ngOnInit(): void {
     this.relatoriService.getRelatori().subscribe((data) => {
       this.relatori = data;
-
     });
   }
-
-
-
 }

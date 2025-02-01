@@ -25,8 +25,6 @@ export interface Event {
 }
 
 
-
-
 @Injectable({
   providedIn: 'root',
 })
@@ -35,14 +33,14 @@ export class RelatoriService {
   private talksApiUrl = 'http://localhost:8080/talks';
 
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
-  // Funzione per ottenere tutti i relatori
   getRelatori(): Observable<Relatore[]> {
     return this.http.get<Relatore[]>(this.apiUrl).pipe(catchError(this.handleError));
   }
 
-  // Funzione per ottenere un relatore tramite ID
+
   getRelatoreById(id: string): Observable<Relatore> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.get<Relatore>(url).pipe(catchError(this.handleError));
@@ -54,14 +52,12 @@ export class RelatoriService {
   }
 
 
-  // Funzione per ottenere tutti i talk
-  getTalks(): Observable<Talk[]> {
-    return this.http.get<Talk[]>(this.talksApiUrl).pipe(catchError(this.handleError));
+  getSpeakersByTalkId(id:string): Observable<Talk[]> {
+    const url = `${this.apiUrl}/${id}/talks`;
+    return this.http.get<Talk[]>(url).pipe(catchError(this.handleError));
   }
 
 
-
-  // Gestione degli errori
   private handleError(error: any): Observable<never> {
     console.error('An error occurred:', error); // Log error
     return throwError('Something went wrong with the request. Please try again later.');
