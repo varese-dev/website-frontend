@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RelatoreDetailComponentComponent } from './relatore-detail-component.component';
+import { RelatoreDetailComponent } from './relatore-detail-component.component';
 
 describe('RelatoreDetailComponentComponent', () => {
-  let component: RelatoreDetailComponentComponent;
-  let fixture: ComponentFixture<RelatoreDetailComponentComponent>;
+  let component: RelatoreDetailComponent;
+  let fixture: ComponentFixture<RelatoreDetailComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RelatoreDetailComponentComponent]
+      imports: [RelatoreDetailComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RelatoreDetailComponentComponent);
+    fixture = TestBed.createComponent(RelatoreDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
