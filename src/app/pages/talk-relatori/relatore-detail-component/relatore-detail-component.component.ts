@@ -10,7 +10,7 @@ import {HeaderComponent} from '../../../components/header/header.component';
   imports: [
     NgClass,
     NgForOf,
-    HeaderComponent,
+
 
   ],
   styleUrls: ['./relatore-detail-component.component.css']
