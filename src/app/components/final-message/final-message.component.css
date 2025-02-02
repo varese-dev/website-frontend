@@ -1,0 +1,53 @@
+.final-message {
+    text-align: center;
+    padding: 5vh;
+    background: linear-gradient(135deg, #c22c1e, #8b1e14);
+    color: white;
+  }
+  
+  .content {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  h2 {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    position: relative;
+  }
+  
+  h2::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 4px;
+    background: white;
+    margin: 10px auto 0;
+    border-radius: 50px;
+  }
+  
+  p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+  }
+  
+  .join-btn {
+    display: inline-block;
+    background: white;
+    color: #c22c1e;
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: background 0.3s, color 0.3s;
+    margin-bottom: 5vh;
+  }
+  
+  .join-btn:hover {
+    background: #f4f4f4;
+    color: #a3221c;
+  }
+  

@@ -9,9 +9,18 @@
             <h2>{{ slide.title }}</h2>
             <p>{{ slide.description }}</p>
             <button class="details-button">Dettagli</button>
+          </div>
+
+          <!-- Blocco fisso in basso a sinistra -->
+          <div class="card-info">
             <div class="countdown">
               <h3>Tempo Rimanente</h3>
               <p>{{ slide.timeRemaining }}</p>
+            </div>
+            
+            <div class="remaining-slots">
+              <h3>Posti Rimasti</h3>
+              <p>{{ slide.remainingSlots > 0 ? slide.remainingSlots : 'Dati non disponibili' }}</p> <!-- Fallback se i posti sono NaN o 0 -->
             </div>
           </div>
         </div>

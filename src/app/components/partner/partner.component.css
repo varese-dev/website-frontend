@@ -1,7 +1,7 @@
 /* Partners Section */
 .partners-section {
   text-align: left;
-  padding: 50px 10% 20px;
+  padding: 30px 10% 20px;
   background-color: #ffffff;
 }
 
@@ -64,6 +64,7 @@
   color: white; /* Scritta bianca */
   transition: background-color 0.3s;
   margin-top: 3vh;
+  margin-bottom: 8vh;
 }
 
 .read-more:hover {

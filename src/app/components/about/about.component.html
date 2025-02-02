@@ -1,0 +1,44 @@
+<section id="about">
+  <!-- Titolo Unico -->
+  <div class="about-title">
+    <h2>Chi Siamo</h2>
+  </div>
+
+  <!-- Contenitore principale: timeline a sinistra e card centrata dei dettagli -->
+  <div class="timeline-container">
+    <!-- Colonna Sinistra: Timeline Verticale Semplificata -->
+    <div class="timeline-nav">
+      <ul>
+        <li
+          *ngFor="let event of timelineEvents; let i = index"
+          (click)="selectEvent(i)"
+          [class.active]="i <= currentIndex"
+        >
+          <span class="year">{{ event.year }}</span>
+        </li>
+      </ul>
+      <!-- Linea di base: larga con bordi rossi e interno bianco, che si estende leggermente sopra e sotto -->
+      <div class="timeline-line"></div>
+      <!-- Linea attiva: si riempie in rosso fino all'evento corrente -->
+      <div
+        class="timeline-active-line"
+        [style.height.%]="activePercentage"
+      ></div>
+    </div>
+
+    <!-- Card centrata: Dettagli dell'evento (testo ed immagine) -->
+    <div class="timeline-card" [@fadeAnimation]>
+      <div class="timeline-details">
+        <!-- Testo -->
+        <div class="detail-text">
+          <h3>{{ currentEvent.title }}</h3>
+          <p>{{ currentEvent.description }}</p>
+        </div>
+        <!-- Immagine -->
+        <div class="detail-image">
+          <img [src]="currentEvent.image" alt="{{ currentEvent.title }}" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

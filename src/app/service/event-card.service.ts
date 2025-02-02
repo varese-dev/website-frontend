@@ -6,8 +6,10 @@ import { map } from 'rxjs/operators';
 export interface Event {
   title: string;
   description: string;
-  date: Date;  // Ora è un oggetto Date
-  timeRemaining?: string; // Aggiunto per evitare undefined
+  date: Date;
+  timeRemaining?: string; 
+  max_participants: number;   
+  participants_count: number; 
 }
 
 @Injectable({
@@ -21,23 +23,49 @@ export class EventService {
   getEvents(): Observable<Event[]> {
     return this.http.get<Event[]>(this.apiUrl).pipe(
       map(events =>
-        events.map(event => ({
-          ...event,
-          date: new Date(event.date), // Converte la stringa in Date
-          timeRemaining: '' // Inizializza per evitare undefined
-        }))
+        events.map(event => {
+          // Converto i valori in numeri e se non sono validi imposto a 0
+          const maxParticipants = this.convertToNumber(event.max_participants);
+          const participantsCount = this.convertToNumber(event.participants_count);
+
+          console.log(`Event Title: ${event.title}`);
+          console.log(`Max Participants: ${maxParticipants}`);
+          console.log(`Participants Count: ${participantsCount}`);
+          console.log(`Remaining Slots: ${maxParticipants - participantsCount}`);
+
+          return {
+            ...event,
+            date: new Date(event.date), // Converte la stringa in Date
+            timeRemaining: '',           // Inizializza per evitare undefined
+            max_participants: maxParticipants, // Assicuro che sia un numero
+            participants_count: participantsCount, // Assicuro che sia un numero
+          };
+        })
       )
     );
+  }
+
+  // Funzione per garantire che il valore sia un numero valido
+  private convertToNumber(value: any): number {
+    const numberValue = Number(value);
+    return isNaN(numberValue) ? 0 : numberValue;
   }
 
   getEventById(id: string): Observable<Event> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.get<Event>(url).pipe(
-      map(event => ({
-        ...event,
-        date: new Date(event.date), // Converte la stringa in Date
-        timeRemaining: '' // Inizializza per sicurezza
-      }))
+      map(event => {
+        const maxParticipants = this.convertToNumber(event.max_participants);
+        const participantsCount = this.convertToNumber(event.participants_count);
+
+        return {
+          ...event,
+          date: new Date(event.date),
+          timeRemaining: '',
+          max_participants: maxParticipants,
+          participants_count: participantsCount,
+        };
+      })
     );
   }
 }

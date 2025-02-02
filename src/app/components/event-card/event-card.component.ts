@@ -2,6 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EventService, Event } from '../../service/event-card.service';
 
+// Nuova interfaccia che estende Event, aggiungendo le proprietà calcolate
+export interface ExtendedEvent extends Event {
+  timeRemaining: string;
+  remainingSlots: number;
+}
+
 @Component({
   selector: 'app-event-card',
   standalone: true,
@@ -10,7 +16,7 @@ import { EventService, Event } from '../../service/event-card.service';
   styleUrls: ['./event-card.component.css'],
 })
 export class EventCardComponent implements OnInit, OnDestroy {
-  events: Event[] = [];
+  events: ExtendedEvent[] = [];
   currentIndex = 0;
   countdownInterval: any;
 
@@ -20,11 +26,21 @@ export class EventCardComponent implements OnInit, OnDestroy {
     this.eventService.getEvents().subscribe((data) => {
       console.log('Event data received:', data);
 
-      this.events = data.map(event => ({
-        ...event,
-        date: new Date(event.date), // Assicura che la data sia un oggetto Date
-        timeRemaining: this.getTimeRemaining(new Date(event.date))
-      }));
+      // Mappiamo i dati per includere timeRemaining e remainingSlots
+      this.events = data.map((event) => {
+        const maxParticipants = Number(event.max_participants) || 0; // Forza la conversione in numero
+        const participantsCount = Number(event.participants_count) || 0; // Forza la conversione in numero
+
+        // Log per monitorare il calcolo dei posti rimanenti
+        console.log('Remaining Slots Calculation:', maxParticipants - participantsCount);
+
+        return {
+          ...event,
+          date: new Date(event.date),
+          timeRemaining: this.getTimeRemaining(new Date(event.date)),
+          remainingSlots: maxParticipants - participantsCount, // Calcolo dei posti rimanenti
+        };
+      });
 
       this.startCountdown();
     });
@@ -67,9 +83,9 @@ export class EventCardComponent implements OnInit, OnDestroy {
 
   startCountdown() {
     this.countdownInterval = setInterval(() => {
-      this.events = this.events.map(event => ({
+      this.events = this.events.map((event) => ({
         ...event,
-        timeRemaining: this.getTimeRemaining(new Date(event.date)) // Conversione sicura
+        timeRemaining: this.getTimeRemaining(new Date(event.date)),
       }));
     }, 1000);
   }
