@@ -16,8 +16,8 @@
         </div>
         <p class="cardDescription">{{ biography }}</p>
 
-      <div *ngIf="linkedinUrl; else noLink">
-        <a [href]="linkedinUrl" target="_blank" rel="noopener noreferrer">
+      <div *ngIf="linkedin; else noLink">
+        <a [href]="linkedin" target="_blank" rel="noopener noreferrer">
           <button class="btn btn-primary">Vai al profilo LinkedIn</button>
         </a>
       </div>

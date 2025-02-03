@@ -20,7 +20,7 @@ export class RelatoreDetailComponent implements OnInit {
   talks: Talk[] = [];
   events: Event[] = [];
   relatore!: Relatore;
-  linkedinUrl: string | null = null;
+  linkedin: string | null = null;
 
   currentIndex = 0;
   currentIndexEvents = 0;
@@ -29,6 +29,8 @@ export class RelatoreDetailComponent implements OnInit {
   name: string = '';
   surname: string = '';
   biography: string = '';
+  image : string = '';
+
 
   constructor(
     private relatoriService: RelatoriService,
@@ -75,11 +77,11 @@ export class RelatoreDetailComponent implements OnInit {
       (relatore) => {
         if (relatore) {
           this.relatore = relatore;
-          this.linkedinUrl = relatore.linkedin_url || null;
+          this.linkedin = relatore.linkedin || null;
         }
       },
       () => {
-        this.linkedinUrl = null;
+        this.linkedin = null;
       }
     );
   }
