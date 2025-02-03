@@ -1,6 +1,6 @@
-import {Observable} from 'rxjs';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -19,29 +19,50 @@ export class AuthService {
     return this.http.post(`${this.authUrl}/login`, loginData, {
       headers,
       responseType: 'text',
-      withCredentials: true
+      withCredentials: true,
     });
   }
 
+  // API per inviare il codice di verifica
   forgottenPassword(emailOrPhone: string): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-
     return this.http.post(`${this.userUrl}/forgottenPassword`, { emailOrPhone }, {
-      headers,
-      responseType: 'text'
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      responseType: 'text',
     });
   }
 
-  register(registerData: registrationData): Observable<any> {
+  // API per verificare il codice di verifica
+  verifyCode(emailOrPhone: string, verificationCode: string): Observable<any> {
+    return this.http.post(
+      `${this.userUrl}/verifyCode?emailOrPhone=${encodeURIComponent(emailOrPhone)}`,
+      { verificationCode },
+      {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+        responseType: 'text',
+      }
+    );
+  }
+
+  // API per aggiornare la password
+  updatePassword(emailOrPhone: string, newPassword: string, repeatNewPassword: string): Observable<any> {
+    return this.http.post(
+      `${this.userUrl}/updatePassword?emailOrPhone=${encodeURIComponent(emailOrPhone)}`,
+      { newPassword, repeatNewPassword },
+      {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+        responseType: 'text',
+      }
+    );
+  }
+
+  register(registerData: RegistrationData): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
 
     return this.http.post(`${this.authUrl}/register`, registerData, {
       headers,
-      responseType: 'text'
+      responseType: 'text',
     });
   }
 }
@@ -52,7 +73,7 @@ export interface LoginData {
   rememberMe?: boolean;
 }
 
-export interface registrationData {
+export interface RegistrationData {
   name: string;
   surname: string;
   email: string;
