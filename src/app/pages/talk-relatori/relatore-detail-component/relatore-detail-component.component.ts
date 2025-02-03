@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {RelatoriService, Talk, Event, Relatore} from '../../../service/relatori.service';
-import {NgClass, NgForOf} from '@angular/common';
+import {NgClass, NgForOf, NgIf} from '@angular/common';
 import {HeaderComponent} from '../../../components/header/header.component';
 
 @Component({
@@ -10,15 +10,18 @@ import {HeaderComponent} from '../../../components/header/header.component';
   imports: [
     NgClass,
     NgForOf,
+    NgIf,
 
 
   ],
   styleUrls: ['./relatore-detail-component.component.css']
 })
 export class RelatoreDetailComponent implements OnInit {
-  talks: Talk[]=[];
+  talks: Talk[] = [];
   events: Event[] = [];
   relatore!: Relatore;
+  linkedinUrl: string | null = null;
+
   currentIndex = 0;
   currentIndexEvents = 0;
 
@@ -72,12 +75,15 @@ export class RelatoreDetailComponent implements OnInit {
       (relatore) => {
         if (relatore) {
           this.relatore = relatore;
+          this.linkedinUrl = relatore.linkedin_url || null;
         }
       },
       () => {
+        this.linkedinUrl = null;
       }
     );
   }
+
 
   loadTalks(id: string): void {
     this.relatoriService.getSpeakersByTalkId(id).subscribe(
@@ -135,7 +141,6 @@ export class RelatoreDetailComponent implements OnInit {
   trackByFn(index: number, item: any): string {
     return item && item.id ? item.id : index.toString();  // Fallback to index if item.id is undefined
   }
-
 
 
 }

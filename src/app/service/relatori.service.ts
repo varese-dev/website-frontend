@@ -10,6 +10,7 @@ export interface Relatore {
   name: string;
   surname: string;
   biography: string;
+  linkedin_url?: string;
 }
 
 export interface Talk {

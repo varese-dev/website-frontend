@@ -16,7 +16,15 @@
         </div>
         <p class="cardDescription">{{ biography }}</p>
 
-        <button class="card__btn card__btn-solid">Seguilo su Linkedin</button>
+      <div *ngIf="linkedinUrl; else noLink">
+        <a [href]="linkedinUrl" target="_blank" rel="noopener noreferrer">
+          <button class="btn btn-primary">Vai al profilo LinkedIn</button>
+        </a>
+      </div>
+
+      <ng-template #noLink>
+        <p>Profilo LinkedIn non disponibile</p>
+      </ng-template>
     </div>
 
 
