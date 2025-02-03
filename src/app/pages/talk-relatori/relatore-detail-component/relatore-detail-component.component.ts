@@ -84,6 +84,7 @@ export class RelatoreDetailComponent implements OnInit {
           this.relatore = relatore;
           this.linkedin = relatore.linkedin;
           this.showLinkedinButton = !!relatore.linkedin;
+          this.image = relatore.image;
         }
       },
       () => {
