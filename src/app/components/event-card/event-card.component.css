@@ -119,7 +119,7 @@
 
 .remaining-slots h3 {
   margin: 0;
-  font-size: 22px;
+  font-size: 18px;
   white-space: nowrap; /* Impedisce che il testo vada a capo */
 }
 

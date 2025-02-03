@@ -8,6 +8,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 0 20px;
 }
 
 .hero-image {
@@ -22,12 +23,12 @@
 }
 
 #hero h1 {
-  font-size: 60px;
+  font-size: 4rem; /* Modificato per migliorare la leggibilità su mobile */
   margin-bottom: 20px;
 }
 
 #hero p {
-  font-size: 22px;
+  font-size: 1.4rem; /* Dimensioni più piccole per mobile */
   margin-bottom: 7%;
 }
 
@@ -56,6 +57,7 @@
   min-height: 30vh;
   padding: 35px 15px;
   background-color: #f9f9f9;
+  box-sizing: border-box;
 }
 
 /* Stile del titolo principale con sottolineatura */
@@ -71,7 +73,6 @@
   width: fit-content;
 }
 
-/* Sottolineatura personalizzata */
 .eventi::after {
   content: "";
   position: absolute;
@@ -85,12 +86,59 @@
 
 /* Adattabilità per mobile */
 @media (max-width: 768px) {
+  /* Smartphone in orizzontale e tablet */
+  #hero {
+    height: 80vh; /* Ridotto per evitare che l'hero occupi troppo spazio */
+  }
+
+  #hero h1 {
+    font-size: 2.5rem; /* Ancora più piccolo per migliorare la leggibilità */
+  }
+
+  #hero p {
+    font-size: 1rem; /* Ridotto ulteriormente */
+    margin-bottom: 10%;
+  }
+
+  .btn-primary {
+    padding: 8px 18px;
+    font-size: 14px;
+  }
+
   .event-container {
-      padding: 20px 10px;
+    padding: 20px 10px;
   }
 
   .eventi {
-      font-size: 2.2rem;
-      text-align: left;
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Smartphone in verticale */
+  #hero {
+    height: 70vh; /* Ancora ridotto per schermi più piccoli */
+  }
+
+  #hero h1 {
+    font-size: 2rem; /* Ancora più piccolo per migliorare la leggibilità */
+  }
+
+  #hero p {
+    font-size: 0.9rem;
+    margin-bottom: 15%;
+  }
+
+  .btn-primary {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .event-container {
+    padding: 15px;
+  }
+
+  .eventi {
+    font-size: 1.5rem;
   }
 }

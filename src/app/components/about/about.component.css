@@ -40,7 +40,6 @@
 .timeline-nav {
   position: relative;
   width: 80px; /* Larghezza fissa per la timeline */
-  margin-right: 20px;
   margin-right: 10vw;
 }
 
@@ -58,21 +57,6 @@
   cursor: pointer;
   position: relative;
   z-index: 2;
-}
-
-/* Linea di base: estesa oltre il primo e ultimo pallino */
-.timeline-nav ul::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: -10px;
-  bottom: -10px;
-  width: 12px;
-  background-color: white;
-  border: 3px solid #c22c1e;
-  border-radius: 6px;
-  transform: translateX(-50%);
-  z-index: 0;
 }
 
 .timeline-nav li .year {
@@ -95,7 +79,33 @@
   color: #fff;
 }
 
-/* Linea verticale semplice */
+/* Linea di base: estesa oltre il primo e ultimo pallino (versione verticale) */
+.timeline-nav ul::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -20px;
+  bottom: -20px;
+  width: 12px;
+  border: 3px solid #c22c1e;
+  border-radius: 6px;
+  transform: translateX(-50%);
+  z-index: 0;
+}
+
+/* Linea attiva: si riempie in rosso fino all'evento corrente (versione verticale) */
+.timeline-active-line {
+  position: absolute;
+  left: 50%;
+  top: 1px;
+  width: 12px;
+  min-height: 20px;
+  background-color: #c22c1e;
+  border: 3px solid #c22c1e;
+  border-radius: 6px;
+  transform: translateX(-50%);
+  z-index: 1;
+}
 
 /* Card per i Dettagli della Timeline */
 .timeline-card {
@@ -109,7 +119,6 @@
   align-items: center;
   margin: 20px;
 }
-
 
 /* Dettagli all'interno della Card */
 .timeline-details {
@@ -141,7 +150,6 @@
   text-align: right;
 }
 
-
 .detail-image img {
   width: 100%;
   height: 100%; /* Occupa tutta l'altezza della card */
@@ -158,25 +166,87 @@
   max-height: 280px;
 }
 
-
-
-
-/* Responsività */
-@media (max-width: 768px) {
+/* ===================================================== */
+/*           RESPONSIVITÀ PER TABLET E TELEFONI          */
+/* ===================================================== */
+@media (max-width: 1024px) {
+  /* Disporre timeline e card in colonna: timeline sopra, card sotto */
   .timeline-container {
     flex-direction: column;
     align-items: center;
   }
+  
+  /* Timeline in modalità orizzontale */
   .timeline-nav {
-    width: auto;
-    margin-right: 0;
+    width: 100%;
+    margin: 0 0 20px 0;  /* margine inferiore per distanziare dalla card */
+    position: relative;
   }
+  
+  .timeline-nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Spaziatura orizzontale per ogni elemento della timeline */
+  .timeline-nav li {
+    margin: 0 20px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* Modifica della linea di base: diventa orizzontale */
+  .timeline-nav ul::before {
+    content: "";
+    position: absolute;
+    left: -10px;
+    right: -10px;
+    top: 50%;
+    height: 12px;
+    background-color: white;
+    border: 3px solid #c22c1e;
+    border-radius: 6px;
+    transform: translateY(-50%);
+    z-index: 0;
+  }
+  
+  /* La linea attiva in modalità orizzontale:
+     - La larghezza verrà gestita via Angular (binding ngStyle)
+     - Rimane lo stesso styling di base per altezza, bordo e colore */
+  .timeline-active-line {
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    height: 12px;
+    background-color: #c22c1e;
+    border: 3px solid #c22c1e;
+    border-radius: 6px;
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+  
+  /* Adatta la card in modo che occupi la larghezza disponibile */
   .timeline-card {
     width: 100%;
+    margin: 0 10px;
+    padding: 30px;
   }
+  
+  /* Dettagli: disponi in colonna e centra i contenuti */
   .timeline-details {
     flex-direction: column;
+    align-items: center;
+    gap: 20px;
   }
+  
+  .detail-text {
+    text-align: center;
+  }
+  
   .detail-image {
     text-align: center;
   }
