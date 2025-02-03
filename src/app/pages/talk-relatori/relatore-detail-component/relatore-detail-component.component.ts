@@ -33,7 +33,7 @@ export class RelatoreDetailComponent implements OnInit {
   surname: string = '';
   biography: string = '';
   image : string = '';
-  linkedin : string = '';
+  linkedin : string | undefined = '';
 
 
 

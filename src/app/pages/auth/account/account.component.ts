@@ -358,11 +358,32 @@ export class AccountComponent implements OnInit, OnDestroy, AfterViewInit {
     this.authService.register(registrationData).subscribe({
       next: (response) => {
         console.log('Registration successful:', response);
-        this.router.navigate(['/area-utente']); // Navigate to user area
-      },
+        this.animateSwitchToLogin();
+        this.router.navigate([], {fragment: 'login'});
+        },
       error: (err) => {
         console.error('Registration error:', err);
         this.errorMessage = 'Registration failed. Please try again.';
+      }
+    });
+  }
+
+  forgottenPasswordEmailOrPhone: string = '';
+
+  forgottenPassword(): void {
+    if (!this.forgottenPasswordEmailOrPhone) {
+      this.errorMessage = 'Email or phone number is required';
+      return;
+    }
+
+    this.authService.forgottenPassword(this.forgottenPasswordEmailOrPhone).subscribe({
+      next: (response) => {
+        console.log('Password reset request successful:', response);
+        this.errorMessage = 'Password reset instructions have been sent to your email or phone.';
+      },
+      error: (err) => {
+        console.error('Password reset request error:', err);
+        this.errorMessage = 'Failed to send password reset instructions. Please try again.';
       }
     });
   }
