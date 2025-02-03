@@ -28,8 +28,8 @@ export class EventCardComponent implements OnInit, OnDestroy {
 
       // Mappiamo i dati per includere timeRemaining e remainingSlots
       this.events = data.map((event) => {
-        const maxParticipants = Number(event.max_participants) || 0; // Forza la conversione in numero
-        const participantsCount = Number(event.participants_count) || 0; // Forza la conversione in numero
+        const maxParticipants = event.maxParticipants; // Forza la conversione in numero
+        const participantsCount = event.participantsCount; // Forza la conversione in numero
 
         // Log per monitorare il calcolo dei posti rimanenti
         console.log('Remaining Slots Calculation:', maxParticipants - participantsCount);
@@ -93,7 +93,7 @@ export class EventCardComponent implements OnInit, OnDestroy {
   getTimeRemaining(date: Date): string {
     const now = new Date();
     const timeDiff = date.getTime() - now.getTime();
-    
+
     if (timeDiff <= 0) return 'Evento concluso';
 
     const days = Math.floor(timeDiff / (1000 * 3600 * 24));

@@ -17,10 +17,10 @@
               <h3>Tempo Rimanente</h3>
               <p>{{ slide.timeRemaining }}</p>
             </div>
-            
-            <div class="remaining-slots">
+
+            <div *ngIf="slide.timeRemaining !== 'Evento concluso'" class="remaining-slots">
               <h3>Posti Rimasti</h3>
-              <p>{{ slide.remainingSlots > 0 ? slide.remainingSlots : 'Dati non disponibili' }}</p> <!-- Fallback se i posti sono NaN o 0 -->
+              <p>{{ slide.remainingSlots > 0 ? slide.remainingSlots : 'Tutto esaurito' }}</p> <!-- Fallback se i posti sono NaN o 0 -->
             </div>
           </div>
         </div>

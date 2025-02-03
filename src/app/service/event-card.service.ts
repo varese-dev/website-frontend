@@ -7,9 +7,9 @@ export interface Event {
   title: string;
   description: string;
   date: Date;
-  timeRemaining?: string; 
-  max_participants: number;   
-  participants_count: number; 
+  timeRemaining?: string;
+  maxParticipants: number;
+  participantsCount: number;
 }
 
 @Injectable({
@@ -25,8 +25,8 @@ export class EventService {
       map(events =>
         events.map(event => {
           // Converto i valori in numeri e se non sono validi imposto a 0
-          const maxParticipants = this.convertToNumber(event.max_participants);
-          const participantsCount = this.convertToNumber(event.participants_count);
+          const maxParticipants = event.maxParticipants;
+          const participantsCount = event.participantsCount;
 
           console.log(`Event Title: ${event.title}`);
           console.log(`Max Participants: ${maxParticipants}`);
@@ -37,8 +37,8 @@ export class EventService {
             ...event,
             date: new Date(event.date), // Converte la stringa in Date
             timeRemaining: '',           // Inizializza per evitare undefined
-            max_participants: maxParticipants, // Assicuro che sia un numero
-            participants_count: participantsCount, // Assicuro che sia un numero
+            maxParticipants: maxParticipants, // Assicuro che sia un numero
+            participantsCount: participantsCount, // Assicuro che sia un numero
           };
         })
       )
@@ -55,15 +55,15 @@ export class EventService {
     const url = `${this.apiUrl}/${id}`;
     return this.http.get<Event>(url).pipe(
       map(event => {
-        const maxParticipants = this.convertToNumber(event.max_participants);
-        const participantsCount = this.convertToNumber(event.participants_count);
+        const maxParticipants = event.maxParticipants;
+        const participantsCount = event.participantsCount;
 
         return {
           ...event,
           date: new Date(event.date),
           timeRemaining: '',
-          max_participants: maxParticipants,
-          participants_count: participantsCount,
+          maxParticipants: maxParticipants,
+          participantsCount: participantsCount,
         };
       })
     );
