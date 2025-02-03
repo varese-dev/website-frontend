@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { EventiComponent } from './pages/eventi/eventi.component';
+import { EventiDetailsComponent } from './pages/eventi/eventi-details/eventi-details.component'; // Import aggiunto
 import { TalkRelatoriComponent } from './pages/talk-relatori/talk-relatori.component';
 import { PartnerComponent } from './pages/partner/partner.component';
 import { PrenotazioneComponent } from './pages/prenotazione/prenotazione.component';

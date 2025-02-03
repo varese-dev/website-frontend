@@ -1,0 +1,279 @@
+<div class="pageContainer">
+  <div class="animatedBackground"></div>
+
+  <div #loginBox class="loginBox" [hidden]="!isLoginVisible">
+    <div #loginLeft class="welcomeContainer">
+      <div class="logo">
+        <img src="/assets/images/account/imageAccount" alt="Logo" />
+      </div>
+    </div>
+
+    <div #loginRight class="loginRight">
+
+      <div class="welcomeText">
+        <div class="topLogo">
+          <img src="/assets/images/logo/logoVDGminimal.png" alt="Logo VDG minimal" />
+        </div>
+        <h2>Bentornato nel <br /> <span>Varese Developer Group</span></h2>
+        <hr />
+        <p>Accedi per non perderti i prossimi eventi</p>
+      </div>
+
+      <form (ngSubmit)="login()" class="loginForm">
+        <div class="input-group">
+          <input class="input-text" name="contact" type="text" id="contact" placeholder="Email o Numero di telefono"
+            [(ngModel)]="contact" required (input)="validateInput()" />
+
+          <label class="input-text-label" for="contact">Email o Cellurare</label>
+
+          <span class="icon-contact">
+            <svg *ngIf="showBothIcons || isEmail" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="#b22222"
+                d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z" />
+            </svg>
+
+            <svg *ngIf="showBothIcons || !isEmail" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="#b22222"
+                d="M511.1 387.8l-92.4-92.4c-16.2-16.2-42.5-16.2-58.6 0l-33.3 33.3c-15.3 15.3-40.1 15.3-55.4 0l-81-81c-15.3-15.3-15.3-40.1 0-55.4l33.3-33.3c16.2-16.2 16.2-42.5 0-58.6l-92.4-92.4C121.7-5.1 98-5.1 81.9 10.9l-60.5 60.5c-43.3 43.3-27.6 122.4 35.3 185.3l180.9 180.9c63 63 142 78.6 185.3 35.3l60.5-60.5c16-16 16-39.7 0-55.7z" />
+            </svg>
+          </span>
+        </div>
+        <div class="input-group">
+          <input class="input-text" [type]="showPassword ? 'text' : 'password'" name="password" id="password"
+            placeholder="Password" [(ngModel)]="password" required (input)="onPasswordInput()" />
+
+          <label class="input-text-label" for="password">Password</label>
+
+          <span class="icon">
+            <svg *ngIf="!isPasswordTyped" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+              <path fill="#b22222"
+                d="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z" />
+            </svg>
+
+            <span *ngIf="isPasswordTyped" class="icon toggle-password" (click)="togglePassword()">
+              <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                <path fill="#b22222"
+                  d="M569.34 231.16c-47.06-77.43-134.17-135.31-245.32-135.31-111.15 0-198.26 57.88-245.32 135.31a48.62 48.62 0 0 0 0 49.68c47.06 77.44 134.17 135.31 245.32 135.31s198.26-57.87 245.32-135.31a48.62 48.62 0 0 0 0-49.68zM288 368a80 80 0 1 1 80-80 80 80 0 0 1-80 80zm0-128a48 48 0 1 0 48 48 48 48 0 0 0-48-48z" />
+              </svg>
+
+              <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                <path fill="#b22222"
+                  d="M320 96C189.25 96 82.75 172.5 32 256c50.75 83.5 157.25 160 288 160s237.25-76.5 288-160c-50.75-83.5-157.25-160-288-160zM320 352c-53 0-96-43-96-96s43-96 96-96 96 43 96 96-43 96-96 96zm0-160c-35.25 0-64 28.75-64 64s28.75 64 64 64 64-28.75 64-64-28.75-64-64-64z" />
+              </svg>
+            </span>
+          </span>
+        </div>
+        <div class="loginActions">
+          <label class="cyberpunk-checkbox-label">
+            <input id="rememberMe" type="checkbox" class="cyberpunk-checkbox" [(ngModel)]="rememberMe"
+                   name="rememberMe">
+            Ricordami</label>
+
+          <div class="buttonContainer">
+            <button class="animated-button-login">
+              <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+                </path>
+              </svg>
+              <span class="text">Accedi </span>
+              <span class="circle"></span>
+              <svg viewBox="0 0 24 24" class="arr-1" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+                </path>
+              </svg>
+            </button>
+            <br /><br />
+            <button class="animated-button" (click)="switchToRegister()">
+              <svg viewBox=" 0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+              </path>
+              </svg>
+              <span class="text">Crea un Account </span>
+              <span class="circle"></span>
+              <svg viewBox="0 0 24 24" class="arr-1" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+                </path>
+              </svg>
+            </button>
+          </div>
+
+          <p class="forgotPassword">
+            Password dimenticata? <a href="#">Clicca qui per recuperarla</a>
+          </p>
+
+          <p class="backHome">
+            Torna alla <a routerLink="/" class="homeLink">
+              <span class="hover-underline">Home</span></a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div #registerBox class="registerBox" [hidden]="isLoginVisible">
+    <div #registerLeft class="registerLeft">
+
+      <div class="welcomeText">
+        <div class="topLogo">
+          <img src="/assets/images/logo/logoVDGminimal.png" alt="Logo VDG minimal" />
+        </div>
+        <h2>Benvenuto nel <br /> <span>Varese Developer Group</span></h2>
+        <hr />
+        <p>Crea un account per entrare nel nostro mondo</p>
+      </div>
+      <form (ngSubmit)="register()" class="registerForm">
+        <div class="flexContact">
+          <div class="input-group">
+            <input class="input-text" name="firstName" type="text" id="firstName" placeholder="Nome"
+              [(ngModel)]="firstName" required />
+            <label class="input-text-label" for="firstName">Nome</label>
+            <span class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path fill="#b22222"
+                  d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
+              </svg>
+            </span>
+          </div>
+
+          <div class="input-group">
+            <input class="input-text" name="lastName" type="text" id="lastName" placeholder="Cognome"
+              [(ngModel)]="lastName" required />
+            <label class="input-text-label" for="lastName">Cognome</label>
+            <span class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path fill="#b22222"
+                  d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <div class="flexContact">
+          <div class="input-group">
+            <input class="input-text" name="email" type="email" id="email" placeholder="Email"
+              [(ngModel)]="registerEmail" (input)="validateRegisterInput()" />
+            <label class="input-text-label" for="email">Email</label>
+            <span class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <path fill="#b22222"
+                  d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z" />
+              </svg>
+            </span>
+          </div>
+
+          <div class="input-group">
+            <input class="input-text" name="phone" type="text" id="phone" placeholder="Numero di telefono"
+              [(ngModel)]="registerPhone" (input)="validateRegisterInput()" />
+            <label class="input-text-label" for="phone">Cellurare</label>
+            <span class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <path fill="#b22222"
+                  d="M511.1 387.8l-92.4-92.4c-16.2-16.2-42.5-16.2-58.6 0l-33.3 33.3c-15.3 15.3-40.1 15.3-55.4 0l-81-81c-15.3-15.3-15.3-40.1 0-55.4l33.3-33.3c16.2-16.2 16.2-42.5 0-58.6l-92.4-92.4C121.7-5.1 98-5.1 81.9 10.9l-60.5 60.5c-43.3 43.3-27.6 122.4 35.3 185.3l180.9 180.9c63 63 142 78.6 185.3 35.3l60.5-60.5c16-16 16-39.7 0-55.7z" />
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <input class="input-text" [type]="showPassword ? 'text' : 'password'" name="password" id="password"
+            placeholder="Password" [(ngModel)]="password" required (input)="onPasswordInput()" />
+          <label class="input-text-label" for="password">Password</label>
+          <span class="icon">
+            <svg *ngIf="!isPasswordTyped" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+              <path fill="#b22222"
+                d="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z" />
+            </svg>
+            <span *ngIf="isPasswordTyped" class="icon toggle-password" (click)="togglePassword()">
+              <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                <path fill="#b22222"
+                  d="M569.34 231.16c-47.06-77.43-134.17-135.31-245.32-135.31-111.15 0-198.26 57.88-245.32 135.31a48.62 48.62 0 0 0 0 49.68c47.06 77.44 134.17 135.31 245.32 135.31s198.26-57.87 245.32-135.31a48.62 48.62 0 0 0 0-49.68zM288 368a80 80 0 1 1 80-80 80 80 0 0 1-80 80zm0-128a48 48 0 1 0 48 48 48 48 0 0 0-48-48z" />
+              </svg>
+
+              <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                <path fill="#b22222"
+                  d="M320 96C189.25 96 82.75 172.5 32 256c50.75 83.5 157.25 160 288 160s237.25-76.5 288-160c-50.75-83.5-157.25-160-288-160zM320 352c-53 0-96-43-96-96s43-96 96-96 96 43 96 96-43 96-96 96zm0-160c-35.25 0-64 28.75-64 64s28.75 64 64 64 64-28.75 64-64-28.75-64-64-64z" />
+              </svg>
+            </span>
+          </span>
+        </div>
+
+        <div class="input-group">
+          <input class="input-text" [type]="showConfirmPassword ? 'text' : 'password'" name="confirmPassword"
+            id="confirmPassword" placeholder="Conferma Password" [(ngModel)]="confirmPassword" required />
+          <label class="input-text-label" for="confirmPassword">Conferma Password</label>
+          <span class="icon">
+            <svg *ngIf="!isPasswordTyped" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+              <path fill="#b22222"
+                d="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z" />
+            </svg>
+            <span *ngIf="isPasswordTyped" class="icon toggle-password" (click)="toggleConfirmPassword()">
+              <svg *ngIf="showConfirmPassword" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                <path fill="#b22222"
+                  d="M569.34 231.16c-47.06-77.43-134.17-135.31-245.32-135.31-111.15 0-198.26 57.88-245.32 135.31a48.62 48.62 0 0 0 0 49.68c47.06 77.44 134.17 135.31 245.32 135.31s198.26-57.87 245.32-135.31a48.62 48.62 0 0 0 0-49.68zM288 368a80 80 0 1 1 80-80 80 80 0 0 1-80 80zm0-128a48 48 0 1 0 48 48 48 48 0 0 0-48-48z" />
+              </svg>
+
+              <svg *ngIf="!showConfirmPassword" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                <path fill="#b22222"
+                  d="M320 96C189.25 96 82.75 172.5 32 256c50.75 83.5 157.25 160 288 160s237.25-76.5 288-160c-50.75-83.5-157.25-160-288-160zM320 352c-53 0-96-43-96-96s43-96 96-96 96 43 96 96-43 96-96 96zm0-160c-35.25 0-64 28.75-64 64s28.75 64 64 64 64-28.75 64-64-28.75-64-64-64z" />
+              </svg>
+            </span>
+          </span>
+        </div>
+
+        <div class="registerActions">
+          <label class="cyberpunk-checkbox-label-register">
+            <input type="checkbox" class="cyberpunk-checkbox-register">
+            Accetto i termini e le condizioni</label>
+
+          <div class="buttonContainer">
+            <button class="animated-button-register">
+              <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+                </path>
+              </svg>
+              <span class="text">Registrati</span>
+              <span class="circle"></span>
+              <svg viewBox="0 0 24 24" class="arr-1" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+                </path>
+              </svg>
+            </button>
+            <br /><br />
+            <button class="animated-button" (click)="switchToLogin()">
+              <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+                </path>
+              </svg>
+              <span class="text">Accedi </span>
+              <span class="circle"></span>
+              <svg viewBox="0 0 24 24" class="arr-1" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+                </path>
+              </svg>
+            </button>
+          </div>
+
+          <p class="backHome-register">
+            Torna alla <a routerLink="/" class="homeLink-register">
+              <span class="hover-underline-register">Home</span></a>
+          </p>
+
+        </div>
+      </form>
+    </div>
+
+    <div #registerRight class="welcomeContainer">
+      <div class="logo">
+        <img src="/assets/images/Designer.png" alt="Logo" />
+      </div>
+    </div>
+  </div>
+</div>

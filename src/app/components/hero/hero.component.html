@@ -1,0 +1,44 @@
+<section class="hero-section">
+    <!-- Hero Content -->
+    <div class="hero-content">
+      <!-- Text Section -->
+      <div class="hero-text-section">
+        <span class="mini-text">Benvenuto nel futuro</span>
+        <h1 class="hero-title">Varese Developer Group</h1>
+        <p class="hero-description">Scopri il nostro calendario di eventi dal vivo e online: talk tecnici, workshop e
+          incontri con esperti. Unisciti a noi e fai parte di una community dove le idee si trasformano in innovazione.
+        </p>
+        <button class="cta-button" (click)="onGetStarted()">Scopri di più</button>
+      </div>
+  
+      <!-- Cards Section -->
+      <div class="cards-container">
+        <!-- Navigation Dots -->
+        <div class="dots-navigation">
+          <div class="dot active" (click)="switchCard(0)"></div>
+          <div class="dot" (click)="switchCard(1)"></div>
+          <div class="dot" (click)="switchCard(2)"></div>
+        </div>
+  
+        <div class="cards-wrapper">
+          <div class="event-card active">
+            <h2 class="card-title">Evento 1</h2>
+            <p class="card-description">Descrizione dell'evento 1.</p>
+          </div>
+          <div class="event-card">
+            <h2 class="card-title">Evento 2</h2>
+            <p class="card-description">Descrizione dell'evento 2.</p>
+          </div>
+          <div class="event-card">
+            <h2 class="card-title">Evento 3</h2>
+            <p class="card-description">Descrizione dell'evento 3.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator" (click)="scrollToNextSection()">
+      <i class="fa-solid fa-arrow-down"></i>
+    </div>
+  </section>

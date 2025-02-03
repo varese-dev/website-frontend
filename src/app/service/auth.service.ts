@@ -1,51 +1,62 @@
-import { Injectable } from '@angular/core';
+import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private loginUrl = 'http://localhost:8080/auth/login';
-  private registerUrl = 'http://localhost:8080/auth/register';
+  private authUrl = 'http://localhost:8080/auth'; // Endpoint base
+  private userUrl = 'http://localhost:8080/user'; // Endpoint base
 
   constructor(private http: HttpClient) {}
 
-  /**
-   * Effettua il login con email, telefono e password.
-   * @param credentials
-   * @returns Observable con la risposta del server
-   */
   login(loginData: LoginData): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem('token') // Recupera il token salvato
     });
 
-    return this.http.post(this.loginUrl, loginData, { headers });
+    return this.http.post(`${this.authUrl}/login`, loginData, {
+      headers,
+      responseType: 'text',
+      withCredentials: true
+    });
   }
 
-  /**
+  forgottenPassword(emailOrPhone: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
 
-   * @param userData
-   * @returns Observable con la risposta del server
-   */
-  register(userData: RegisterData): Observable<any> {
-    return this.http.post(this.registerUrl, userData);
+    return this.http.post(`${this.userUrl}/forgottenPassword`, { emailOrPhone }, {
+      headers,
+      responseType: 'text'
+    });
   }
-}
 
+  register(registerData: registrationData): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
 
-export interface RegisterData {
-  name: string;
-  surname: string;
-  email?: string;
-  phone?: string;
-  password: string;
+    return this.http.post(`${this.authUrl}/register`, registerData, {
+      headers,
+      responseType: 'text'
+    });
+  }
 }
 
 export interface LoginData {
-  email?: string;
-  phone?: string;
+  emailOrPhone: string;
   password: string;
+  rememberMe?: boolean;
+}
+
+export interface registrationData {
+  name: string;
+  surname: string;
+  email: string;
+  phone: string;
+  password: string;
+  passwordConfirmation: string;
 }
