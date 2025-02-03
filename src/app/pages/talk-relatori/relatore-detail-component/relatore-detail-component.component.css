@@ -1,162 +1,176 @@
 
 .card-carousel-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    margin-top: 60px;
-    background-color: #f9f9f9;
-    padding: 60px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  margin-top: 60px;
+  background-color: #f9f9f9;
+  padding: 60px 20px;
 }
 
 .card-biography {
-    width: 350px;
-    background: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-    text-align: center;
-    padding-bottom: 20px;
-    margin-left: 50px;
+  width: 350px;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  text-align: center;
+  padding-bottom: 20px;
+  margin-left: 50px;
 }
 
 .card-carousel {
-    width: 100%;
-    max-width: 550px;
-    background: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-    padding: 20px;
+  width: 100%;
+  max-width: 550px;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  padding: 20px;
 }
 
 .card__title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
 }
 
 .card__titleSpeaker {
-    color: #a90202;
-    font-size: 2rem;
-    font-weight: 600;
+  color: #a90202;
+  font-size: 2rem;
+  font-weight: 600;
 }
 
 
 .card__btn {
-    margin-top: 15px;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    background-color: #0077B5;
-    color: white;
-    border-radius: 5px;
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  background-color: #0077B5;
+  color: white;
+  border-radius: 5px;
 }
 
 .cardDescription {
-    font-size: 15px;
-    margin: 10px;
-    color: #555;
+  font-size: 15px;
+  margin-left: 30px;
+  margin-right: 30px;
+  color: #555;
 }
 
 p {
-    color: #555;
+  color: #555;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+h3 {
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 h2 {
-    color: #333333;
+  color: #333333;
+}
+
+svg {
+  display: block;
+  margin-bottom: -35px;
+  margin-top: -20px; /* Riduci il margine inferiore */
 }
 
 .card__btn:hover {
-    background-color: #1f69b2;
+  background-color: #1f69b2;
 }
 
 /* Container del carousel */
 .carousel-container {
-    position: relative;
-    width: 60%;
-    max-width: 600px;
-    margin-right: 50px;
+  position: relative;
+  width: 60%;
+  max-width: 600px;
+  margin-right: 50px;
 }
 
 .carousel {
-    display: flex;
-    transition: transform 0.3s ease-in-out;
+  display: flex;
+  transition: transform 0.3s ease-in-out;
 }
 
 .slides {
-    display: flex;
-    gap: 10px;
-    width: 100%;
+  display: flex;
+  gap: 10px;
+  width: 100%;
 }
 
 .slide {
-    flex: 0 0 100%;
-    display: none;
+  flex: 0 0 100%;
+  display: none;
 }
 
 .slide.active {
-    display: block;
+  display: block;
 }
 
 .distance {
-    margin-top: 70px;
+  margin-top: 70px;
 }
 
 .h2Title {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #a90202;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #a90202;
 }
 
 /* Navigation buttons */
 .nav-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    color: black;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    font-size: 24px;
-    background: none;
-    z-index: 10;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: black;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 24px;
+  background: none;
+  z-index: 10;
 }
 
 .nav-button.prev {
-    left: 10px;
+  left: 10px;
 }
 
 .nav-button.next {
-    right: 10px;
+  right: 10px;
 }
 
 /* Carousel Indicators */
 .indicators {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 .indicator {
-    width: 10px;
-    height: 10px;
-    margin: 5px;
-    background: #bbb;
-    border-radius: 50%;
-    cursor: pointer;
+  width: 10px;
+  height: 10px;
+  margin: 5px;
+  background: #bbb;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .indicator.active {
-    background: #333;
+  background: #333;
 }
 
 /* Layout responsivo */
 @media (max-width: 900px) {
-    .card-carousel-container {
-        flex-direction: column;
-        align-items: center;
-    }
+  .card-carousel-container {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .carousel-container {
-        width: 100%;
-    }
+  .carousel-container {
+    width: 100%;
+  }
 }
