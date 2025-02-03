@@ -48,7 +48,26 @@
   cursor: pointer;
   background-color: #0077B5;
   color: white;
+
   border-radius: 5px;
+}
+
+.card__btnLinkedin {
+  margin-top: 10px;
+  border: none;
+  cursor: pointer;
+  background-color: #0077B5;
+  color: white;
+  border-radius: 5px;
+}
+
+.linkedinText {
+  color: white;
+}
+
+.card__btn a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .cardDescription {

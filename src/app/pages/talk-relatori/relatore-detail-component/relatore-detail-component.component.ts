@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {RelatoriService, Talk, Event, Relatore} from '../../../service/relatori.service';
 import {NgClass, NgForOf, NgIf} from '@angular/common';
-import {HeaderComponent} from '../../../components/header/header.component';
 
 @Component({
   selector: 'app-relatore-detail-component',
@@ -20,7 +19,11 @@ export class RelatoreDetailComponent implements OnInit {
   talks: Talk[] = [];
   events: Event[] = [];
   relatore!: Relatore;
-  linkedin: string | null = null;
+  showLinkedinButton: boolean = false; // Variabile di controllo
+
+
+
+
 
   currentIndex = 0;
   currentIndexEvents = 0;
@@ -30,6 +33,8 @@ export class RelatoreDetailComponent implements OnInit {
   surname: string = '';
   biography: string = '';
   image : string = '';
+  linkedin : string = '';
+
 
 
   constructor(
@@ -77,14 +82,17 @@ export class RelatoreDetailComponent implements OnInit {
       (relatore) => {
         if (relatore) {
           this.relatore = relatore;
-          this.linkedin = relatore.linkedin || null;
+          this.linkedin = relatore.linkedin;
+          this.showLinkedinButton = !!relatore.linkedin;
         }
       },
       () => {
-        this.linkedin = null;
+        this.showLinkedinButton = false;
       }
     );
   }
+
+
 
 
   loadTalks(id: string): void {
