@@ -10,8 +10,8 @@ export interface Relatore {
   name: string;
   surname: string;
   biography: string;
+  linkedin: string;
   image: string;
-  linkedin?: string;
 }
 
 export interface Talk {
@@ -54,7 +54,7 @@ export class RelatoriService {
   }
 
 
-  getSpeakersByTalkId(id:string): Observable<Talk[]> {
+  getSpeakersByTalkId(id: string): Observable<Talk[]> {
     const url = `${this.apiUrl}/${id}/talks`;
     return this.http.get<Talk[]>(url).pipe(catchError(this.handleError));
   }

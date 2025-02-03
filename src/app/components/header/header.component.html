@@ -1,17 +1,25 @@
-<header [class.scrolled]="scrolled">
-  <div class="nav-left">
-    <ul>
-      <li><a href="/eventi">Eventi</a></li>
-      <li><a href="/relatori">Relatori</a></li>
-      <li><a href="/partner">Partner</a></li>
-    </ul>
-  </div>
-
+<header class="main-header" [class.scrolled]="isScrolled">
+  <!-- Logo -->
   <div class="logo">
-    <a href=""><img src="logo.png" alt="Varese Developer Group Logo" /></a>
+    <img src="/assets/images/logo/logoVDGminimal.png" alt="Logo" />
   </div>
 
-  <div class="login">
-    <a href="/auth/login"><button class="button">Login</button></a>
+  <!-- Menu Items -->
+  <div class="actions">
+    <a routerLink="/about" class="menu-item">About</a>
+    <a routerLink="/services" class="menu-item">Services</a>
+    <a routerLink="/contact" class="menu-item">Contact</a>
+
+    <div class="divider"></div>
+
+    <!-- Search Icon -->
+    <button class="icon-button search-button" (click)="onSearch()">
+      <i class="fa-solid fa-magnifying-glass" style="color: #b22222;"></i>
+    </button>
+
+    <!-- Login Icon -->
+    <button class="icon-button login-button" (click)="onLogin()">
+      <i class="fa-regular fa-user" style="color: #b22222;"></i>
+    </button>
   </div>
 </header>

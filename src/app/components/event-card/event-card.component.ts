@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EventService, Event } from '../../service/event-card.service';
+import { format, toZonedTime } from 'date-fns-tz';
 
-// Nuova interfaccia che estende Event, aggiungendo le proprietà calcolate
 export interface ExtendedEvent extends Event {
+  formattedDate: string;
   timeRemaining: string;
   remainingSlots: number;
 }
@@ -26,24 +27,33 @@ export class EventCardComponent implements OnInit, OnDestroy {
     this.eventService.getEvents().subscribe((data) => {
       console.log('Event data received:', data);
 
-      // Mappiamo i dati per includere timeRemaining e remainingSlots
       this.events = data.map((event) => {
-        const maxParticipants = event.maxParticipants; // Forza la conversione in numero
-        const participantsCount = event.participantsCount; // Forza la conversione in numero
-
-        // Log per monitorare il calcolo dei posti rimanenti
-        console.log('Remaining Slots Calculation:', maxParticipants - participantsCount);
+        const maxParticipants = event.maxParticipants;
+        const participantsCount = event.participantsCount;
 
         return {
           ...event,
-          date: new Date(event.date),
+          formattedDate: this.formatDate(new Date(event.date)),
           timeRemaining: this.getTimeRemaining(new Date(event.date)),
-          remainingSlots: maxParticipants - participantsCount, // Calcolo dei posti rimanenti
+          remainingSlots: maxParticipants - participantsCount,
         };
       });
 
       this.startCountdown();
     });
+  }
+
+  formatDate(date: Date): string {
+    const timeZone = 'Europe/Rome'; // Set the correct timezone
+    const zonedDate = toZonedTime(date, timeZone);
+
+    const day = String(zonedDate.getDate()).padStart(2, '0');
+    const month = String(zonedDate.getMonth() + 1).padStart(2, '0');
+    const year = zonedDate.getFullYear();
+    const hours = String(zonedDate.getHours()).padStart(2, '0');
+    const minutes = String(zonedDate.getMinutes()).padStart(2, '0');
+
+    return `${day}/${month}/${year}, ore: ${hours}:${minutes}`;
   }
 
   ngOnDestroy() {
@@ -97,10 +107,11 @@ export class EventCardComponent implements OnInit, OnDestroy {
     if (timeDiff <= 0) return 'Evento concluso';
 
     const days = Math.floor(timeDiff / (1000 * 3600 * 24));
-    const hours = Math.floor((timeDiff % (1000 * 3600 * 24)) / (1000 * 3600));
-    const minutes = Math.floor((timeDiff % (1000 * 3600)) / (1000 * 60));
-    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+    if (days > 0) {
+      return `${days}d`;
+    }
 
-    return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    const hours = Math.floor((timeDiff % (1000 * 3600 * 24)) / (1000 * 3600));
+    return `${hours}h`;
   }
 }

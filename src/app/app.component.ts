@@ -1,18 +1,27 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { routes } from './app.routes';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { HeaderComponent } from "./components/header/header.component";
-import { FooterComponent } from "./components/footer/footer.component"; // Importa il file routes
+import { FooterComponent } from "./components/footer/footer.component";
+import { HeroComponent } from "./components/hero/hero.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [RouterModule, HeaderComponent, FooterComponent] // Assicurati di importare RouterModule
- // Assicurati di importare RouterModule
- // Assicurati di importare RouterModule
+  imports: [RouterModule, CommonModule, HeaderComponent, FooterComponent, HeroComponent]
 })
 export class AppComponent {
   title = 'Varese Developer Group';
+
+  hideHeaderFooter: boolean = false;
+
+  constructor(private router: Router) {
+    this.router.events.subscribe(() => {
+      const currentRoute = this.router.url;
+      // Nasconde header e footer per le pagine di login e registrazione
+      this.hideHeaderFooter = currentRoute === '/auth/account#login'|| currentRoute === '/auth/account#register';
+    });
+  }
 }
