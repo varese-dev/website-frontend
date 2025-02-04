@@ -1,9 +1,10 @@
 /* Contenitore generale */
 .container {
-  margin-left: 40px;
+  margin: 20px 40px;
+  padding: 20px;
 }
 
-/* Generale */
+/* Corpo generale */
 body {
   font-family: 'Arial', sans-serif;
   background-color: #f9f9f9;
@@ -19,9 +20,10 @@ h1, h2 {
   margin-bottom: 15px;
 }
 
-/* Messaggi di caricamento */
+/* Messaggi */
 p {
   font-size: 16px;
+  line-height: 1.4;
 }
 
 .is-loading p {
@@ -41,19 +43,25 @@ p {
   text-align: center;
 }
 
+/* Messaggio di successo */
+.success-message {
+  color: #28a745;
+  background-color: #e6ffed;
+  border: 1px solid #28a745;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+  text-align: center;
+}
+
 /* Lista delle prenotazioni */
 .booking-list {
   list-style: none;
   padding: 0;
   margin: 20px 0;
-.container {
-  margin-left: 40px;
-  padding: 20px;
 }
 
-h1, h2 {
-  color: #007bff;
-  margin-bottom: 15px;
 /* Item della prenotazione */
 .booking-item {
   background-color: #fff;
@@ -64,12 +72,47 @@ h1, h2 {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-.row {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
+.booking-item h3 {
+  margin: 0 0 10px;
+  color: #007bff;
 }
 
+.booking-item p {
+  margin: 5px 0;
+}
+
+/* Pulsanti */
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.7);
+}
+
+/* Pulsante di cancellazione */
+button.cancel-button {
+  background-color: #ff4d4f;
+}
+
+button.cancel-button:hover {
+  background-color: #cc0000;
+}
+
+/* Gruppo di input del modulo */
 .form-group {
   margin-bottom: 15px;
 }
@@ -78,94 +121,28 @@ label {
   font-weight: bold;
   display: block;
   margin-bottom: 5px;
-.booking-item h3 {
-  margin: 0 0 10px;
-  color: #007bff;
 }
 
 input, textarea {
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
-.booking-item p {
-  margin: 5px 0;
-}
-
-/* Pulsante di cancellazione */
-button {
-  background-color: #ff4d4f;
-  color: #fff;
-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 8px 12px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   font-size: 14px;
-  border-radius: 5px;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #cc0000;
-  margin-top: 10px;
+/* Layout con righe */
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
 
-button:hover {
-  background-color: #0056b3;
-}
-
-.error-message, .success-message {
-  font-weight: bold;
-  margin: 10px 0;
-  padding: 10px;
-  border-radius: 5px;
-button:focus {
-  outline: none;
-  box-shadow: 0 0 4px rgba(255, 77, 79, 0.7);
-}
-
-/* Sezione vuota */
+/* Testo per prenotazioni vuote */
 p.no-bookings {
   text-align: center;
   font-size: 18px;
   color: #6c757d;
-}
-
-.error-message {
-  color: #ff4d4f;
-  background-color: #ffe6e6;
-  border: 1px solid #ff4d4f;
-}
-
-.success-message {
-  color: #28a745;
-  background-color: #e6ffed;
-  border: 1px solid #28a745;
-}
-
-.booking-list {
-  list-style: none;
-  padding: 0;
-  margin-right: 20px;
-}
-
-.booking-item {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-}
-
-.booking-item h3 {
-  margin: 0 0 10px;
-  color: #007bff;
-}
-
-.booking-item p {
-  margin: 5px 0;
 }
