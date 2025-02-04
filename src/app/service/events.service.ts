@@ -33,7 +33,9 @@ export interface Event {
   remaining?: number;
   bookingMessage?: string;
   tags?: Tag[];
+  talks?: Talk[];
 }
+
 
 @Injectable({
   providedIn: 'root',
@@ -74,13 +76,27 @@ export class EventsService {
   }
 
   getEventById(id: string): Observable<Event> {
-    return this.http.get<Event>(`${this.apiUrl}/${id}`).pipe(      map(event => ({
+    return this.http.get<Event>(`${this.apiUrl}/${id}`).pipe(
+      map(event => ({
         ...event,
         date: new Date(event.date),
         remaining: event.maxParticipants - event.participantsCount,
-      }))
+      })),
+      switchMap(event =>
+        forkJoin({
+          tags: this.getTagsByEventId(id),
+          talks: this.getTalksByEventId(id)
+        }).pipe(
+          map(({ tags, talks }) => ({
+            ...event,
+            tags,
+            talks
+          }))
+        )
+      )
     );
   }
+
 
   getTalksByEventId(eventId: string): Observable<Talk[]> {
     return this.http.get<Talk[]>(`${this.apiUrl}/${eventId}/talks`).pipe(catchError(() => []));

@@ -34,37 +34,20 @@ export class EventiDetailsComponent implements OnInit {
       this.eventsService.getEventById(idParam).subscribe({
         next: (eventData: Event) => {
           this.event = eventData;
-          this.loadTalks(eventData.id);
+          this.talks = eventData.talks || [];
+          this.talks.forEach((talk) => this.loadSpeakers(talk));
         },
         error: (err) => {
           console.error('Errore nel recupero dei dettagli evento', err);
           this.error = 'Errore nel recupero dei dettagli evento';
           this.loading = false;
         },
+        complete: () => this.loading = false,
       });
     } else {
       this.error = 'ID evento non valido';
       this.loading = false;
     }
-  }
-
-  loadTalks(eventId: string): void {
-    this.eventsService.getTalksByEventId(eventId).subscribe({
-      next: (talks: Talk[]) => {
-        this.talks = talks || []; // Ensure talks is an array
-        this.talksLoaded = 0;
-
-        if (this.talks.length === 0) {
-          this.loading = false;
-        } else {
-          this.talks.forEach((talk) => this.loadSpeakers(talk));
-        }
-      },
-      error: () => {
-        console.error('Errore nel caricamento dei talks');
-        this.loading = false;
-      },
-    });
   }
 
   loadSpeakers(talk: Talk): void {
