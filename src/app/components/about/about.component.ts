@@ -38,35 +38,35 @@ export class AboutComponent implements OnInit {
       title: 'Nascita di Python Varese',
       description:
         "Nel Luglio 2023, Fabio Barbazza, appassionato di Python, organizza il primo evento 'PyBeer' su LinkedIn. Alcuni programmatori si ritrovano in un locale di Varese e nasce il canale Telegram 'Python Varese'.",
-      image: 'pyvarese.png',
+      image: '/images/pyvarese.png',
     },
     {
       year: 'OTT 23',
       title: 'Secondo PyBeer e Crescita della Community',
       description:
         "A Ottobre 2023, Dario Bertolino si unisce all'organizzazione. Matteo Bilotta, insieme a Marco Beri, partecipa al secondo PyBeer, consolidando la community.",
-      image: 'aperitivojs.png',
+      image: '/images/aperitivojs.png',
     },
     {
       year: 'FEB 24',
       title: 'Lancio di Vue.js Varese',
       description:
         "A Febbraio 2024, Matteo Bilotta, con la sua passione per il frontend, crea il gruppo Telegram 'Vue.js Varese' per far conoscere il framework tra i professionisti locali.",
-      image: 'vuejs-varese.png',
+      image: '/images/vuejs-varese.png',
     },
     {
       year: 'GIU 24',
       title: 'Primo Evento Combinato',
       description:
         'A Giugno 2024 viene organizzato il primo evento combinato in Elmec, unendo le community e dimostrando la sinergia tra le diverse tecnologie.',
-      image: 'code_cheers.png',
+      image: '/images/code_cheers.png',
     },
     {
       year: 'DIC 24',
       title: 'Nascita del Varese Developer Group',
       description:
         'Rendendosi conto che rimanere confinati in specifiche tecnologie era limitante, gli organizzatori decidono di unire le community sotto un unico cappello: Varese Developer Group, per dare maggior visibilità e risonanza al mondo tech.',
-      image: 'logovarese.png',
+      image: '/images/logovarese.png',
     },
   ];
 

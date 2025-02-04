@@ -1,25 +1,110 @@
+/* Contenitore principale */
 .event-details-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Contenitore delle card */
+.cards-container {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Card generica */
+.card {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  flex: 1;
+  min-width: 300px;
+}
+
+/* Card dettagli evento */
+.event-card {
+  text-align: left;
+}
+
+/* Titoli */
+h1 {
+  color: #007bff;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  color: #007bff;
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+/* Descrizione */
+.description {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+/* Dati aggiuntivi */
+p strong {
+  color: #222;
+}
+
+/* Card Talks */
+.talks-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Tabella Talks */
+.talks-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.talks-table th,
+.talks-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.talks-table th {
+  background: #f4f4f4;
+  font-weight: bold;
+}
+
+/* Relatori */
+.speaker-list {
+  font-size: 16px;
+  color: #000;
+  margin-top: 5px;
+}
+
+.no-speakers {
+  color: #888;
+  font-style: italic;
+}
+
+/* Messaggi di caricamento ed errore */
+.loading,
+.error {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Responsive: impilamento verticale su schermi piccoli */
+@media (max-width: 768px) {
+  .cards-container {
+    flex-direction: column;
   }
-  
-  .event-details-container h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-  }
-  
-  .event-details-container .description {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-  }
-  
-  .event-details-container p {
-    margin: 10px 0;
-  }
-  
-  .error {
-    color: red;
-    font-weight: bold;
-  }
-  
+}

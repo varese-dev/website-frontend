@@ -35,10 +35,8 @@ export class EventiComponent implements OnInit {
         event.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
         event.description.toLowerCase().includes(this.searchTerm.toLowerCase());
 
-      const matchesCategory =
-        !this.selectedCategory || event.category === this.selectedCategory;
 
-      return matchesSearch && matchesCategory;
+      return matchesSearch;
     });
   }
 }

@@ -1,37 +1,55 @@
 <div class="event-details-container">
-    <!-- Mostra un messaggio durante il caricamento -->
-    <ng-container *ngIf="loading; else content">
-      <p>Caricamento dettagli evento...</p>
+  <!-- Mostra un messaggio durante il caricamento -->
+  <ng-container *ngIf="loading; else content">
+    <p class="loading">Caricamento dettagli evento...</p>
+  </ng-container>
+
+  <!-- Se c'è un errore, lo mostra -->
+  <ng-template #content>
+    <ng-container *ngIf="error; else eventDetails">
+      <p class="error">{{ error }}</p>
     </ng-container>
+  </ng-template>
 
-    <!-- Se c'è un errore, lo mostra -->
-    <ng-template #content>
-      <ng-container *ngIf="error; else eventDetails">
-        <p class="error">{{ error }}</p>
-      </ng-container>
-    </ng-template>
-
-    <!-- Mostra i dettagli dell'evento -->
-    <ng-template #eventDetails>
-      <div *ngIf="event">
+  <!-- Mostra i dettagli dell'evento -->
+  <ng-template #eventDetails>
+    <div class="cards-container">
+      <!-- Card dettagli evento -->
+      <div class="card event-card" *ngIf="event">
         <h1>{{ event.title }}</h1>
         <p class="description">{{ event.description }}</p>
-        <p>
-          <strong>Data:</strong>
-          {{ event.date | date: 'longDate' }}
-        </p>
-        <p>
-          <strong>Orario:</strong>
-          {{ event.start }} - {{ event.end }}
-        </p>
-        <p>
-          <strong>Categoria:</strong>
-          {{ event.category }}
-        </p>
-        <p>
-          <strong>Posti disponibili:</strong>
-          {{ event.remaining }}
-        </p>
+        <p><strong>Data:</strong> {{ event.date | date : "fullDate" }}</p>
+        <p><strong>Posti disponibili:</strong> {{ event.remaining }}</p>
       </div>
-    </ng-template>
+
+      <!-- Card talks e relatori -->
+      <div class="card talks-card" *ngIf="talks && talks.length">
+        <h2>Talks</h2>
+        <table class="talks-table">
+          <thead>
+            <tr>
+              <th>Talk</th>
+              <th>Relatori</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let talk of talks">
+              <td>
+                <strong>{{ talk.title }}</strong>
+                <p>{{ talk.description }}</p>
+              </td>
+              <td>
+                <span *ngIf="getSpeakerNames(talk); else noSpeakers">
+                  {{ getSpeakerNames(talk) }}
+                </span>
+                <ng-template #noSpeakers>
+                  <p class="no-speakers">Nessun relatore disponibile</p>
+                </ng-template>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </ng-template>
 </div>
