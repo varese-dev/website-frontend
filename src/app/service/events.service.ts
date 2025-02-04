@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { forkJoin, Observable, of, switchMap } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {forkJoin, Observable, of, switchMap} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
 
 export interface Speaker {
   id: string;
   name: string;
-  surname: string; 
+  surname: string;
 }
 
 export interface Talk {
@@ -14,6 +14,7 @@ export interface Talk {
   title: string;
   description: string;
   speakers?: Speaker[];
+  tags?: Tag[];
 }
 
 export interface Tag {
@@ -33,17 +34,20 @@ export interface Event {
   remaining?: number;
   bookingMessage?: string;
   tags?: Tag[];
+  talks?: Talk[];
 }
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class EventsService {
   private apiUrl = 'http://localhost:8080/events';
-  private talksUrl = 'http://localhost:8080/talks'; // Nuovo endpoint per i talk
-  private bookingUrl = 'http://localhost:8080/bookings'; 
+  private talksUrl = 'http://localhost:8080/talks';
+  private bookingUrl = 'http://localhost:8080/bookings';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   getEvents(): Observable<Event[]> {
     return this.http.get<Event[]>(this.apiUrl).pipe(
@@ -72,17 +76,30 @@ export class EventsService {
     );
   }
 
-  getEventById(id: number): Observable<Event> {
+  getEventById(id: string): Observable<Event> {
     return this.http.get<Event>(`${this.apiUrl}/${id}`).pipe(
       map(event => ({
         ...event,
         date: new Date(event.date),
         remaining: event.maxParticipants - event.participantsCount,
-      }))
+      })),
+      switchMap(event =>
+        forkJoin({
+          tags: this.getTagsByEventId(id),
+          talks: this.getTalksByEventId(id)
+        }).pipe(
+          map(({ tags, talks }) => ({
+            ...event,
+            tags,
+            talks
+          }))
+        )
+      )
     );
   }
 
-  getTalksByEventId(eventId: number): Observable<Talk[]> {
+
+  getTalksByEventId(eventId: string): Observable<Talk[]> {
     return this.http.get<Talk[]>(`${this.apiUrl}/${eventId}/talks`).pipe(catchError(() => []));
   }
 
@@ -90,12 +107,16 @@ export class EventsService {
     return this.http.get<Speaker[]>(`${this.talksUrl}/${talkId}/speakers`).pipe(catchError(() => []));
   }
 
+  getTagsByTalkId(talkId: string): Observable<Tag[]> {
+    return this.http.get<Tag[]>(`${this.talksUrl}/${talkId}/tags`).pipe(catchError(() => []));
+  }
+
   createBooking(eventId: string): Observable<any> {
     const url = `${this.bookingUrl}/${eventId}`;
 
-    return this.http.post<any>(url, null, { withCredentials: true }).pipe(
+    return this.http.post<any>(url, null, {withCredentials: true}).pipe(
       map(response => {
-        return { success: true, message: 'Booking created successfully', data: response };
+        return {success: true, message: 'Booking created successfully', data: response};
       }),
       catchError(error => {
         console.error('Error response:', error);
@@ -107,7 +128,7 @@ export class EventsService {
         } else if (error.status === 204) {
           errorMessage = 'Nessun contenuto disponibile per questo evento';
         }
-        return of({ success: false, message: errorMessage, error });
+        return of({success: false, message: errorMessage, error});
       })
     );
   }

@@ -1,10 +1,8 @@
 <div class="event-details-container">
-  <!-- Mostra un messaggio durante il caricamento -->
   <ng-container *ngIf="loading; else content">
     <p class="loading">Caricamento dettagli evento...</p>
   </ng-container>
 
-  <!-- Se c'è un errore, lo mostra -->
   <ng-template #content>
     <ng-container *ngIf="error; else eventDetails">
       <p class="error">{{ error }}</p>
@@ -28,31 +26,30 @@
         </div>
       </div>
 
-      <!-- Card talks e relatori -->
+      <!-- Talks e dettagli -->
       <div class="card talks-card" *ngIf="talks && talks.length">
         <h2>Talks</h2>
         <table class="talks-table">
           <thead>
-            <tr>
-              <th>Talk</th>
-              <th>Relatori</th>
-            </tr>
+          <tr>
+            <th>Talk</th>
+            <th>Relatori</th>
+            <th>Tags</th>
+          </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let talk of talks">
-              <td>
-                <strong>{{ talk.title }}</strong>
-                <p>{{ talk.description }}</p>
-              </td>
-              <td>
-                <span *ngIf="getSpeakerNames(talk); else noSpeakers">
-                  {{ getSpeakerNames(talk) }}
-                </span>
-                <ng-template #noSpeakers>
-                  <p class="no-speakers">Nessun relatore disponibile</p>
-                </ng-template>
-              </td>
-            </tr>
+          <tr *ngFor="let talk of talks">
+            <td>
+              <strong>{{ talk.title }}</strong>
+              <p>{{ talk.description }}</p>
+            </td>
+            <td>
+              {{ getSpeakerNames(talk) }}
+            </td>
+            <td>
+              {{ getTalkTags(talk) }}
+            </td>
+          </tr>
           </tbody>
         </table>
       </div>
