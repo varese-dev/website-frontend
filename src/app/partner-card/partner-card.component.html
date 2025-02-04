@@ -1,0 +1,41 @@
+<div class="carousel-container">
+    <button class="nav-button prev" (click)="previousSlide()">&#10094;</button>
+  
+    <div class="carousel">
+      <div class="slides">
+        <div *ngFor="let slide of visibleSlides; trackBy: trackByFn" class="slide">
+          <div class="card">
+            <div class="card-content">
+              <h2>{{ slide.title }}</h2>
+              <p>{{ slide.description }}</p>
+              <button class="details-button">Dettagli</button>
+            </div>
+  
+            <!-- Blocco fisso in basso a sinistra -->
+            <div class="card-info">
+              <div class="countdown">
+                <h3>Tempo Rimanente</h3>
+                <p>{{ slide.timeRemaining }}</p>
+              </div>
+  
+              <div *ngIf="slide.timeRemaining !== 'Evento concluso'" class="remaining-slots">
+                <h3>Posti Rimasti</h3>
+                <p>{{ slide.remainingSlots > 0 ? slide.remainingSlots : 'Tutto esaurito' }}</p> <!-- Fallback se i posti sono NaN o 0 -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <button class="nav-button next" (click)="nextSlide()">&#10095;</button>
+  
+    <div class="indicators">
+      <span *ngFor="let _ of getTotalPages(); let idx = index"
+            class="indicator"
+            [class.active]="idx === currentPage"
+            (click)="goToSlide(idx)">
+      </span>
+    </div>
+  </div>
+  

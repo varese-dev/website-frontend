@@ -1,0 +1,187 @@
+.carousel-container {
+    position: relative;
+    width: 90%;
+    max-width: 1800px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+  }
+  
+  .carousel {
+    width: 100%;
+    min-width: 65vw;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .slides {
+    display: flex;
+    transition: transform 0.6s ease-in-out;
+  }
+  
+  .slide {
+    flex: 0 0 100%;
+  }
+  
+  .card {
+    width: 50vw; 
+    height: 380px; 
+    /*background: linear-gradient(100deg, white 55%, transparent 45%),
+      url("../../../assets/pyvarese.png");*/
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    position: relative;
+    flex-shrink: 0;
+  }
+  
+  .card-content {
+    width: 45%;
+    margin-left: 3vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 250px;
+  }
+  
+  .card h2 {
+    margin: 0;
+    font-size: 28px;
+  }
+  
+  .card p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 5px;
+    flex-grow: 1;
+    padding-bottom: 5px;
+  }
+  
+  /* Pulsante dettagli */
+  .details-button {
+    padding: 10px 20px;
+    background-color: #C22C1E;
+    color: white;
+    border: none;
+    border-radius: 34px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 2vh; /* Aggiunto per distanziare il bottone dalla descrizione */
+  }
+  
+  .details-button:hover {
+    background-color: #AE3025;
+  }
+  
+  
+  /* Blocco info fisso in basso a sinistra */
+  .card-info {
+    position: absolute;
+    bottom: 15px; /* Più vicino al bordo inferiore */
+    left: 25px; /* Leggermente più a sinistra */
+    display: flex;
+    flex-direction: column;
+    gap: 2px; /* Spazio minimo tra countdown e posti rimanenti */
+  }
+  
+  /* Countdown */
+  .countdown {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .countdown h3 {
+    font-size: 16px; /* Testo più piccolo */
+    margin-bottom: -8px; /* Riduce ulteriormente lo spazio */
+  }
+  
+  .countdown p {
+    font-size: 16px; /* Anche il valore è più piccolo */
+  }
+  
+  /* Sezione posti rimanenti */
+  .remaining-slots {
+    display: flex;
+    align-items: center; /* Allineamento verticale perfetto */
+    gap: 10px; /* Spazio tra il titolo e il numero */
+    flex-direction: row; /* Allinea orizzontalmente */
+  }
+  
+  .remaining-slots h3 {
+    margin: 0;
+    font-size: 18px;
+    white-space: nowrap; /* Impedisce che il testo vada a capo */
+  }
+  
+  .remaining-slots p {
+    margin: 0; /* Rimuove eventuali margini indesiderati */
+    font-size: 18px;
+    margin-top: 7px;
+    font-weight: bold;
+    color: #C22C1E;
+  }
+  
+  
+  /* Indicators */
+  .indicators {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+  }
+  
+  .indicator {
+    width: 12px;
+    height: 12px;
+    background: #bbb;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .indicator.active {
+    background: #333;
+  }
+  
+  /* Frecce senza sfondo */
+  .nav-button {
+    color: #333;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 10;
+    transition: opacity 0.3s, transform 0.3s;
+    position: absolute;
+    top: 45%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: none;
+  }
+  
+  .nav-button.prev {
+    left: -10vw;
+  }
+  
+  .nav-button.next {
+    right: -10vw;
+  }
+  
+  /* Hover e trasformazione per l'animazione */
+  .nav-button:hover {
+    opacity: 0.8;
+    transform: translateY(-50%) scale(1.1);
+  }
+  
