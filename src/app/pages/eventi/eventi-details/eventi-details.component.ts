@@ -31,11 +31,11 @@ export class EventiDetailsComponent implements OnInit {
   ngOnInit(): void {
     const idParam = this.route.snapshot.paramMap.get('id');
     if (idParam) {
-      const id = Number(idParam);
+      const id = Number(idParam); // Converti id in number
       this.eventsService.getEventById(id).subscribe({
         next: (eventData: Event) => {
           this.event = eventData;
-          this.loadTalks(eventData.id);
+          this.loadTalks(Number(eventData.id)); // Converto eventData.id in number
         },
         error: (err) => {
           console.error('Errore nel recupero dei dettagli evento', err);
