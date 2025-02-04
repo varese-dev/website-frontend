@@ -1,36 +1,33 @@
 <div class="event-details-container">
-  <!-- Messaggio di caricamento -->
   <ng-container *ngIf="loading; else content">
     <p class="loading">Caricamento dettagli evento...</p>
   </ng-container>
 
-  <!-- Se c'è un errore -->
   <ng-template #content>
     <ng-container *ngIf="error; else eventDetails">
       <p class="error">{{ error }}</p>
     </ng-container>
   </ng-template>
 
-  <!-- Dettagli evento -->
   <ng-template #eventDetails>
     <div class="cards-container">
-      <!-- Card dettagli evento -->
+      <!-- Dettagli evento -->
       <div class="card event-card" *ngIf="event">
         <h1>{{ event.title }}</h1>
         <p class="description">{{ event.description }}</p>
         <p><strong>Data:</strong> {{ event.date | date: 'longDate' }}</p>
         <p><strong>Posti disponibili:</strong> {{ event.remaining }}</p>
 
-        <!-- Sezione tags -->
+        <!-- Tags evento -->
         <div *ngIf="event.tags && event.tags.length" class="tags-section">
-          <h3>Tags</h3>
+          <h3>Tags Evento</h3>
           <ul class="tags-list">
             <li *ngFor="let tag of event.tags">{{ tag.name }}</li>
           </ul>
         </div>
       </div>
 
-      <!-- Card talks e relatori -->
+      <!-- Talks e dettagli -->
       <div class="card talks-card" *ngIf="talks && talks.length">
         <h2>Talks</h2>
         <table class="talks-table">
@@ -38,6 +35,7 @@
           <tr>
             <th>Talk</th>
             <th>Relatori</th>
+            <th>Tags</th>
           </tr>
           </thead>
           <tbody>
@@ -47,12 +45,10 @@
               <p>{{ talk.description }}</p>
             </td>
             <td>
-                <span *ngIf="getSpeakerNames(talk); else noSpeakers">
-                  {{ getSpeakerNames(talk) }}
-                </span>
-              <ng-template #noSpeakers>
-                <p class="no-speakers">Nessun relatore disponibile</p>
-              </ng-template>
+              {{ getSpeakerNames(talk) }}
+            </td>
+            <td>
+              {{ getTalkTags(talk) }}
             </td>
           </tr>
           </tbody>

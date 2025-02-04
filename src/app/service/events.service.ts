@@ -14,6 +14,7 @@ export interface Talk {
   title: string;
   description: string;
   speakers?: Speaker[];
+  tags?: Tag[];
 }
 
 export interface Tag {
@@ -104,6 +105,10 @@ export class EventsService {
 
   getSpeakersByTalkId(talkId: string): Observable<Speaker[]> {
     return this.http.get<Speaker[]>(`${this.talksUrl}/${talkId}/speakers`).pipe(catchError(() => []));
+  }
+
+  getTagsByTalkId(talkId: string): Observable<Tag[]> {
+    return this.http.get<Tag[]>(`${this.talksUrl}/${talkId}/tags`).pipe(catchError(() => []));
   }
 
   createBooking(eventId: string): Observable<any> {
