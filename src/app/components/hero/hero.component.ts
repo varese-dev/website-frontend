@@ -7,6 +7,7 @@ import gsap from 'gsap';
   templateUrl: './hero.component.html',
   styleUrls: ['./hero.component.css'],
   standalone: true,
+  imports: [],
 })
 export class HeroComponent implements AfterViewInit {
   @ViewChildren('section') sections!: QueryList<ElementRef>;

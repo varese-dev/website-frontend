@@ -13,7 +13,7 @@ import { ForgotPasswordComponent } from './pages/auth/account/forgotten-password
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'eventi', component: EventiComponent },
-  { path: 'eventi/:id', component: EventiDetailsComponent }, // Aggiunto route dinamico per dettagli evento
+  { path: 'eventi/:id', component: EventiDetailsComponent },
   { path: 'meeting', component: TalkRelatoriComponent },
   { path: 'meeting/:id', component: RelatoreDetailComponent }, // Aggiunto route per dettagli relatore
   { path: 'partner', component: PartnerComponent },
