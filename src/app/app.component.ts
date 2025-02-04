@@ -15,13 +15,12 @@ import { HeroComponent } from "./components/hero/hero.component";
 export class AppComponent {
   title = 'Varese Developer Group';
 
-  hideHeaderFooter: boolean = false;
+  hideHeaderHeroFooter: boolean = false;
 
   constructor(private router: Router) {
     this.router.events.subscribe(() => {
       const currentRoute = this.router.url;
-      // Nasconde header e footer per le pagine di login e registrazione
-      this.hideHeaderFooter = currentRoute === '/auth/account#login'|| currentRoute === '/auth/account#register';
+      this.hideHeaderHeroFooter = currentRoute === '/auth/account#login'|| currentRoute === '/auth/account#register' || currentRoute === '/auth/account/forgotten-password';
     });
   }
 }

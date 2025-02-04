@@ -11,11 +11,6 @@
   transition: all 0.5s ease;
 }
 
-.main-header.scrolled {
-  background-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
 .logo {
   display: flex;
   justify-content: flex-start;
@@ -30,7 +25,7 @@
 
 .menu-item {
   position: relative;
-  color: #b22222;
+  color: #ffffff;
   font-size: 1rem;
   font-weight: 300;
   letter-spacing: 0.2rem;
@@ -46,7 +41,7 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #b22222, #16213e);
+  background: linear-gradient(90deg, #b22222, #37529e);
   transition: width 0.3s ease;
 }
 
@@ -63,6 +58,15 @@
   width: 100%;
 }
 
+.main-header.scrolled {
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.main-header.scrolled .menu-item {
+  color: #b22222;
+}
+
 .actions {
   display: flex;
   justify-content: flex-end;
@@ -73,8 +77,12 @@
 .divider {
   height: 1.5rem;
   width: 1px;
-  background-color: #b22222;
+  background-color: #ffffff;
   opacity: 0.5;
+}
+
+.main-header.scrolled .divider {
+  background-color: #b22222;
 }
 
 .icon-button {
@@ -91,16 +99,12 @@
   transform: scale(1.1);
 }
 
-.fa-solid {
-  transition: color 0.7s ease;
+.main-header.scrolled .icon-button i {
+  color: #b22222 !important;
 }
 
-.fa-solid:hover {
-  color: #16213e !important;
-}
-
-.fa-regular:hover {
-  color: #16213e !important;
+.main-header.scrolled .icon-button:hover i {
+  transform: scale(1.1);
 }
 
 .fa-regular {
