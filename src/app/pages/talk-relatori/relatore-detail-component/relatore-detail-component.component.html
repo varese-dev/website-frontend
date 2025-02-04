@@ -1,91 +1,96 @@
 <div class="card-carousel-container">
-    <div class="card-biography">
-        <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="64" cy="64" r="40"></circle>
-            <image
-                    [attr.href]="'/relatore/relatore' + relatore.id + '.jpg'"
-                    x="4"
-                    y="4"
-                    width="120"
-                    height="120"
-                    clip-path="circle(40px at center)"
-            />
-        </svg>
-        <div class="card__titleSpeaker">
-            {{ name }} {{ surname }}
+  <div class="card-biography">
+    <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="64" cy="64" r="40"></circle>
+      <image
+        [attr.href]="relatore.image"
+        x="4"
+        y="4"
+        width="120"
+        height="120"
+        clip-path="circle(40px at center)"
+      />
+    </svg>
+    <div class="card__titleSpeaker">
+      {{ name }} {{ surname }}
+    </div>
+    <p class="cardDescription">{{ biography }}</p>
+
+    <div *ngIf="showLinkedinButton; else noLinkedin">
+      <button class="card__btn">
+        <a [href]="relatore.linkedin" target="_blank">Visita il profilo LinkedIn</a>
+      </button>
+    </div>
+
+    <ng-template #noLinkedin>
+
+      <button class="card__btnLinkedin">
+        <p class="linkedinText">Profilo LinkedIn non disponibile</p>
+      </button>
+    </ng-template>
+
+
+  </div>
+
+
+  <div class="carousel-container">
+    <h2 class="h2Title">I SUOI TALK</h2>
+
+
+    <div class="carousel">
+      <div class="slides">
+        <div *ngFor="let slide of talks; let idx = index; trackBy: trackByFn"
+             class="slide"
+             [ngClass]="{ 'active': idx === currentIndex }">
+          <div class="card-carousel">
+            <div class="card-content">
+              <h3>{{ slide.title }}</h3>
+              <p>{{ slide.description }}</p>
+            </div>
+          </div>
         </div>
-        <p class="cardDescription">{{ biography }}</p>
-
-      <div *ngIf="linkedin; else noLink">
-        <a [href]="linkedin" target="_blank" rel="noopener noreferrer">
-          <button class="btn btn-primary">Vai al profilo LinkedIn</button>
-        </a>
       </div>
-
-      <ng-template #noLink>
-        <p>Profilo LinkedIn non disponibile</p>
-      </ng-template>
     </div>
 
 
-    <div class="carousel-container">
-        <h2 class="h2Title">I SUOI TALK</h2>
-
-
-        <div class="carousel">
-            <div class="slides">
-                <div *ngFor="let slide of talks; let idx = index; trackBy: trackByFn"
-                     class="slide"
-                     [ngClass]="{ 'active': idx === currentIndex }">
-                    <div class="card-carousel">
-                        <div class="card-content">
-                            <h3>{{ slide.title }}</h3>
-                            <p>{{ slide.description }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="indicators">
+    <div class="indicators">
       <span *ngFor="let _ of talks; let idx = index"
             class="indicator"
             [class.active]="idx === currentIndex"
             (click)="goToSlide(idx)">
       </span>
-        </div>
+    </div>
 
-        <div class="distance">
-            <h2 class="h2Title">GLI EVENTI A CUI HA PARTECIPATO</h2>
+    <div class="distance">
+      <h2 class="h2Title">GLI EVENTI A CUI HA PARTECIPATO</h2>
 
 
-            <div class="carousel">
-                <div class="slides">
-                    <div *ngFor="let slide of events; let idx = index; trackBy: trackByFn"
-                         class="slide"
-                         [ngClass]="{ 'active': idx === currentIndexEvents }">
-                        <div class="card-carousel">
-                            <div class="card-content">
-                                <h3>{{ slide.title }}</h3>
-                                <p>{{ slide.description }}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+      <div class="carousel">
+        <div class="slides">
+          <div *ngFor="let slide of events; let idx = index; trackBy: trackByFn"
+               class="slide"
+               [ngClass]="{ 'active': idx === currentIndexEvents }">
+            <div class="card-carousel">
+              <div class="card-content">
+                <h3>{{ slide.title }}</h3>
+                <p>{{ slide.description }}</p>
+              </div>
             </div>
+          </div>
+
+        </div>
+      </div>
 
 
-            <div class="indicators">
+      <div class="indicators">
       <span *ngFor="let _ of events; let idx = index"
             class="indicator"
             [class.active]="idx === currentIndexEvents"
             (click)="goToSlide1(idx)">
       </span>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 
 </div>
 

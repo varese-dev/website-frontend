@@ -44,7 +44,7 @@
             </clipPath>
           </defs>
           <image
-            [attr.href]="'/relatore/relatore' + relatore.id + '.jpg'"
+            [attr.href]="relatore.image"
             x="-60"
             y="-60"
             width="240"
@@ -58,7 +58,7 @@
       <div class="card__subtitle">{{ relatore.surname }}</div>
       <div class="card__wrapper">
 
-        <button class="card__btn card__btn-solid" [routerLink]="['/relatori', relatore.id]">Scopri il relatore</button>
+        <button class="card__btn card__btn-solid" [routerLink]="['/meeting', relatore.id]">Scopri il relatore</button>
 
 
       </div>

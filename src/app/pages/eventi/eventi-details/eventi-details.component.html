@@ -1,0 +1,37 @@
+<div class="event-details-container">
+    <!-- Mostra un messaggio durante il caricamento -->
+    <ng-container *ngIf="loading; else content">
+      <p>Caricamento dettagli evento...</p>
+    </ng-container>
+
+    <!-- Se c'è un errore, lo mostra -->
+    <ng-template #content>
+      <ng-container *ngIf="error; else eventDetails">
+        <p class="error">{{ error }}</p>
+      </ng-container>
+    </ng-template>
+
+    <!-- Mostra i dettagli dell'evento -->
+    <ng-template #eventDetails>
+      <div *ngIf="event">
+        <h1>{{ event.title }}</h1>
+        <p class="description">{{ event.description }}</p>
+        <p>
+          <strong>Data:</strong>
+          {{ event.date | date: 'longDate' }}
+        </p>
+        <p>
+          <strong>Orario:</strong>
+          {{ event.start }} - {{ event.end }}
+        </p>
+        <p>
+          <strong>Categoria:</strong>
+          {{ event.category }}
+        </p>
+        <p>
+          <strong>Posti disponibili:</strong>
+          {{ event.remaining }}
+        </p>
+      </div>
+    </ng-template>
+</div>
