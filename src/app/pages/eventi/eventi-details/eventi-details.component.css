@@ -1,18 +1,19 @@
 /* Contenitore principale */
 .event-details-container {
+  padding: 40px 20px;
   display: flex;
   justify-content: center;
-  padding: 20px;
+  align-items: center;
   font-family: Arial, sans-serif;
   color: #333;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Contenitore delle card */
-.cards-container {
+/* Contenitore per le card con layout affiancato */
+.details-cards-container {
   display: flex;
-  gap: 20px;
+  gap: 30px;
   width: 100%;
 }
 
@@ -20,47 +21,86 @@
 .card {
   background: #ffffff;
   border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
   flex: 1;
   min-width: 300px;
 }
 
+.card:hover {
+  transform: translateY(-5px);
+}
+
 /* Card dettagli evento */
 .event-card {
-  text-align: left;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Titoli */
-h1 {
-  color: #007bff;
-  font-size: 24px;
-  margin-bottom: 10px;
+/* Header evento: immagine e data in sovrapposizione */
+.event-header {
+  position: relative;
+  height: 250px;
+  overflow: hidden;
 }
 
-h2 {
-  color: #007bff;
-  font-size: 22px;
+.event-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.event-card:hover .event-image {
+  transform: scale(1.05);
+}
+
+.event-date {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: rgba(169, 2, 2, 0.9);
+  color: #fff;
+  padding: 8px 12px;
+  font-size: 1rem;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/* Contenuto evento */
+.event-content {
+  padding: 20px;
+}
+
+.event-content h1 {
+  font-size: 28px;
+  color: #A90202;
   margin-bottom: 15px;
 }
 
-/* Descrizione */
 .description {
   font-size: 16px;
   color: #555;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
-/* Dati aggiuntivi */
-p strong {
-  color: #222;
+.event-content p {
+  font-size: 15px;
+  margin-bottom: 10px;
 }
 
 /* Card Talks */
 .talks-card {
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+
+.talks-card h2 {
+  font-size: 24px;
+  color: #A90202;
+  margin-bottom: 15px;
 }
 
 /* Tabella Talks */
@@ -73,22 +113,17 @@ p strong {
 .talks-table th,
 .talks-table td {
   border: 1px solid #ddd;
-  padding: 10px;
+  padding: 12px;
   text-align: left;
+  font-size: 15px;
 }
 
 .talks-table th {
-  background: #f4f4f4;
+  background: #f8f8f8;
   font-weight: bold;
 }
 
 /* Relatori */
-.speaker-list {
-  font-size: 16px;
-  color: #000;
-  margin-top: 5px;
-}
-
 .no-speakers {
   color: #888;
   font-style: italic;
@@ -102,9 +137,9 @@ p strong {
   font-weight: bold;
 }
 
-/* Responsive: impilamento verticale su schermi piccoli */
+/* Responsive per dispositivi piccoli */
 @media (max-width: 768px) {
-  .cards-container {
+  .details-cards-container {
     flex-direction: column;
   }
 }

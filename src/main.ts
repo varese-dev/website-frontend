@@ -6,6 +6,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { routes } from './app/app.routes';
 import { appConfig } from './app/app.config';
+import { registerLocaleData } from '@angular/common';
+import localeIt from '@angular/common/locales/it';
+import { LOCALE_ID } from '@angular/core';
+
+// Registra il locale italiano
+registerLocaleData(localeIt);
 
 bootstrapApplication(AppComponent, {
   ...appConfig,
@@ -13,6 +19,7 @@ bootstrapApplication(AppComponent, {
     ...appConfig.providers,
     provideRouter(routes),
     importProvidersFrom(HttpClientModule),
-    provideAnimations()
+    provideAnimations(),
+    { provide: LOCALE_ID, useValue: 'it-IT' } // Imposta l'italiano come lingua predefinita per le date
   ]
 }).catch((err) => console.error(err));

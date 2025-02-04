@@ -11,15 +11,21 @@
     </ng-container>
   </ng-template>
 
-  <!-- Mostra i dettagli dell'evento -->
+  <!-- Mostra i dettagli dell'evento e i talk -->
   <ng-template #eventDetails>
-    <div class="cards-container">
+    <div class="details-cards-container">
       <!-- Card dettagli evento -->
       <div class="card event-card" *ngIf="event">
-        <h1>{{ event.title }}</h1>
-        <p class="description">{{ event.description }}</p>
-        <p><strong>Data:</strong> {{ event.date | date: 'longDate' }}</p>
-        <p><strong>Posti disponibili:</strong> {{ event.remaining }}</p>
+        <div class="event-header">
+          <img src="images/hero.png" alt="Immagine Evento" class="event-image" />
+          <div class="event-date">{{ event.date | date: 'dd MMM yyyy' }}</div>
+        </div>
+        <div class="event-content">
+          <h1>{{ event.title }}</h1>
+          <p class="description">{{ event.description }}</p>
+          <p><strong>Data:</strong> {{ event.date | date: 'longDate' }}</p>
+          <p><strong>Posti disponibili:</strong> {{ event.remaining }}</p>
+        </div>
       </div>
 
       <!-- Card talks e relatori -->
