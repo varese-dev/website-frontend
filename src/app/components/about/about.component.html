@@ -1,44 +1,30 @@
-<section id="about">
-  <!-- Titolo Unico -->
-  <div class="about-title">
-    <h2>Chi Siamo</h2>
+<section id="about" class="about-section">
+  <!-- Titolo principale -->
+  <div class="hero-header">
+    <div class="label">About Us</div>
+    <h1>Chi Siamo: <span class="highlight">Scopri la nostra storia</span></h1>
+    <p class="subtitle">Un viaggio attraverso le tappe fondamentali del nostro gruppo.</p>
   </div>
 
-  <!-- Contenitore principale: timeline a sinistra e card centrata dei dettagli -->
-  <div class="timeline-container">
-    <!-- Colonna Sinistra: Timeline Verticale Semplificata -->
-    <div class="timeline-nav">
-      <ul>
-        <li
-          *ngFor="let event of timelineEvents; let i = index"
-          (click)="selectEvent(i)"
-          [class.active]="i <= currentIndex"
-        >
-          <span class="year">{{ event.year }}</span>
-        </li>
-      </ul>
-      <!-- Linea di base: larga con bordi rossi e interno bianco, che si estende leggermente sopra e sotto -->
-      <div class="timeline-line"></div>
-      <!-- Linea attiva: si riempie in rosso fino all'evento corrente -->
+  <!-- Step orizzontale con navigazione -->
+  <div class="horizontal-steps">
+    <div class="step-track">
       <div
-        class="timeline-active-line"
-        [style.height.%]="activePercentage"
-      ></div>
-    </div>
-
-    <!-- Card centrata: Dettagli dell'evento (testo ed immagine) -->
-    <div class="timeline-card" [@fadeAnimation]>
-      <div class="timeline-details">
-        <!-- Testo -->
-        <div class="detail-text">
-          <h3>{{ currentEvent.title }}</h3>
-          <p>{{ currentEvent.description }}</p>
-        </div>
-        <!-- Immagine -->
-        <div class="detail-image">
-          <img [src]="currentEvent.image" alt="{{ currentEvent.title }}" />
+        *ngFor="let event of timelineEvents; let i = index"
+        class="step-block"
+        (click)="selectEvent(i)"
+      >
+        <div [class.active]="i === currentIndex" class="step">
+          <span class="step-year">{{ event.year }}</span>
         </div>
       </div>
+      <div class="progress-line" [style.width.%]="progressWidth"></div>
     </div>
+  </div>
+
+  <!-- Dettaglio step attivo -->
+  <div class="step-content fade-in">
+    <h3>{{ currentEvent.title }}</h3>
+    <p>{{ currentEvent.description }}</p>
   </div>
 </section>
