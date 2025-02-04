@@ -1,253 +1,101 @@
-/* Sezione About di Base */
-#about {
-  background-color: #fff;
+/* Sezione principale */
+.about-section {
   padding: 80px;
-}
-
-.about-title {
+  background-color: #f5f5f5;
   text-align: center;
-  margin-bottom: 50px;
 }
 
-.about-title h2 {
-  font-size: 40px; /* Titolo 40px */
-  color: #c22c1e;
+.hero-header {
+  margin-bottom: 60px;
+}
+
+.label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #16213e;
   text-transform: uppercase;
-  margin: 0;
-  display: inline-block;
+  letter-spacing: 0.1rem;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+  color: #333;
+  margin: 10px 0;
+  text-transform: uppercase;
+}
+
+h1 .highlight {
+  color: #b22222;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #555;
+  margin: 10px 0 40px;
+}
+
+/* Step orizzontale */
+.horizontal-steps {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 40px 0;
+}
+
+.step-track {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 80%;
   position: relative;
 }
 
-.about-title h2::after {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 6px;
-  background-color: #c22c1e;
-  border-radius: 50px;
-  margin-top: 10px;
-}
-
-/* Contenitore principale: timeline e card */
-.timeline-container {
+.step-block {
+  flex: 1;
   display: flex;
-  align-items: stretch; /* La card si adatta all'altezza della timeline */
-  gap: 50px;
   justify-content: center;
 }
 
-/* Timeline Navigation Semplificata */
-.timeline-nav {
-  position: relative;
-  width: 80px; /* Larghezza fissa per la timeline */
-  margin-right: 10vw;
-}
-
-.timeline-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  z-index: 2;
-}
-
-.timeline-nav li {
-  margin: 20px 0;
-  text-align: center;
+.step {
+  padding: 15px 20px;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
   cursor: pointer;
-  position: relative;
-  z-index: 2;
 }
 
-.timeline-nav li .year {
-  display: inline-block;
-  width: 60px; /* Pallino più grande */
-  height: 60px; /* Pallino più grande */
-  line-height: 60px;
-  border-radius: 50%;
-  background-color: #fff;
-  border: 3px solid #c22c1e;
-  color: #c22c1e;
-  font-weight: bold;
-  transition: background-color 0.3s, color 0.3s;
-  margin: 0 auto; /* Centro il pallino */
-}
-
-.timeline-nav li.active .year,
-.timeline-nav li:hover .year {
-  background-color: #c22c1e;
+.step.active {
+  background-color: #16213e;
   color: #fff;
+  transform: scale(1.1);
 }
 
-/* Linea di base: estesa oltre il primo e ultimo pallino (versione verticale) */
-.timeline-nav ul::before {
-  content: "";
+.step-year {
+  font-size: 0.9rem;
+  color: inherit;
+}
+
+.progress-line {
   position: absolute;
-  left: 50%;
-  top: -20px;
-  bottom: -20px;
-  width: 12px;
-  border: 3px solid #c22c1e;
-  border-radius: 6px;
-  transform: translateX(-50%);
-  z-index: 0;
+  bottom: -10px;
+  height: 4px;
+  background-color: #16213e;
+  border-radius: 2px;
+  transition: width 0.3s ease;
 }
 
-/* Linea attiva: si riempie in rosso fino all'evento corrente (versione verticale) */
-.timeline-active-line {
-  position: absolute;
-  left: 50%;
-  top: 1px;
-  width: 12px;
-  min-height: 20px;
-  background-color: #c22c1e;
-  border: 3px solid #c22c1e;
-  border-radius: 6px;
-  transform: translateX(-50%);
-  z-index: 1;
+/* Animazioni */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* Card per i Dettagli della Timeline */
-.timeline-card {
-  flex: 1;
-  background-color: #fff;
-  padding: 50px; 
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  max-width: 850px;
-  display: flex;
-  align-items: center;
-  margin: 20px;
-}
-
-/* Dettagli all'interno della Card */
-.timeline-details {
-  display: flex;
-  gap: 30px;
-  width: 100%;
-}
-
-.detail-text {
-  flex: 1;
-  text-align: left;
-}
-
-.detail-text h3 {
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 7vh;
-  margin-top: -1vh;
-}
-
-.detail-text p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: #555;
-}
-
-.detail-image {
-  flex: 1;
-  text-align: right;
-}
-
-.detail-image img {
-  width: 100%;
-  height: 100%; /* Occupa tutta l'altezza della card */
-  border-radius: 8px;
-  object-fit: contain; /* Mantiene la risoluzione senza distorsioni */
-  max-width: 380px; /* Imposta una larghezza massima uguale per tutte */
-  max-height: 380px; /* Imposta un'altezza massima uguale per tutte */
-  display: block;
-  margin: auto; /* Mantiene l'immagine centrata */
-}
-
-.detail-image img[src*="vuejs-varese.png"] {
-  max-width: 280px;
-  max-height: 280px;
-}
-
-/* ===================================================== */
-/*           RESPONSIVITÀ PER TABLET E TELEFONI          */
-/* ===================================================== */
-@media (max-width: 1024px) {
-  /* Disporre timeline e card in colonna: timeline sopra, card sotto */
-  .timeline-container {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  /* Timeline in modalità orizzontale */
-  .timeline-nav {
-    width: 100%;
-    margin: 0 0 20px 0;  /* margine inferiore per distanziare dalla card */
-    position: relative;
-  }
-  
-  .timeline-nav ul {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Spaziatura orizzontale per ogni elemento della timeline */
-  .timeline-nav li {
-    margin: 0 20px;
-    position: relative;
-    z-index: 2;
-  }
-  
-  /* Modifica della linea di base: diventa orizzontale */
-  .timeline-nav ul::before {
-    content: "";
-    position: absolute;
-    left: -10px;
-    right: -10px;
-    top: 50%;
-    height: 12px;
-    background-color: white;
-    border: 3px solid #c22c1e;
-    border-radius: 6px;
-    transform: translateY(-50%);
-    z-index: 0;
-  }
-  
-  /* La linea attiva in modalità orizzontale:
-     - La larghezza verrà gestita via Angular (binding ngStyle)
-     - Rimane lo stesso styling di base per altezza, bordo e colore */
-  .timeline-active-line {
-    position: absolute;
-    top: 50%;
-    left: -10px;
-    height: 12px;
-    background-color: #c22c1e;
-    border: 3px solid #c22c1e;
-    border-radius: 6px;
-    transform: translateY(-50%);
-    z-index: 1;
-  }
-  
-  /* Adatta la card in modo che occupi la larghezza disponibile */
-  .timeline-card {
-    width: 100%;
-    margin: 0 10px;
-    padding: 30px;
-  }
-  
-  /* Dettagli: disponi in colonna e centra i contenuti */
-  .timeline-details {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
-  
-  .detail-text {
-    text-align: center;
-  }
-  
-  .detail-image {
-    text-align: center;
-  }
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
 }

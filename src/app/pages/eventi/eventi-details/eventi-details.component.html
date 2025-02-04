@@ -18,7 +18,7 @@
       <div class="card event-card" *ngIf="event">
         <h1>{{ event.title }}</h1>
         <p class="description">{{ event.description }}</p>
-        <p><strong>Data:</strong> {{ event.date | date : "fullDate" }}</p>
+        <p><strong>Data:</strong> {{ event.date | date: 'longDate' }}</p>
         <p><strong>Posti disponibili:</strong> {{ event.remaining }}</p>
       </div>
 

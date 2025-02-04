@@ -6,20 +6,17 @@
 
   <!-- Menu Items -->
   <div class="actions">
-    <a routerLink="/about" class="menu-item">About</a>
-    <a routerLink="/services" class="menu-item">Services</a>
-    <a routerLink="/contact" class="menu-item">Contact</a>
+    <a href="/eventi" class="menu-item">Eventi</a>
+    <a href="/meeting" class="menu-item">Relatori</a>
+    <a href="/partner" class="menu-item">Partner</a>
 
     <div class="divider"></div>
 
-    <!-- Search Icon -->
-    <button class="icon-button search-button" (click)="onSearch()">
-      <i class="fa-solid fa-magnifying-glass" style="color: #b22222;"></i>
-    </button>
-
     <!-- Login Icon -->
-    <button class="icon-button login-button" (click)="onLogin()">
-      <i class="fa-regular fa-user" style="color: #b22222;"></i>
-    </button>
+    <a href="/auth/account">
+      <button class="icon-button login-button">
+        <i class="fa-regular fa-user" style="color: #ffffff;"></i>
+      </button>
+    </a>
   </div>
 </header>

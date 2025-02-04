@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, HostListener, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { Router } from '@angular/router';
 import gsap from 'gsap';
 
@@ -7,16 +7,18 @@ import gsap from 'gsap';
   templateUrl: './hero.component.html',
   styleUrls: ['./hero.component.css'],
   standalone: true,
+  imports: [],
 })
 export class HeroComponent implements AfterViewInit {
+  @ViewChildren('section') sections!: QueryList<ElementRef>;
+  currentSectionIndex: number = 0;
+
+  public currentCardIndex: number = 0
+
   constructor(private router: Router) { }
 
-  viewEvent(eventId: number): void {
-    console.log('Visualizzazione dettagli evento:', eventId);
-  }
-
   ngAfterViewInit(): void {
-    this.animateHeroContent();
+    this.animateSection(this.sections.first.nativeElement); // Anima la prima sezione al caricamento
   }
 
   animateHeroContent(): void {
@@ -56,12 +58,59 @@ export class HeroComponent implements AfterViewInit {
     });
   }
 
-  onGetStarted(): void {
-    this.router.navigate(['/about']);
+  // Scroll Handler per lo scrolling tra sezioni
+  @HostListener('window:wheel', ['$event'])
+  onScroll(event: WheelEvent): void {
+    if (event.deltaY > 0) {
+      this.scrollToNextSection();
+    } else {
+      this.scrollToPreviousSection();
+    }
   }
 
   scrollToNextSection(): void {
-    const nextSection = document.querySelector('.next-section');
-    nextSection?.scrollIntoView({ behavior: 'smooth' });
+    if (this.currentSectionIndex < this.sections.length - 1) {
+      this.currentSectionIndex++;
+      this.scrollToSection(this.currentSectionIndex);
+    }
+  }
+
+  scrollToPreviousSection(): void {
+    if (this.currentSectionIndex > 0) {
+      this.currentSectionIndex--;
+      this.scrollToSection(this.currentSectionIndex);
+    }
+  }
+
+  scrollToSection(index: number): void {
+    const section = this.sections.toArray()[index].nativeElement;
+    section.scrollIntoView({ behavior: 'smooth' });
+    this.animateSection(section);
+  }
+
+  // Animazione della sezione attiva
+  animateSection(section: HTMLElement): void {
+    gsap.fromTo(
+      section,
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }
+    );
+  }
+
+  // Navigazione ai componenti specifici tramite pulsanti
+  onGetStarted(): void {
+    this.scrollToSectionById('event-card');
+  }
+
+  scrollToAbout(): void {
+    this.scrollToSectionById('about');
+  }
+
+  scrollToSectionById(sectionId: string): void {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+      this.animateSection(section);
+    }
   }
 }

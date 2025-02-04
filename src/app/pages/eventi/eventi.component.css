@@ -60,9 +60,12 @@
 }
 
 .search-bar {
-  flex: 2;
-  position: relative;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
   cursor: pointer;
+  width: 50%;
 }
 
 .search-bar input {
@@ -230,4 +233,29 @@
 
 .clickable-card:hover {
   transform: translateY(-5px);
+}
+
+.h2{
+  text-align: center;
+  margin-top: 30px;
+}
+
+.booking-message {
+  margin-top: 10px;
+  padding: 8px;
+  color: white;
+  background-color: #007bff;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  animation: fade-in 0.3s ease-in-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

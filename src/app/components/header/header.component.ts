@@ -1,6 +1,6 @@
 import { Component, ElementRef, AfterViewInit, ViewChild, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 import gsap from 'gsap';
-import { routes } from '../../app.routes';
 
 @Component({
   selector: 'app-header',
@@ -11,6 +11,8 @@ import { routes } from '../../app.routes';
 export class HeaderComponent implements AfterViewInit {
   @ViewChild('mainHeader', { static: true }) mainHeader!: ElementRef;
   isScrolled = false;
+
+  constructor(private router: Router) {}
 
   @HostListener('window:scroll', [])
   onScroll(): void {
@@ -26,12 +28,7 @@ export class HeaderComponent implements AfterViewInit {
     });
   }
 
-  onSearch(): void {
-    console.log('Search clicked');
-    // Logica per aprire la ricerca
-  }
-
-  onLogin(): void {
-    console.log('Login clicked');
+  navigateTo(route: string): void {
+    this.router.navigate([route]);
   }
 }

@@ -1,5 +1,5 @@
 .hero-section {
-    height: 100vh;
+    height: 95vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -218,7 +218,7 @@
   
   .scroll-indicator {
     position: absolute;
-    bottom: 2rem;
+    bottom: 4rem;
     font-size: 2rem;
     color: white;
     animation: bounce 2s infinite;

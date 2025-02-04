@@ -28,8 +28,8 @@
 }
 
 .card {
-  width: 50vw; 
-  height: 380px; 
+  width: 50vw;
+  height: 380px;
   background: linear-gradient(100deg, white 55%, transparent 45%),
     url('/images/pyvarese.png');
   border-radius: 20px;
