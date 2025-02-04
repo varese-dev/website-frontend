@@ -20,22 +20,21 @@ export class EventiDetailsComponent implements OnInit {
   talks: Talk[] = [];
   loading: boolean = true;
   error: string | null = null;
-  talksLoaded: number = 0; // Contatore per verificare quando tutti i talks sono caricati
+  talksLoaded: number = 0;
 
   constructor(
     private route: ActivatedRoute,
     private eventsService: EventsService,
-    private cdr: ChangeDetectorRef // Forza aggiornamento UI
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     const idParam = this.route.snapshot.paramMap.get('id');
     if (idParam) {
-      const id = Number(idParam); // Converti id in number
-      this.eventsService.getEventById(id).subscribe({
+      this.eventsService.getEventById(idParam).subscribe({
         next: (eventData: Event) => {
           this.event = eventData;
-          this.loadTalks(Number(eventData.id)); // Converto eventData.id in number
+          this.loadTalks(eventData.id);
         },
         error: (err) => {
           console.error('Errore nel recupero dei dettagli evento', err);
@@ -49,16 +48,16 @@ export class EventiDetailsComponent implements OnInit {
     }
   }
 
-  loadTalks(eventId: number): void {
+  loadTalks(eventId: string): void {
     this.eventsService.getTalksByEventId(eventId).subscribe({
       next: (talks: Talk[]) => {
-        this.talks = talks;
-        this.talksLoaded = 0; // Reset contatore
+        this.talks = talks || []; // Ensure talks is an array
+        this.talksLoaded = 0;
 
-        if (talks.length === 0) {
-          this.loading = false; // Se non ci sono talk, smetti di caricare
+        if (this.talks.length === 0) {
+          this.loading = false;
         } else {
-          talks.forEach((talk) => this.loadSpeakers(talk));
+          this.talks.forEach((talk) => this.loadSpeakers(talk));
         }
       },
       error: () => {

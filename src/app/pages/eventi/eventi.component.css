@@ -191,6 +191,11 @@
   margin: 5px 0;
 }
 
+.router-link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .event-description {
   font-size: 0.9rem;
   color: #555;
