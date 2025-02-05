@@ -1,8 +1,8 @@
-import { Component, OnInit, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import gsap from 'gsap';
+import Lenis from '@studio-freight/lenis';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { trigger, transition, style, animate } from '@angular/animations';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,56 +19,39 @@ interface TimelineEvent {
   imports: [CommonModule],
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css'],
-  animations: [
-    // Animazione di entrata durante lo scroll
-    trigger('scrollAnimation', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(30px)' }),
-        animate('600ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })),
-      ]),
-    ]),
-
-    // Animazione di switch tra eventi della timeline
-    trigger('switchEventAnimation', [
-      transition('* => *', [
-        style({ opacity: 0, transform: 'translateX(-30px)' }),
-        animate('400ms ease-out', style({ opacity: 1, transform: 'translateX(0)' })),
-      ]),
-    ]),
-  ],
 })
-export class AboutComponent implements OnInit {
+export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
   timelineEvents: TimelineEvent[] = [
     {
-      year: 'LUG 23',
+      year: 'LUGLIO 2023',
       title: 'Nascita di Python Varese',
       description:
         "Nel Luglio 2023, Fabio Barbazza, appassionato di Python, organizza il primo evento 'PyBeer' su LinkedIn. Alcuni programmatori si ritrovano in un locale di Varese e nasce il canale Telegram 'Python Varese'.",
       image: '/images/about/pyvarese.png',
     },
     {
-      year: 'OTT 23',
+      year: 'OTTOBRE 2023',
       title: 'Secondo PyBeer e Crescita della Community',
       description:
         "A Ottobre 2023, Dario Bertolino si unisce all'organizzazione. Matteo Bilotta, insieme a Marco Beri, partecipa al secondo PyBeer, consolidando la community.",
       image: '/images/about/aperitivojs.png',
     },
     {
-      year: 'FEB 24',
+      year: 'FEBBRAIO 2024',
       title: 'Lancio di Vue.js Varese',
       description:
         "A Febbraio 2024, Matteo Bilotta, con la sua passione per il frontend, crea il gruppo Telegram 'Vue.js Varese' per far conoscere il framework tra i professionisti locali.",
       image: '/images/about/vuejs-varese.png',
     },
     {
-      year: 'GIU 24',
+      year: 'GIUGNO 2024',
       title: 'Primo Evento Combinato',
       description:
         'A Giugno 2024 viene organizzato il primo evento combinato in Elmec, unendo le community e dimostrando la sinergia tra le diverse tecnologie.',
       image: '/images/about/code_cheers.png',
     },
     {
-      year: 'DIC 24',
+      year: 'DICEMBRE 2024',
       title: 'Nascita del Varese Developer Group',
       description:
         'Rendendosi conto che rimanere confinati in specifiche tecnologie era limitante, gli organizzatori decidono di unire le community sotto un unico cappello: Varese Developer Group, per dare maggior visibilità e risonanza al mondo tech.',
@@ -78,18 +61,32 @@ export class AboutComponent implements OnInit {
 
   currentIndex: number = 0;
   autoScrollInterval: any;
+  lenis!: Lenis;
 
   constructor(private elementRef: ElementRef) { }
 
   ngOnInit(): void { }
 
   ngAfterViewInit(): void {
-    this.initAnimations();
     this.startAutoScroll();
+
+    gsap.to('.animated-content', {
+      opacity: 1,
+      y: 0,
+      stagger: 0.2,
+      duration: 0.8,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.about-section',
+        start: 'top 80%',
+        toggleActions: 'play none none reverse',
+      },
+    });
   }
 
   ngOnDestroy(): void {
     clearInterval(this.autoScrollInterval);
+    this.lenis.destroy();
   }
 
   get currentEvent(): TimelineEvent {
@@ -109,50 +106,57 @@ export class AboutComponent implements OnInit {
     this.autoScrollInterval = setInterval(() => {
       this.currentIndex = (this.currentIndex + 1) % this.timelineEvents.length;
       this.animateStepChange();
-    }, 4000); // Cambia step ogni 4 secondi
+    }, 6000);
   }
 
+  private isAnimating: boolean = false;
+
   private animateStepChange(): void {
-    gsap.to('.step-content', {
+    if (this.isAnimating) return; // Blocca se c'è già un'animazione in corso
+    this.isAnimating = true;
+
+    const current = document.querySelector('.step-content') as HTMLElement;
+
+    // Crea una nuova card
+    const newContent = current.cloneNode(true) as HTMLElement;
+
+    // Aggiorna il contenuto della nuova card
+    newContent.querySelector('h3')!.textContent = this.currentEvent.title;
+    newContent.querySelector('p')!.textContent = this.currentEvent.description;
+    newContent.querySelector('.step-date')!.textContent = this.currentEvent.year;
+    const newImage = newContent.querySelector('img')!;
+    newImage.src = this.currentEvent.image;
+    newImage.alt = this.currentEvent.title;
+
+    // Posiziona la nuova card sopra l'attuale nel layout
+    current.insertAdjacentElement('afterend', newContent);
+
+    // Aggiungi uno stile temporaneo per la nuova card
+    newContent.style.position = 'absolute';
+    newContent.style.zIndex = '2';
+    gsap.set(newContent, { opacity: 0 });
+
+    // Anima la scomparsa della card attuale
+    gsap.to(current, {
       opacity: 0,
-      x: -30,
       duration: 0.5,
+      ease: 'power3.inOut',
       onComplete: () => {
-        gsap.fromTo(
-          '.step-content',
-          { opacity: 0, x: 30 },
-          { opacity: 1, x: 0, duration: 0.5, ease: 'power3.out' }
-        );
+        current.remove(); // Rimuove la card dopo l'animazione
       },
     });
 
-    gsap.to('.progress-line', {
-      width: `${this.progressWidth}%`,
+    // Anima l'entrata della nuova card
+    gsap.to(newContent, {
+      opacity: 1,
       duration: 0.5,
-      ease: 'power3.out',
+      ease: 'power3.inOut',
+      onComplete: () => {
+        // Rimuovi z-index e flag temporanei dopo l'animazione
+        newContent.style.position = '';
+        newContent.style.zIndex = '';
+        this.isAnimating = false; // Libera il flag dopo l'animazione
+      },
     });
-
-    const steps = this.elementRef.nativeElement.querySelectorAll('.step');
-    steps.forEach((step: HTMLElement, index: number) => {
-      step.classList.toggle('active', index === this.currentIndex);
-    });
-  }
-
-  private initAnimations(): void {
-    gsap.fromTo(
-      '.fade-in',
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.fade-in',
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-        },
-      }
-    );
   }
 }

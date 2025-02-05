@@ -1,19 +1,15 @@
 <section id="about" class="about-section">
   <!-- Titolo principale -->
   <div class="hero-header">
-    <div class="label">About Us</div>
-    <h1>Chi Siamo: <span class="highlight">Scopri la nostra storia</span></h1>
-    <p class="subtitle">Un viaggio attraverso le tappe fondamentali del nostro gruppo.</p>
+    <div class="label animated-content">About Us</div>
+    <h1 class="animated-content">Chi Siamo: <span class="highlight">Scopri la nostra storia</span></h1>
+    <p class="subtitle animated-content">Un viaggio attraverso le tappe fondamentali del nostro gruppo.</p>
   </div>
 
   <!-- Step orizzontale con navigazione -->
-  <div class="horizontal-steps">
+  <div class="horizontal-steps animated-content">
     <div class="step-track">
-      <div
-        *ngFor="let event of timelineEvents; let i = index"
-        class="step-block"
-        (click)="selectEvent(i)"
-      >
+      <div *ngFor="let event of timelineEvents; let i = index" class="step-block" (click)="selectEvent(i)">
         <div [class.active]="i === currentIndex" class="step">
           <span class="step-year">{{ event.year }}</span>
         </div>
@@ -23,8 +19,18 @@
   </div>
 
   <!-- Dettaglio step attivo -->
-  <div class="step-content fade-in">
-    <h3>{{ currentEvent.title }}</h3>
-    <p>{{ currentEvent.description }}</p>
+  <div class="step-content-wrapper">
+    <div class="step-content animated-content">
+      <div class="step-detail">
+        <div class="step-image">
+          <img [src]="currentEvent.image" alt="{{ currentEvent.title }}" />
+        </div>
+        <div class="step-text">
+          <div class="step-date">{{ currentEvent.year }}</div>
+          <h3>{{ currentEvent.title }}</h3>
+          <p>{{ currentEvent.description }}</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
