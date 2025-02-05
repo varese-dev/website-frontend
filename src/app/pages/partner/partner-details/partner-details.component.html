@@ -1,19 +1,28 @@
- <!-- Hero Section -->
- <div class="hero">
-    <div class="hero-overlay"></div>
-    <img src="strettadimano.png" alt="Hero Image" class="hero-image">
-    <div class="hero-text">
-      <h1>Partner Aziendali</h1>
-      <p>Collaboriamo con le migliori aziende del settore per offrire soluzioni di alta qualità.</p>
+<div class="partner-details">
+  <div *ngIf="partner">
+    <!-- Card informazioni partner -->
+    <div class="partner-info">
+      <img [src]="'/images/partners/' + partner.image" [alt]="partner.name" class="partner-logo" />
+      <p><strong>Descrizione:</strong> {{ partner.description }}</p>
+      <p><strong>Luogo:</strong> {{ partner.place }}</p>
+      <p><strong>Sito:</strong> <a [href]="partner.website" target="_blank">{{ partner.website }}</a></p>
+      <p><strong>Email:</strong> {{ partner.email }}</p>
+    </div>
+
+    <!-- Card eventi partner -->
+    <div class="partner-events">
+      <h2>Eventi</h2>
+
+      <div class="event-card" *ngFor="let event of events">
+        <h3>{{ event.title }}</h3>
+        <p>{{ event.description }}</p>
+        <p><strong>Data:</strong> {{ getFormattedDate(event) }}</p>
+        <p><strong>Tempo rimanente:</strong> {{ getTimeRemaining(event) }}</p>
+      </div>
+
+      <div class="no-events-message" *ngIf="events.length === 0">
+        <p>Nessun evento disponibile per questo partner.</p>
+      </div>
     </div>
   </div>
-  
-  
-  <!-- Angular Component -->
-  <partner-card></partner-card>
-  
-  
-  <!-- Scripts Angular -->
-  <script src="runtime.js" type="module"></script>
-  <script src="polyfills.js" type="module"></script>
-  <script src="main.js" type="module"></script>
+</div>
