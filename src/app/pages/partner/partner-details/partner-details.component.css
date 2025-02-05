@@ -1,12 +1,38 @@
-/* Partner Details Section */
+/* Container principale a due colonne con misure fisse */
 .partner-details {
-  background-color: #fafafa;
-  padding: 40px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
+  display: flex;
+  max-width: 1200px;
   margin: 40px auto;
-  font-family: 'Arial', sans-serif;
+  gap: 20px;
+}
+
+/* Card informazioni partner (sinistra) */
+.partner-info {
+  width: 40%;
+  height: 300px; /* Altezza fissa */
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Evita lo scroll interno */
+  text-align: left;
+}
+
+.partner-info p {
+  font-size: 1.1em;
+  color: #555;
+  margin: 20px 0;
+  margin-top: 3.5vh;
+}
+
+.partner-info a {
+  color: #A90202;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.partner-info a:hover {
+  text-decoration: underline;
 }
 
 /* Logo Partner */
@@ -18,44 +44,39 @@
   transition: transform 0.3s ease;
 }
 
-/* Titolo Partner */
-.partner-details h1 {
-  font-size: 2em;
-  color: #A90202;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 20px;
-  text-transform: uppercase;
+/* Card eventi partner (destra) */
+.partner-events {
+  width: 60%;
+  height: 310px; /* Stessa altezza della card informazioni (leggermente maggiore per includere il titolo) */
+  background-color: #ffffff;
+  padding: 15px 25px 25px 25px; /* Ridotto il padding-top per avvicinare il titolo all'inizio */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
-/* Dettagli del Partner */
-.partner-details p {
-  font-size: 1.1em;
-  color: #555;
-  margin: 10px 0;
-}
-
-.partner-details a {
-  color: #A90202;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.partner-details a:hover {
-  text-decoration: underline;
-}
-
-/* Event Section */
-h2 {
+/* Titolo Eventi: posizionato in cima, fuori dall'area scrollabile */
+.partner-events h2 {
   font-size: 1.8em;
   color: #A90202;
-  margin-top: 40px;
-  margin-bottom: 20px;
   text-align: center;
   text-transform: uppercase;
+  margin: 0;              /* rimuove margini extra */
+  padding-bottom: 10px;   /* separazione minima dal contenuto scrollabile */
+  border-bottom: 1px solid #eee;
 }
 
-/* Event Card */
+/* Container scrollabile per gli eventi */
+.events-container {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px; /* Per evitare che il contenuto venga coperto dalla scrollbar */
+  margin-top: 10px;    /* Spazio minimo per separare dal titolo */
+}
+
+/* Singola Event Card */
 .event-card {
   background-color: #ffffff;
   padding: 25px;
@@ -90,25 +111,48 @@ h2 {
   font-style: italic;
 }
 
-/* Bottone "Discover" per il dettaglio */
-.discover-button {
-  background-color: #A90202;
-  color: white;
-  border: none;
-  padding: 12px 28px;
-  border-radius: 30px;
-  cursor: pointer;
-  font-size: 1.1em;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  margin-top: 20px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+/* Responsive: per tablet e telefoni le card sono impilate verticalmente */
+@media (max-width: 1024px) {
+  .partner-details {
+    flex-direction: column;
+    max-width: 80%;
+    gap: 20px;
+  }
+  
+  .partner-info,
+  .partner-events {
+    width: 100%;
+    height: auto;
+  }
+  
+  .partner-events {
+    margin-top: 20px;
+  }
+  
+  .events-container {
+    max-height: 400px;
+  }
 }
 
-.discover-button:hover {
-  background-color: #8c0202;
-  transform: translateY(-3px);
+/* Ulteriore ottimizzazione per dispositivi molto piccoli (max-width: 480px) */
+@media (max-width: 480px) {
+
+  .partner-details {
+    max-width: 60%;
+    margin-right: 110px;
+    gap: 10px;
+  }
+
+  .partner-info p,
+  .event-card p {
+    font-size: 1em;
+  }
+  
+  .partner-events h2 {
+    font-size: 1.6em;
+  }
+  
+  .event-card h3 {
+    font-size: 1.4em;
+  }
 }

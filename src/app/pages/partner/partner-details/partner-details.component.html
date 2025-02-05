@@ -1,25 +1,27 @@
-<div class="partner-details">
-  <div *ngIf="partner">
-    <!-- Card informazioni partner -->
-    <div class="partner-info">
-      <img [src]="'/images/partners/' + partner.image" [alt]="partner.name" class="partner-logo" />
-      <p><strong>Descrizione:</strong> {{ partner.description }}</p>
-      <p><strong>Luogo:</strong> {{ partner.place }}</p>
-      <p><strong>Sito:</strong> <a [href]="partner.website" target="_blank">{{ partner.website }}</a></p>
-      <p><strong>Email:</strong> {{ partner.email }}</p>
-    </div>
+<div class="partner-details" *ngIf="partner">
+  <!-- Card informazioni partner (sinistra) -->
+  <div class="partner-info">
+    <img [src]="'/images/partners/' + partner.image" [alt]="partner.name" class="partner-logo" />
+    <p><strong>Descrizione:</strong> {{ partner.description }}</p>
+    <p><strong>Luogo:</strong> {{ partner.place }}</p>
+    <p>
+      <strong>Sito:</strong>
+      <a [href]="partner.website" target="_blank">{{ partner.website }}</a>
+    </p>
+    <p><strong>Email:</strong> {{ partner.email }}</p>
+  </div>
 
-    <!-- Card eventi partner -->
-    <div class="partner-events">
-      <h2>Eventi</h2>
-
+  <!-- Card eventi partner (destra) -->
+  <div class="partner-events">
+    <h2>Eventi</h2>
+    <!-- Container scrollabile per gli eventi -->
+    <div class="events-container">
       <div class="event-card" *ngFor="let event of events">
         <h3>{{ event.title }}</h3>
         <p>{{ event.description }}</p>
         <p><strong>Data:</strong> {{ getFormattedDate(event) }}</p>
         <p><strong>Tempo rimanente:</strong> {{ getTimeRemaining(event) }}</p>
       </div>
-
       <div class="no-events-message" *ngIf="events.length === 0">
         <p>Nessun evento disponibile per questo partner.</p>
       </div>
