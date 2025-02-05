@@ -31,8 +31,8 @@ export interface Event {
   providedIn: 'root',
 })
 export class RelatoriService {
-  private apiUrl = 'https://localhost:8443/speakers';
-  private talksApiUrl = 'https://localhost:8443/talks';
+  private apiUrl = 'https://localhost:8080/speakers';
+  private talksApiUrl = 'https://localhost:8080/talks';
 
 
   constructor(private http: HttpClient) {
