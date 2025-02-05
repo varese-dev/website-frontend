@@ -1,4 +1,4 @@
-
+/* Base Styles */
 .card-carousel-container {
   display: flex;
   flex-direction: row;
@@ -40,7 +40,6 @@
   font-weight: 600;
 }
 
-
 .card__btn {
   margin-top: 10px;
   padding: 10px 20px;
@@ -48,7 +47,6 @@
   cursor: pointer;
   background-color: #0077B5;
   color: white;
-
   border-radius: 5px;
 }
 
@@ -95,7 +93,7 @@ h2 {
 svg {
   display: block;
   margin-bottom: -35px;
-  margin-top: -20px; /* Riduci il margine inferiore */
+  margin-top: -20px; /* Reduce the margin bottom */
 }
 
 .card__btn:hover {
@@ -191,5 +189,97 @@ svg {
 
   .carousel-container {
     width: 100%;
+    margin-right: 0;
+  }
+
+  .card-biography {
+    width: 100%;
+    max-width: 550px;
+    margin-left: 0;
+  }
+
+  .card__titleSpeaker {
+    font-size: 1.5rem;
+  }
+
+  .card__title {
+    font-size: 1.2rem;
+  }
+
+  .cardDescription, p, h3 {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .nav-button {
+    font-size: 18px;
+  }
+
+  .h2Title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .card-carousel-container {
+    padding: 40px 10px;
+  }
+
+  .card-biography {
+    width: 100%;
+    max-width: 450px;
+  }
+
+  .card__titleSpeaker {
+    font-size: 1.3rem;
+  }
+
+  .card__title {
+    font-size: 1.1rem;
+  }
+
+  .cardDescription, p, h3 {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+
+  .nav-button {
+    font-size: 16px;
+  }
+
+  .h2Title {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-carousel-container {
+    padding: 30px 10px;
+  }
+
+  .card-biography {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .card__titleSpeaker {
+    font-size: 1.2rem;
+  }
+
+  .card__title {
+    font-size: 1rem;
+  }
+
+  .cardDescription, p, h3 {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .nav-button {
+    font-size: 14px;
+  }
+
+  .h2Title {
+    font-size: 1.2rem;
   }
 }
