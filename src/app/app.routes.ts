@@ -3,7 +3,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { EventiComponent } from './pages/eventi/eventi.component';
 import { EventiDetailsComponent } from './pages/eventi/eventi-details/eventi-details.component';
 import { TalkRelatoriComponent } from './pages/talk-relatori/talk-relatori.component';
-import { PartnerComponent } from './pages/partner/partner-details/partner-details.component';
+import { PartnerComponent } from './pages/partner/partner.component';
+import { PartnerDetailsComponent } from './pages/partner/partner-details/partner-details.component';
 import { PrenotazioneComponent } from './pages/prenotazione/prenotazione.component';
 import { AreaUtenteComponent } from './pages/area-utente/area-utente.component';
 import { AccountComponent } from './pages/auth/account/account.component';
@@ -18,6 +19,7 @@ export const routes: Routes = [
   { path: 'meeting', component: TalkRelatoriComponent },
   { path: 'meeting/:id', component: RelatoreDetailComponent },
   { path: 'partner', component: PartnerComponent },
+  { path: 'partner-details/:id', component: PartnerDetailsComponent },
   { path: 'prenotazione', component: PrenotazioneComponent },
   { path: 'area-utente', component: AreaUtenteComponent },
   { path: 'area-utente/:id', component: AreaUtenteComponent },

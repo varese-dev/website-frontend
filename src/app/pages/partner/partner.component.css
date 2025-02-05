@@ -1,0 +1,101 @@
+/* General Partner Section */
+.partners {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+  gap: 20px;
+  padding: 40px 20px;
+  margin-top: 40px;
+  background-color: #fafafa; 
+  border-radius: 8px;
+}
+
+/* Singola card Partner */
+.partner {
+  background-color: white;
+  text-align: center;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 20%;
+  min-height: 200px;
+  align-items: center;
+  position: relative;
+}
+
+/* Effetto hover per la card */
+.partner:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Logo del partner */
+.partner-logo {
+  max-width: 180px;
+  max-height: 120px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  display: block; 
+  margin-left: auto;  
+  margin-right: auto; 
+}
+
+/* Hover sul logo */
+.partner:hover .partner-logo {
+  transform: scale(1.05);
+}
+
+/* Titolo del Partner */
+.partner h3 {
+  font-size: 1.4em;
+  color: #A90202; 
+  margin: 10px 0;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Descrizione partner */
+.partner-description {
+  font-size: 1em;
+  color: #555; 
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+/* Bottone "Discover" */
+.discover-button {
+  background-color: #C22C1E;
+  color: white;
+  padding: 12px 25px;
+  text-decoration: none;
+  border-radius: 34px;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  margin-top: 5%;
+  border: none;
+}
+
+/* Hover sul bottone */
+.discover-button:hover {
+  background-color: #ae3025;
+}
+
+/* Media query per dispositivi mobili */
+@media (max-width: 768px) {
+  .partners {
+    gap: 15px;
+    padding: 30px 15px;
+  }
+
+  .partner {
+    padding: 20px;
+  }
+
+  .discover-button {
+    padding: 10px 20px;
+  }
+}
