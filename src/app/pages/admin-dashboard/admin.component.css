@@ -7,11 +7,16 @@
 .tabs button {
   padding: 10px;
   cursor: pointer;
+  background-color: #C22C1E;
+  color: white;
+  border:none;
+  border-radius: 35px;
 }
 
 .tabs button.active {
-  background-color: #007bff;
+  background-color: #C22C1E;
   color: white;
+  border:none;
 }
 
 .success {
@@ -26,4 +31,42 @@
   margin-left: 20px;
   margin-top: 70px;
   margin-bottom: 70px;
+}
+input {
+  width: 50%;
+  border: none;
+  border-bottom: 2px solid #7f7f7f;
+  border-radius: 0 !important;
+  outline: 0;
+  font-size: 17px;
+  font-weight: 300;
+  letter-spacing: 0.1rem;
+  color: #7f7f7f;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+
+button{
+  padding: 10px;
+  cursor: pointer;
+  background-color: #C22C1E;
+  color: white;
+  border:none;
+  border-radius: 35px;
+}
+
+textarea{
+  width: 50%;
+  border: none;
+  border-bottom: 2px solid #7f7f7f;
+  border-radius: 0 !important;
+  outline: 0;
+  font-size: 17px;
+  font-weight: 300;
+  letter-spacing: 0.1rem;
+  color: #7f7f7f;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
 }
