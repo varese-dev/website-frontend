@@ -1,26 +1,79 @@
-<div class="area-utente-container">
-    <h2>Area Utente</h2>
-  
-    <!-- Sezione Eventi Prenotati -->
-    <div class="section">
-      <h3>Eventi Prenotati</h3>
-      <ul>
-        <li *ngFor="let event of bookedEvents" class="event-item">
-          <span class="event-title">{{ event.title }}</span>
-          <span class="event-date">{{ event.date }}</span>
+<div class="container">
+  <div>
+    <h1>Dettagli Utente</h1>
+    <p><strong>Nome:</strong> {{ user?.name }}</p>
+    <p><strong>Cognome:</strong> {{ user?.surname }}</p>
+    <p><strong>Email:</strong> {{ user?.email }}</p>
+    <p><strong>Telefono:</strong> {{ user?.phone }}</p>
+  </div>
+  <div class="row">
+    <div>
+      <button (click)="toggleEditMode()"
+              class="btn btn-secondary">{{ isEditMode ? 'Nascondi Modifiche' : 'Modifica Dati' }}
+      </button>
+
+      <div *ngIf="isEditMode" class="edit-form">
+        <h2>Modifica dati utente</h2>
+
+        <div class="form-group">
+          <label for="name">Nome</label>
+          <input id="name" [(ngModel)]="name" type="text" class="form-control"/>
+          <button (click)="updateName()" class="btn btn-primary">Aggiorna Nome</button>
+        </div>
+
+        <div class="form-group">
+          <label for="surname">Cognome</label>
+          <input id="surname" [(ngModel)]="surname" type="text" class="form-control"/>
+          <button (click)="updateSurname()" class="btn btn-primary">Aggiorna Cognome</button>
+        </div>
+
+        <div class="form-group">
+          <label for="oldPassword">Vecchia Password</label>
+          <input id="oldPassword" [(ngModel)]="oldPassword" type="password" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <label for="newPassword">Nuova Password</label>
+          <input id="newPassword" [(ngModel)]="newPassword" type="password" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <label for="repeatNewPassword">Ripeti Nuova Password</label>
+          <input id="repeatNewPassword" [(ngModel)]="repeatNewPassword" type="password" class="form-control"/>
+        </div>
+        <button (click)="updatePassword()" class="btn btn-primary">Aggiorna Password</button>
+      </div>
+      <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    </div>
+
+    <div>
+      <button (click)="goToCreateTalk()" class="btn btn-primary create-talk-btn">Crea il tuo Talk</button>
+    </div>
+  </div>
+    <div *ngIf="activeBookings.length > 0" class="bookings-section">
+      <h2>Prenotazioni attive</h2>
+      <ul class="booking-list">
+        <li *ngFor="let booking of activeBookings" class="booking-item">
+          <h3>{{ booking.title }}</h3>
+          <p><strong>Data:</strong> {{ booking.date | date: 'longDate' }}</p>
+          <p><strong>Stato:</strong> {{ booking.status }}</p>
+          <button (click)="cancelBooking(booking.bookingId)" class="btn btn-danger">Cancella Prenotazione</button>
         </li>
       </ul>
     </div>
-  
-    <!-- Sezione Storico Partecipazioni -->
-    <div class="section">
-      <h3>Storico Partecipazioni</h3>
-      <ul>
-        <li *ngFor="let history of participationHistory" class="history-item">
-          <span class="event-title">{{ history.eventTitle }}</span>
-          <span class="event-date">{{ history.eventDate }}</span>
-          <span class="event-status">{{ history.status }}</span>
-        </li>
-      </ul>
+
+    <div *ngIf="activeBookings.length === 0 && !isLoading" class="no-bookings">
+      <h2>Prenotazioni attive</h2>
+      <p>Non ci sono prenotazioni attive.</p>
     </div>
+
+  <div *ngIf="!isLoading && !errorMessage">
+    <h2>Altre prenotazioni</h2>
+    <ul class="booking-list">
+      <li *ngFor="let booking of otherBookings" class="booking-item">
+        <h3>{{ booking.title }}</h3>
+        <p><strong>Data:</strong> {{ booking.date | date: 'longDate' }}</p>
+        <p><strong>Stato:</strong> {{ booking.status }}</p>
+      </li>
+    </ul>
+  </div>
   </div>

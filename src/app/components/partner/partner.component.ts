@@ -13,11 +13,11 @@ export class PartnerComponent implements OnInit, OnDestroy {
   title = 'nome-del-progetto';
 
   slides = [
-    { image: 'retilogo.png', alt: 'Slide 1', link: 'https://www.reti.it' },
-    { image: 'notjustl.png', alt: 'Slide 2', link: 'https://www.notjustl.com' },
-    { image: 'varesenextl.png', alt: 'Slide 3', link: 'https://www.varesenext.com' },
-    { image: 'digitiamol.png', alt: 'Slide 4', link: 'https://www.digitiamol.com' },
-    { image: 'elmecl.png', alt: 'Slide 5', link: 'https://www.elmec.com' }
+    { image: '/images/retilogo.png', alt: 'Slide 1', link: 'https://www.reti.it' },
+    { image: '/images/notjustl.png', alt: 'Slide 2', link: 'https://www.notjustl.com' },
+    { image: '/images/varesenextl.png', alt: 'Slide 3', link: 'https://www.varesenext.com' },
+    { image: '/images/digitiamol.png', alt: 'Slide 4', link: 'https://www.digitiamol.com' },
+    { image: '/images/elmecl.png', alt: 'Slide 5', link: 'https://www.elmec.com' }
   ];
 
   private indexSignal = signal(0);

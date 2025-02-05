@@ -1,0 +1,126 @@
+<div class="admin-dashboard">
+  <h2>Gestione Admin</h2>
+
+  <div class="tabs">
+    <button (click)="setActiveTab('events')" [class.active]="activeTab === 'events'">Eventi</button>
+    <button (click)="setActiveTab('partners')" [class.active]="activeTab === 'partners'">Partner</button>
+    <button (click)="setActiveTab('speakers')" [class.active]="activeTab === 'speakers'">Speaker</button>
+    <button (click)="setActiveTab('tags')" [class.active]="activeTab === 'tags'">Tag</button>
+    <button (click)="setActiveTab('talks')" [class.active]="activeTab === 'talks'">Talk</button>
+
+  </div>
+
+  <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+  <!-- Form Eventi -->
+  <div *ngIf="activeTab === 'events'">
+    <h3>Crea Evento</h3>
+    <form [formGroup]="eventForm" (ngSubmit)="submitForm('event')">
+      <label>Titolo </label>
+      <input formControlName="title" type="text"><br><br>
+
+      <label>Descrizione </label>
+      <textarea formControlName="description"></textarea><br><br>
+
+      <label>Data </label>
+      <input formControlName="date" type="datetime-local"><br><br>
+
+      <label>ID Host (Partner) </label>
+      <input formControlName="partnerId" type="text"><br><br>
+
+      <label>ID Sponsor </label>
+      <input formControlName="sponsorId" type="text"><br><br>
+
+      <label>Massimo Partecipanti </label>
+      <input formControlName="maxParticipants" type="number" min="1"><br><br>
+
+      <label>Indirizzo </label>
+      <input formControlName="address" type="text"><br><br>
+
+      <button type="submit">Crea Evento</button>
+    </form>
+  </div>
+
+  <!-- Form Partner -->
+  <div *ngIf="activeTab === 'partners'">
+    <h3>Aggiungi Partner</h3>
+    <form [formGroup]="partnerForm" (ngSubmit)="submitForm('partner')">
+      <label>Nome </label>
+      <input formControlName="name" type="text"><br><br>
+
+      <label>Descrizione </label>
+      <textarea formControlName="description"></textarea><br><br>
+
+      <label>Place </label>
+      <input formControlName="place" type="text"><br><br>
+
+      <label>Website </label>
+      <input formControlName="website" type="text"><br><br>
+
+      <label>Email </label>
+      <input formControlName="email" type="email"><br><br>
+
+      <label>Image </label>
+      <input formControlName="image" type="text"><br><br>
+
+      <label>Valore </label>
+      <input formControlName="value" type="text"><br><br>
+
+      <button type="submit">Aggiungi Partner</button>
+    </form>
+  </div>
+
+  <!-- Form Speaker -->
+  <div *ngIf="activeTab === 'speakers'">
+    <h3>Aggiungi Speaker</h3>
+    <form [formGroup]="speakerForm" (ngSubmit)="submitForm('speaker')">
+      <label>User ID </label>
+      <input formControlName="userId" type="text"><br><br>
+
+      <label>Nome </label>
+      <input formControlName="name" type="text"><br><br>
+
+      <label>Cognome </label>
+      <input formControlName="surname" type="text"><br><br>
+
+      <label>Biografia </label>
+      <textarea formControlName="biography"></textarea><br><br>
+
+      <label>Image </label>
+      <input formControlName="image" type="text"><br><br>
+
+      <label>LinkedIn </label>
+      <input formControlName="linkedin" type="text"><br><br>
+
+      <button type="submit">Aggiungi Speaker</button>
+    </form>
+  </div>
+
+  <!-- Form Tag (rimane invariato) -->
+  <div *ngIf="activeTab === 'tags'">
+    <h3>Crea Tag</h3>
+    <form [formGroup]="tagForm" (ngSubmit)="submitForm('tag')">
+      <label>Nome </label>
+      <input formControlName="name" type="text"><br><br>
+
+      <button type="submit">Crea Tag</button>
+    </form>
+  </div>
+
+  <!-- Form Talk (rimane invariato) -->
+  <div *ngIf="activeTab === 'talks'">
+    <h3>Crea Talk</h3>
+    <form [formGroup]="talkForm" (ngSubmit)="submitForm('talk')">
+      <label>Titolo </label>
+      <input formControlName="title" type="text"><br><br>
+
+      <label>Descrizione </label>
+      <textarea formControlName="description"></textarea><br><br>
+
+      <button type="submit">Crea Talk</button>
+    </form>
+  </div>
+
+
+</div>

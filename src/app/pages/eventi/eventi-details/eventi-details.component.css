@@ -1,25 +1,145 @@
+/* Contenitore principale */
 .event-details-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  color: #333;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Contenitore per le card con layout affiancato */
+.details-cards-container {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+}
+
+/* Card generica */
+.card {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  flex: 1;
+  min-width: 300px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Card dettagli evento */
+.event-card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header evento: immagine e data in sovrapposizione */
+.event-header {
+  position: relative;
+  height: 250px;
+  overflow: hidden;
+}
+
+.event-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.event-card:hover .event-image {
+  transform: scale(1.05);
+}
+
+.event-date {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: rgba(169, 2, 2, 0.9);
+  color: #fff;
+  padding: 8px 12px;
+  font-size: 1rem;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/* Contenuto evento */
+.event-content {
+  padding: 20px;
+}
+
+.event-content h1 {
+  font-size: 28px;
+  color: #A90202;
+  margin-bottom: 15px;
+}
+
+.description {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.event-content p {
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+/* Card Talks */
+.talks-card {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.talks-card h2 {
+  font-size: 24px;
+  color: #A90202;
+  margin-bottom: 15px;
+}
+
+/* Tabella Talks */
+.talks-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.talks-table th,
+.talks-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+  font-size: 15px;
+}
+
+.talks-table th {
+  background: #f8f8f8;
+  font-weight: bold;
+}
+
+/* Relatori */
+.no-speakers {
+  color: #888;
+  font-style: italic;
+}
+
+/* Messaggi di caricamento ed errore */
+.loading,
+.error {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Responsive per dispositivi piccoli */
+@media (max-width: 768px) {
+  .details-cards-container {
+    flex-direction: column;
   }
-  
-  .event-details-container h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-  }
-  
-  .event-details-container .description {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-  }
-  
-  .event-details-container p {
-    margin: 10px 0;
-  }
-  
-  .error {
-    color: red;
-    font-weight: bold;
-  }
-  
+}
