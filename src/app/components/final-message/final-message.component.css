@@ -1,53 +1,90 @@
-.final-message {
-    text-align: center;
-    padding: 5vh;
-    background: linear-gradient(135deg, #c22c1e, #8b1e14);
-    color: white;
-  }
-  
-  .content {
-    max-width: 700px;
-    margin: 0 auto;
-  }
-  
-  h2 {
-    font-size: 2.5rem;
-    text-transform: uppercase;
-    margin-bottom: 15px;
-    position: relative;
-  }
-  
-  h2::after {
-    content: "";
-    display: block;
-    width: 50px;
-    height: 4px;
-    background: white;
-    margin: 10px auto 0;
-    border-radius: 50px;
-  }
-  
-  p {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    margin-bottom: 25px;
-  }
-  
-  .join-btn {
-    display: inline-block;
-    background: white;
-    color: #c22c1e;
-    padding: 12px 25px;
-    font-size: 1rem;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 30px;
-    transition: background 0.3s, color 0.3s;
-    margin-bottom: 5vh;
-  }
-  
-  .join-btn:hover {
-    background: #f4f4f4;
-    color: #a3221c;
-  }
-  
+.contacts-section {
+  padding: 80px;
+  background: linear-gradient(135deg, #c22c1e, #8b1e14);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+}
+
+.label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+  color: #16213e;
+  margin: 10px 0;
+  text-transform: uppercase;
+}
+
+h1 .highlight {
+  color: #5f0000;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #ffffff;
+  width: 45%;
+  margin: auto auto 40px auto;
+}
+
+.animated-content {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fade-in 1s ease forwards;
+}
+
+.animated-content:nth-child(1) {
+  animation-delay: 0.5s;
+}
+
+.animated-content:nth-child(2) {
+  animation-delay: 0.7s;
+}
+
+.animated-content:nth-child(3) {
+  animation-delay: 0.9s;
+}
+
+a {
+  text-decoration: none;
+}
+
+.btn {
+  align-items: center;
+  background-color: transparent;
+  color: #16213e;
+  cursor: pointer;
+  display: flex;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.2rem;
+  line-height: 1.5;
+  text-decoration: none;
+  text-transform: uppercase;
+  outline: 0;
+  border: 0;
+  margin: 20px auto 0 auto;
+}
+
+.btn:before {
+  background-color: #16213e;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  margin-right: 10px;
+  transition: all .42s cubic-bezier(.25,.8,.25,1);
+  width: 0;
+}
+
+.btn:hover:before {
+  background-color: #16213e;
+  width: 3rem;
+}

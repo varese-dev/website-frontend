@@ -35,7 +35,8 @@ h1 .highlight {
 .subtitle {
   font-size: 1.2rem;
   color: #ffffff;
-  margin: 10px 0 40px;
+  width: 40%;
+  margin: auto;
 }
 
 .animated-content {
@@ -65,7 +66,7 @@ h1 .highlight {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 80vh;
+  height: 60vh;
 }
 
 .carousel {
@@ -89,7 +90,7 @@ h1 .highlight {
   width: 50vw;
   height: 380px;
   background: linear-gradient(100deg, white 55%, transparent 45%),
-    url('/images/pyvarese.png');
+    url('/images/about/pyvarese.png');
   border-radius: 20px;
   padding: 30px;
   display: flex;
@@ -213,7 +214,7 @@ h1 .highlight {
 
 /* Frecce senza sfondo */
 .nav-button {
-  color: #333;
+  color: #ffffff;
   font-size: 30px;
   cursor: pointer;
   z-index: 10;
@@ -231,11 +232,11 @@ h1 .highlight {
 }
 
 .nav-button.prev {
-  left: -10vw;
+  left: 10%;
 }
 
 .nav-button.next {
-  right: -10vw;
+  right: 10%;
 }
 
 /* Hover e trasformazione per l'animazione */

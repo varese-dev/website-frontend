@@ -70,7 +70,7 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.startAutoScroll();
 
-    gsap.to('.animated-content', {
+    gsap.to('.about-section .animated-content', {
       opacity: 1,
       y: 0,
       stagger: 0.2,

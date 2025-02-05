@@ -114,107 +114,37 @@
     }
   }
   
-  .cards-container {
-    width: 60%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .demo-slider-container {
     position: relative;
+    width: 100%;
+    height: 400px;
   }
   
-  .dots-navigation {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 3rem;
-    position: absolute;
-    left: 8rem;
-    height: 100%;
-  }
-  
-  .dot {
-    width: 5px;
-    height: 5px;
-    background-color: rgb(255, 255, 255);
-    border-radius: 50%;
+  .demo-slider-wrap {
     position: relative;
-    cursor: pointer;
-    transition: all 0.5s ease;
-  }
-  
-  .dot::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border: 2px solid rgb(255, 255, 255);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: all 0.5s ease;
-  }
-  
-  .dot:hover::before {
-    width: 30px;
-    height: 30px;
-    opacity: 0.8;
-  }
-  
-  .dot.active::before {
-    width: 30px;
-    height: 30px;
-    animation: bounce-border 0.4s ease;
-  }
-  
-  /* Animazione di bounce */
-  @keyframes bounce-border {
-    0% {
-      transform: translate(-50%, -50%) scale(0.9);
-    }
-  
-    50% {
-      transform: translate(-50%, -50%) scale(1.1);
-    }
-  
-    100% {
-      transform: translate(-50%, -50%) scale(1);
-    }
-  }
-  
-  
-  .cards-wrapper {
-    position: relative;
-    width: 60%;
-    height: 250px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .event-card {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 102, 102, 0.8);
-    color: white;
-    border-radius: 20px;
-    padding: 2rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    opacity: 0;
-    transform: translateY(100%) rotate(2deg);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
-  .event-card.active {
-    opacity: 1;
-    transform: translateY(0) rotate(0deg);
+  .swiper-slide {
+    position: relative;
+    width: 380px;
+    height: 380px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
   }
   
+  .cards-stack-back img,
+  .cards-stack-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
   
   .scroll-indicator {
     position: absolute;

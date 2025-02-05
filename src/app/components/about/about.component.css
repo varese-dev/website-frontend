@@ -125,7 +125,7 @@ h1 .highlight {
 .step-content-wrapper {
   position: relative;
   overflow: hidden;
-  height: auto;
+  height: 400px;
 }
 
 /* Contenitore dei dettagli */

@@ -42,9 +42,9 @@ export interface Event {
   providedIn: 'root',
 })
 export class EventsService {
-  private apiUrl = 'https://localhost:8080/events';
-  private talksUrl = 'https://localhost:8080/talks';
-  private bookingUrl = 'https://localhost:8080/bookings';
+  private apiUrl = 'http://localhost:8080/events';
+  private talksUrl = 'http://localhost:8080/talks';
+  private bookingUrl = 'http://localhost:8080/bookings';
 
   constructor(private http: HttpClient) {
   }

@@ -1,7 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EventService, Event } from '../../service/event-card.service';
 import { format, toZonedTime } from 'date-fns-tz';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export interface ExtendedEvent extends Event {
   formattedDate: string;
@@ -16,35 +20,58 @@ export interface ExtendedEvent extends Event {
   templateUrl: './event-card.component.html',
   styleUrls: ['./event-card.component.css'],
 })
-export class EventCardComponent implements OnInit, OnDestroy {
+export class EventCardComponent implements OnInit, AfterViewInit, OnDestroy {
   events: ExtendedEvent[] = [];
   currentIndex = 0;
   countdownInterval: any;
 
-  constructor(private eventService: EventService) {}
+  constructor(private eventService: EventService, private el: ElementRef) { }
 
   ngOnInit() {
+    this.loadEvents();
+  }
+
+  ngAfterViewInit(): void {
+    this.initAnimations();
+  }
+
+  ngOnDestroy() {
+    if (this.countdownInterval) {
+      clearInterval(this.countdownInterval);
+    }
+    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+  }
+
+  loadEvents() {
     this.eventService.getEvents().subscribe((data) => {
       console.log('Event data received:', data);
-
-      this.events = data.map((event) => {
-        const maxParticipants = event.maxParticipants;
-        const participantsCount = event.participantsCount;
-
-        return {
-          ...event,
-          formattedDate: this.formatDate(new Date(event.date)),
-          timeRemaining: this.getTimeRemaining(new Date(event.date)),
-          remainingSlots: maxParticipants - participantsCount,
-        };
-      });
-
+      this.events = data.map((event) => ({
+        ...event,
+        formattedDate: this.formatDate(new Date(event.date)),
+        timeRemaining: this.getTimeRemaining(new Date(event.date)),
+        remainingSlots: event.maxParticipants - event.participantsCount,
+      }));
       this.startCountdown();
     });
   }
 
+  initAnimations() {
+    gsap.to('.event-section .animated-content', {
+      opacity: 1,
+      y: 0,
+      stagger: 0.2,
+      duration: 0.8,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.event-section',
+        start: 'top 80%',
+        toggleActions: 'play none none reverse',
+      },
+    });
+  }
+
   formatDate(date: Date): string {
-    const timeZone = 'Europe/Rome'; // Set the correct timezone
+    const timeZone = 'Europe/Rome';
     const zonedDate = toZonedTime(date, timeZone);
 
     const day = String(zonedDate.getDate()).padStart(2, '0');
@@ -54,12 +81,6 @@ export class EventCardComponent implements OnInit, OnDestroy {
     const minutes = String(zonedDate.getMinutes()).padStart(2, '0');
 
     return `${day}/${month}/${year}, ore: ${hours}:${minutes}`;
-  }
-
-  ngOnDestroy() {
-    if (this.countdownInterval) {
-      clearInterval(this.countdownInterval);
-    }
   }
 
   get visibleSlides() {
@@ -79,8 +100,7 @@ export class EventCardComponent implements OnInit, OnDestroy {
   }
 
   previousSlide() {
-    this.currentIndex =
-      this.currentIndex === 0 ? this.events.length - 1 : this.currentIndex - 1;
+    this.currentIndex = this.currentIndex === 0 ? this.events.length - 1 : this.currentIndex - 1;
   }
 
   goToSlide(pageIndex: number) {
