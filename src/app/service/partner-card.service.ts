@@ -12,53 +12,64 @@ export interface Event {
   participantsCount: number;
 }
 
+export interface Partner {
+  id: string;
+  name: string;
+  description: string;
+  place: string;
+  website: string;
+  email: string;
+  image: string;
+}
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PartnerCardService {
-  private apiUrl = 'http://localhost:8080/partners'; // Base URL aggiornata
+  private apiUrl = 'http://localhost:8080/partners';
 
   constructor(private http: HttpClient) {}
 
-  getEventsByPartner(partnerId: string): Observable<Event[]> {
-    const url = `${this.apiUrl}/${partnerId}/events`; // URL aggiornata con l'ID del partner
-    return this.http.get<Event[]>(url).pipe(
-      map(events =>
-        events.map(event => {
-          const maxParticipants = event.maxParticipants;
-          const participantsCount = event.participantsCount;
-
-          console.log(`Event Title: ${event.title}`);
-          console.log(`Max Participants: ${maxParticipants}`);
-          console.log(`Participants Count: ${participantsCount}`);
-          console.log(`Remaining Slots: ${maxParticipants - participantsCount}`);
-
-          return {
-            ...event,
-            date: new Date(event.date), // Converte la stringa in Date
-            timeRemaining: '',           // Inizializza per evitare undefined
-            maxParticipants: maxParticipants, // Assicuro che sia un numero
-            participantsCount: participantsCount, // Assicuro che sia un numero
-          };
-        })
-      )
+  getPartners(): Observable<Partner[]> {
+    return this.http.get<Partner[]>(this.apiUrl).pipe(
+      map((data) => {
+        console.log('Dati partner ricevuti dall’API:', data);
+        return data.sort((a, b) => Number(a.id) - Number(b.id));
+      })
     );
   }
 
-  getEventById(partnerId: string, eventId: string): Observable<Event> {
-    const url = `${this.apiUrl}/${partnerId}/events/${eventId}`; // URL aggiornata per ottenere un evento specifico
-    return this.http.get<Event>(url).pipe(
-      map(event => {
-        const maxParticipants = event.maxParticipants;
-        const participantsCount = event.participantsCount;
-
-        return {
-          ...event,
+  getEventsByPartnerId(partnerId: string): Observable<Event[]> {
+    const url = `${this.apiUrl}/${partnerId}/events`;
+    return this.http.get<any[]>(url).pipe(
+      map((events) => {
+        console.log('Dati eventi ricevuti dall’API:', events);
+        return events.map((event) => ({
+          title: event.title || 'Evento non specificato', // Assicurati che il campo title sia utilizzato
+          description: event.description,
           date: new Date(event.date),
-          timeRemaining: '',
-          maxParticipants: maxParticipants,
-          participantsCount: participantsCount,
-        };
+          timeRemaining: '', 
+          maxParticipants: event.max_participants,
+          participantsCount: event.participants_count,
+        })) as Event[];
+      })
+    );
+  }
+
+  getPartnerById(partnerId: string): Observable<Partner> {
+    const url = `${this.apiUrl}/${partnerId}`;
+    return this.http.get<any>(url).pipe(
+      map((data) => {
+        console.log('Dati partner ricevuti dall’API:', data);
+        return {
+          id: data.id,
+          name: data.name,
+          description: data.description,
+          place: data.place,
+          website: data.website,
+          email: data.email,
+          image: data.image,
+        } as Partner;
       })
     );
   }

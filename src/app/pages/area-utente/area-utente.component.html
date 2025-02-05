@@ -1,92 +1,79 @@
-<div class="wholecontent">
-  <div class="sidebar">
-    <div class="profile">
-      <h3>{{ user.name }}</h3>
+<div class="container">
+  <div>
+    <h1>Dettagli Utente</h1>
+    <p><strong>Nome:</strong> {{ user?.name }}</p>
+    <p><strong>Cognome:</strong> {{ user?.surname }}</p>
+    <p><strong>Email:</strong> {{ user?.email }}</p>
+    <p><strong>Telefono:</strong> {{ user?.phone }}</p>
+  </div>
+  <div class="row">
+    <div>
+      <button (click)="toggleEditMode()"
+              class="btn btn-secondary">{{ isEditMode ? 'Nascondi Modifiche' : 'Modifica Dati' }}
+      </button>
+
+      <div *ngIf="isEditMode" class="edit-form">
+        <h2>Modifica dati utente</h2>
+
+        <div class="form-group">
+          <label for="name">Nome</label>
+          <input id="name" [(ngModel)]="name" type="text" class="form-control"/>
+          <button (click)="updateName()" class="btn btn-primary">Aggiorna Nome</button>
+        </div>
+
+        <div class="form-group">
+          <label for="surname">Cognome</label>
+          <input id="surname" [(ngModel)]="surname" type="text" class="form-control"/>
+          <button (click)="updateSurname()" class="btn btn-primary">Aggiorna Cognome</button>
+        </div>
+
+        <div class="form-group">
+          <label for="oldPassword">Vecchia Password</label>
+          <input id="oldPassword" [(ngModel)]="oldPassword" type="password" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <label for="newPassword">Nuova Password</label>
+          <input id="newPassword" [(ngModel)]="newPassword" type="password" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <label for="repeatNewPassword">Ripeti Nuova Password</label>
+          <input id="repeatNewPassword" [(ngModel)]="repeatNewPassword" type="password" class="form-control"/>
+        </div>
+        <button (click)="updatePassword()" class="btn btn-primary">Aggiorna Password</button>
+      </div>
+      <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
     </div>
-    <ul class="nav-links">
-      <li>
-        <a href="#">
-          <img src="https://cdn3.emoji.gg/emojis/5514-home.png" alt="Home" width="20" height="20" style="vertical-align: middle; margin-right: 8px;">
-          Dashboard
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <img src="https://www.pngfind.com/pngs/m/84-847861_conversation-icon-png-grey-chat-icon-png-transparent.png" alt="Talk" width="20" height="20" style="vertical-align: middle; margin-right: 8px;">
-          Proponi Il Tuo Talk
-        </a>
+
+    <div>
+      <button (click)="goToCreateTalk()" class="btn btn-primary create-talk-btn">Crea il tuo Talk</button>
+    </div>
+  </div>
+    <div *ngIf="activeBookings.length > 0" class="bookings-section">
+      <h2>Prenotazioni attive</h2>
+      <ul class="booking-list">
+        <li *ngFor="let booking of activeBookings" class="booking-item">
+          <h3>{{ booking.title }}</h3>
+          <p><strong>Data:</strong> {{ booking.date | date: 'longDate' }}</p>
+          <p><strong>Stato:</strong> {{ booking.status }}</p>
+          <button (click)="cancelBooking(booking.bookingId)" class="btn btn-danger">Cancella Prenotazione</button>
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="activeBookings.length === 0 && !isLoading" class="no-bookings">
+      <h2>Prenotazioni attive</h2>
+      <p>Non ci sono prenotazioni attive.</p>
+    </div>
+
+  <div *ngIf="!isLoading && !errorMessage">
+    <h2>Altre prenotazioni</h2>
+    <ul class="booking-list">
+      <li *ngFor="let booking of otherBookings" class="booking-item">
+        <h3>{{ booking.title }}</h3>
+        <p><strong>Data:</strong> {{ booking.date | date: 'longDate' }}</p>
+        <p><strong>Stato:</strong> {{ booking.status }}</p>
       </li>
     </ul>
   </div>
-
-  <!-- Main Content -->
-  <div class="main-content">
-    <div class="header">
-      <div class="greeting">
-        <h1>Buongiorno, {{ user.name }} 👋</h1>
-        <p>Ecco i tuoi prossimi eventi</p>
-      </div>
-    </div>
-
-    <!-- Stats -->
-    <div class="stats-container">
-      <div class="stat-card">
-        <h3>Prossimi Eventi</h3>
-        <p class="stat-number">3</p>
-      </div>
-      <div class="stat-card">
-        <h3>Eventi Passati</h3>
-        <p class="stat-number">12</p>
-      </div>
-    </div>
-
-    <!-- Eventi Passati (Carousel) -->
-    <h2 class="section-title">Eventi Passati</h2>
-    <div class="carousel-container">
-      <div class="carousel-wrapper">
-        <div class="slides-container" [style.transform]="'translateX(' + (-currentIndex * 100) + '%)'">
-          <div *ngFor="let slide of slides" class="slide">
-            <div class="event-card">
-              <img [src]="slide.image" [alt]="slide.alt" class="event-img">
-              <div class="event-date">{{ slide.date }}</div>
-              <h3 class="event-title">{{ slide.title }}</h3>
-              <div class="event-location">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>{{ slide.location }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <button class="carousel-button prev" (click)="prevSlide()">❮</button>
-      <button class="carousel-button next" (click)="nextSlide()">❯</button>
-      <div class="indicators">
-        <span *ngFor="let slide of slides; let i = index" [class.active]="currentIndex === i" (click)="goToSlide(i)"></span>
-      </div>
-    </div>
-
-    <!-- Prossimi Eventi -->
-    <h2 class="section-title">Prossimi Eventi</h2>
-    <div class="past-events-container">
-      <div class="past-event-card">
-        <img src="https://www.italieonline.eu/user/blogimg/leto/emilia-romagna/bologna-uvod.jpg" alt="Past Event 1" class="past-event-img">
-        <div class="past-event-date">10 Gennaio 2024</div>
-        <h3 class="past-event-title">Conferenza sulla Sicurezza Informatica</h3>
-        <div class="past-event-location">
-          <i class="fas fa-map-marker-alt"></i>
-          <span>Milano, MI</span>
-        </div>
-      </div>
-      <div class="past-event-card">
-        <img src="https://www.10cose.it/wp-content/uploads/2015/09/cosa-vedere-torino-696x464.jpg" alt="Past Event 2" class="past-event-img">
-        <div class="past-event-date">12 Agosto 2023</div>
-        <h3 class="past-event-title">Seminario Web</h3>
-        <div class="past-event-location">
-          <i class="fas fa-map-marker-alt"></i>
-          <span>Napoli, NA</span>
-        </div>
-      </div>
-    </div>
-    <button class="show-more">Mostra Altri Eventi</button>
   </div>
-</div>

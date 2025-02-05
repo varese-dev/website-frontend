@@ -1,0 +1,117 @@
+<div class="admin-dashboard">
+  <h2>Gestione Admin</h2>
+  <div class="tabs">
+    <button (click)="setActiveTab('events')" [class.active]="activeTab === 'events'">Eventi</button>
+    <button (click)="setActiveTab('partners')" [class.active]="activeTab === 'partners'">Partner</button>
+    <button (click)="setActiveTab('speakers')" [class.active]="activeTab === 'speakers'">Speaker</button>
+    <button (click)="setActiveTab('tags')" [class.active]="activeTab === 'tags'">Tag</button>
+    <button (click)="setActiveTab('talks')" [class.active]="activeTab === 'talks'">Talk</button>
+  </div>
+
+  <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+  <!-- Form Eventi -->
+  <div *ngIf="activeTab === 'events'">
+    <h3>{{ selectedEventId ? 'Modifica Evento' : 'Crea Evento' }}</h3>
+    <form [formGroup]="eventForm" (ngSubmit)="submitForm('event')">
+      <label>Titolo</label>
+      <input formControlName="title" type="text"><br><br>
+      <label>Descrizione</label>
+      <textarea formControlName="description"></textarea><br><br>
+      <label>Data</label>
+      <input formControlName="date" type="datetime-local"><br><br>
+      <label>ID Host (Partner)</label>
+      <input formControlName="partnerId" type="text"><br><br>
+      <label>ID Sponsor</label>
+      <input formControlName="sponsorId" type="text"><br><br>
+      <label>Massimo Partecipanti</label>
+      <input formControlName="maxParticipants" type="number" min="1"><br><br>
+      <label>Indirizzo</label>
+      <input formControlName="address" type="text"><br><br>
+
+      <!-- Tag Section -->
+      <label>Tags</label>
+      <input #tagInput type="text"> <br><br>
+      <button (click)="addTag(tagInput.value); tagInput.value='';">Aggiungi Tag</button>
+
+      <ul>
+        <li *ngFor="let tag of tags.controls; let i = index">
+          {{ tag.value }} <button (click)="removeTag(i)">Rimuovi</button>
+        </li>
+      </ul>
+
+      <!-- Talk Section -->
+      <label>Talks</label>
+      <div>
+        <input #talkTitle type="text" placeholder="Titolo Talk"><br><br>
+        <textarea #talkDesc placeholder="Descrizione Talk"></textarea><br><br>
+        <button (click)="addTalk(talkTitle.value, talkDesc.value); talkTitle.value=''; talkDesc.value='';">Aggiungi Talk</button>
+      </div>
+
+      <ul>
+        <li *ngFor="let talk of talks.controls; let i = index">
+          <strong>{{ talk.value.title }}</strong> - {{ talk.value.description }}
+          <button (click)="removeTalk(i)">Rimuovi</button>
+        </li>
+      </ul>
+
+      <button type="submit">{{ selectedEventId ? 'Aggiorna Evento' : 'Crea Evento' }}</button>
+    </form>
+  </div>
+  <!-- Form Partner -->
+  <div *ngIf="activeTab === 'partners'">
+    <h3>Crea Partner</h3>
+    <form [formGroup]="partnerForm" (ngSubmit)="submitForm('partner')">
+      <label>Nome</label>
+      <input formControlName="name" type="text"><br><br>
+      <label>Descrizione</label>
+      <textarea formControlName="description"></textarea><br><br>
+      <label>Luogo</label>
+      <input formControlName="place" type="text"><br><br>
+      <label>Website</label>
+      <input formControlName="website" type="text"><br><br>
+      <label>Email</label>
+      <input formControlName="email" type="email"><br><br>
+      <button type="submit">Crea Partner</button>
+    </form>
+  </div>
+
+  <!-- Form Speaker -->
+  <div *ngIf="activeTab === 'speakers'">
+    <h3>Crea Speaker</h3>
+    <form [formGroup]="speakerForm" (ngSubmit)="submitForm('speaker')">
+      <label>Nome</label>
+      <input formControlName="name" type="text"><br><br>
+      <label>Cognome</label>
+      <input formControlName="surname" type="text"><br><br>
+      <label>Biografia</label>
+      <textarea formControlName="biography"></textarea><br><br>
+      <label>LinkedIn</label>
+      <input formControlName="linkedin" type="text"><br><br>
+      <button type="submit">Crea Speaker</button>
+    </form>
+  </div>
+
+  <!-- Form Tag -->
+  <div *ngIf="activeTab === 'tags'">
+    <h3>Crea Tag</h3>
+    <form [formGroup]="tagForm" (ngSubmit)="submitForm('tag')">
+      <label>Nome</label>
+      <input formControlName="name" type="text"><br><br>
+      <button type="submit">Crea Tag</button>
+    </form>
+  </div>
+
+  <!-- Form Talk -->
+  <div *ngIf="activeTab === 'talks'">
+    <h3>Crea Talk</h3>
+    <form [formGroup]="talkForm" (ngSubmit)="submitForm('talk')">
+      <label>Titolo</label>
+      <input formControlName="title" type="text"><br><br>
+      <label>Descrizione</label>
+      <textarea formControlName="description"></textarea><br><br>
+      <button type="submit">Crea Talk</button>
+    </form>
+  </div>
+</div>

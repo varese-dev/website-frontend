@@ -1,167 +1,138 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AreaUtenteService } from '../../service/area-utente.service';
 import { CommonModule } from '@angular/common';
-import { AreaUtenteService, User } from '../../service/area-utente.service';
-import { ActivatedRoute } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
+import {FormsModule} from '@angular/forms';
 
-// Definizione dell'interfaccia per le slide
-interface Slide {
-  image: string;
-  alt: string;
+interface User {
+  id: string;
+  name: string;
+  surname: string;
+  email: string;
+  phone: string;
+}
+
+interface Booking {
+  bookingId: string;
   title: string;
   date: string;
-  location: string;
+  status: string;
 }
 
 @Component({
   selector: 'app-area-utente',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './area-utente.component.html',
   styleUrls: ['./area-utente.component.css'],
+  imports: [CommonModule, FormsModule],
 })
-export class AreaUtenteComponent implements OnInit, OnDestroy {
-  // Inizializzazione dell'oggetto utente
-  user: User = { id: '', name: '' };
+export class AreaUtenteComponent implements OnInit {
+  user: User | null = null;
+  activeBookings: Booking[] = [];
+  otherBookings: Booking[] = [];
+  isLoading: boolean = true;
+  errorMessage: string | null = null;
 
-  // Indice corrente della slide
-  currentIndex = 0;
+  name: string = '';
+  surname: string = '';
+  oldPassword: string = '';
+  newPassword: string = '';
+  repeatNewPassword: string = '';
+  successMessage: string | null = null;
+  isEditMode: boolean = false;
 
-  // Numero di slide da visualizzare contemporaneamente
-  slidesPerView = 3;
+  constructor(private areaUtenteService: AreaUtenteService, private router: Router) {}
 
-  // ID dell'intervallo per l'autoplay
-  intervalId: any;
-
-  // Array di slide
-  slides: Slide[] = [
-    {
-      image: 'https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg',
-      alt: 'Slide 1',
-      title: 'Evento 1',
-      date: '10 Febbraio 2025',
-      location: 'Roma',
-    },
-    {
-      image: 'https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg',
-      alt: 'Slide 2',
-      title: 'Evento 2',
-      date: '12 Marzo 2025',
-      location: 'Milano',
-    },
-    {
-      image: 'https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg',
-      alt: 'Slide 3',
-      title: 'Evento 3',
-      date: '20 Aprile 2025',
-      location: 'Napoli',
-    },
-    {
-      image: 'https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg',
-      alt: 'Slide 4',
-      title: 'Evento 4',
-      date: '30 Maggio 2025',
-      location: 'Firenze',
-    },
-    {
-      image: 'https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg',
-      alt: 'Slide 5',
-      title: 'Evento 5',
-      date: '15 Giugno 2025',
-      location: 'Venezia',
-    },
-    {
-      image: 'https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg',
-      alt: 'Slide 6',
-      title: 'Evento 6',
-      date: '25 Luglio 2025',
-      location: 'Bologna',
-    },
-  ];
-
-  constructor(
-    private areaUtenteService: AreaUtenteService,
-    private route: ActivatedRoute,
-    private cookieService: CookieService
-  ) {}
-
-  // Metodo chiamato all'inizializzazione del componente
   ngOnInit() {
-    this.startAutoPlay();
+    this.isLoading = true;
 
-    // Commentato il codice per il recupero dei dettagli dell'utente
-    /*
-    this.route.params.subscribe((params) => {
-      const userId = params['id'];  // Recupera l'id dell'utente dalla rotta
-      const sessionId = this.cookieService.get('sessionId');  // Recupera il sessionId dal cookie
-      if (sessionId) {
-        this.fetchUserDetails(userId, sessionId);  // Chiamata per ottenere i dettagli dell'utente
-      } else {
-        console.error('Session ID non trovato');
-        this.user = { id: '', name: 'Utente non trovato' };  // Mostra errore se sessionId non è presente
-      }
-    });
-    */
-  }
-
-  // Commentato il metodo per il recupero dei dettagli dell'utente
-  /*
-  fetchUserDetails(userId: string, sessionId: string) {
-    this.areaUtenteService.getUserBySessionId(sessionId).subscribe({
-      next: (user) => {
-        console.log('User data received:', user);
-        this.user = user;  // Assegna i dati ricevuti all'oggetto user
+    this.areaUtenteService.fetchUserData().subscribe({
+      next: (data) => {
+        this.user = data;
       },
       error: (error) => {
-        console.error('Error fetching user:', error);
-        this.user = { id: '', name: 'Utente non trovato' };  // Mostra errore in caso di fallimento
+        this.errorMessage = 'Errore durante il recupero dei dati utente.';
+        console.error('Error fetching user data:', error);
       },
-      complete: () => {
-        console.log('Request completed');
+      complete: () => (this.isLoading = false),
+    });
+
+    this.areaUtenteService.fetchUserActiveBookings().subscribe({
+      next: (data) => {
+        this.activeBookings = data.filter(booking => booking.status === 'confirmed');
+        this.otherBookings = data.filter(booking => booking.status !== 'confirmed');
+        this.isLoading = false;
+      },
+      error: (error) => {
+        this.errorMessage = 'Errore durante il recupero delle prenotazioni.';
+        console.error('Error fetching bookings:', error);
+        this.isLoading = false;
       },
     });
   }
-  */
 
-  // Calcola il numero totale di gruppi per la visualizzazione delle slide
-  get totalGroups(): number {
-    return Math.ceil(this.slides.length / this.slidesPerView);
+  toggleEditMode(): void {
+    this.isEditMode = !this.isEditMode;
   }
 
-  // Funzione per l'autoplay delle slide
-  startAutoPlay() {
-    this.intervalId = setInterval(() => {
-      this.nextSlide();
-    }, 5000);
+  goToCreateTalk(): void {
+    this.router.navigate(['/create-talk']);
   }
 
-  // Passa alla slide successiva
-  nextSlide() {
-    if (this.currentIndex < this.totalGroups - 1) {
-      this.currentIndex++;
-    } else {
-      this.currentIndex = 0;
+  updateName(): void {
+    this.areaUtenteService.modifyName(this.name).subscribe({
+      next: (message) => this.handleSuccess(message),
+      error: (error) => this.handleError(error)
+    });
+  }
+
+  updateSurname(): void {
+    this.areaUtenteService.modifySurname(this.surname).subscribe({
+      next: (message) => this.handleSuccess(message),
+      error: (error) => this.handleError(error)
+    });
+  }
+
+  updatePassword(): void {
+    this.areaUtenteService.modifyPassword(this.oldPassword, this.newPassword, this.repeatNewPassword).subscribe({
+      next: (message) => this.handleSuccess(message),
+      error: (error) => this.handleError(error)
+    });
+  }
+
+  cancelBooking(bookingId: string): void {
+    if (confirm('Sei sicuro di voler cancellare questa prenotazione?')) {
+      this.areaUtenteService.cancelBooking(bookingId).subscribe({
+        next: (message) => {
+          this.activeBookings = this.activeBookings.filter(booking => booking.bookingId !== bookingId);
+          this.handleSuccess(message);
+        },
+        error: (error) => this.handleError(error)
+      });
     }
   }
 
-  // Torna alla slide precedente
-  prevSlide() {
-    if (this.currentIndex > 0) {
-      this.currentIndex--;
-    } else {
-      this.currentIndex = this.totalGroups - 1;
-    }
+
+  private refreshPage(): void {
+    this.areaUtenteService.fetchUserData().subscribe({
+      next: (data) => {
+        this.user = data;
+        this.successMessage = 'Dati utente aggiornati con successo.';
+      },
+      error: (error) => {
+        console.error('Errore durante il caricamento dei dati aggiornati:', error);
+        this.errorMessage = 'Errore durante il caricamento dei dati aggiornati.';
+      }
+    });
   }
 
-  // Vai direttamente alla slide specificata
-  goToSlide(index: number) {
-    this.currentIndex = index;
+  private handleSuccess(message: string): void {
+    this.successMessage = message;
+    setTimeout(() => (this.successMessage = null), 5000);
   }
 
-  // Pulisce l'intervallo quando il componente viene distrutto
-  ngOnDestroy() {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-    }
+  private handleError(error: any): void {
+    console.error('Error:', error);
+    this.errorMessage = 'Errore durante l’aggiornamento dei dati.';
+    setTimeout(() => (this.errorMessage = null), 5000);
   }
 }

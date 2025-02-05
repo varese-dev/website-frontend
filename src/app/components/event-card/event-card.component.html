@@ -1,44 +1,50 @@
-<div class="carousel-container">
-  <button class="nav-button prev" (click)="previousSlide()">&#10094;</button>
+<section id="event" class="event-section">
+  <!-- Titolo principale -->
+  <div class="hero-header">
+    <div class="label animated-content">Our Events</div>
+    <h1 class="animated-content">Quando: <span class="highlight">Scopri il nostro calendario</span></h1>
+    <p class="subtitle animated-content">Scopri le tappe fondamentali del nostro gruppo: un percorso fatto di eventi,
+      incontri e collaborazioni. Attraverso talk tecnici, workshop e momenti di networking, costruiamo una community
+      dove le idee prendono vita e diventano innovazione.</p>
+  </div>
 
-  <div class="carousel">
-    <div class="slides">
-      <div *ngFor="let slide of visibleSlides; trackBy: trackByFn" class="slide">
-        <div class="card">
-          <div class="card-content">
-            <h2>{{ slide.title }}</h2>
-            <p>{{ slide.description }}</p>
-            <button class="details-button">Dettagli</button>
-          </div>
+  <div class="carousel-container">
+    <button class="nav-button prev" (click)="previousSlide()">&#10094;</button>
 
-          <!-- Blocco fisso in basso a sinistra -->
-          <div class="card-info">
-            <div class="countdown">
-              <h3>Data</h3>
-              <p>{{ slide.formattedDate }}</p>
+    <div class="carousel">
+      <div class="slides">
+        <div *ngFor="let slide of visibleSlides; trackBy: trackByFn" class="slide">
+          <div class="card">
+            <div class="card-content">
+              <h2>{{ slide.title }}</h2>
+              <p>{{ slide.description }}</p>
+              <button class="details-button">Dettagli</button>
             </div>
-            <div class="countdown">
-              <h3>Tempo Rimanente</h3>
-              <p>{{ slide.timeRemaining }}</p>
-            </div>
 
-            <div *ngIf="slide.timeRemaining !== 'Evento concluso'" class="remaining-slots">
-              <h3>Posti Rimasti</h3>
-              <p>{{ slide.remainingSlots > 0 ? slide.remainingSlots : 'Tutto esaurito' }}</p> <!-- Fallback se i posti sono NaN o 0 -->
+            <!-- Blocco fisso in basso a sinistra -->
+            <div class="card-info">
+              <div class="countdown">
+                <h3>Tempo Rimanente</h3>
+                <p>{{ slide.timeRemaining }}</p>
+              </div>
+
+              <div *ngIf="slide.timeRemaining !== 'Evento concluso'" class="remaining-slots">
+                <h3>Posti Rimasti</h3>
+                <p>{{ slide.remainingSlots > 0 ? slide.remainingSlots : 'Tutto esaurito' }}</p>
+                <!-- Fallback se i posti sono NaN o 0 -->
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <button class="nav-button next" (click)="nextSlide()">&#10095;</button>
+    <button class="nav-button next" (click)="nextSlide()">&#10095;</button>
 
-  <div class="indicators">
-    <span *ngFor="let _ of getTotalPages(); let idx = index"
-          class="indicator"
-          [class.active]="idx === currentPage"
-          (click)="goToSlide(idx)">
-    </span>
+    <div class="indicators">
+      <span *ngFor="let _ of getTotalPages(); let idx = index" class="indicator" [class.active]="idx === currentPage"
+        (click)="goToSlide(idx)">
+      </span>
+    </div>
   </div>
-</div>
+</section>
