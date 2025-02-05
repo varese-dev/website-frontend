@@ -16,7 +16,7 @@ export interface Event {
   providedIn: 'root'
 })
 export class EventService {
-  private apiUrl = 'http://localhost:8080/events';
+  private apiUrl = 'https://localhost:8443/events';
 
   constructor(private http: HttpClient) {}
 

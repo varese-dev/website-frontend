@@ -16,7 +16,7 @@ export interface Event {
   providedIn: 'root'
 })
 export class PartnerCardService {
-  private apiUrl = 'http://localhost:8080/partners'; // Base URL aggiornata
+  private apiUrl = 'https://localhost:8443/partners'; // Base URL aggiornata
 
   constructor(private http: HttpClient) {}
 
