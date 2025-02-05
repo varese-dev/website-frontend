@@ -41,9 +41,9 @@ interface Booking {
   providedIn: 'root',
 })
 export class AreaUtenteService {
-  private apiUrl = 'https://localhost:8080/user';
-  private  bookingUrl = 'https://localhost:8080/bookings';
-  private talkUrl = 'https://localhost:8080/talks';
+  private apiUrl = 'http://localhost:8080/user';
+  private  bookingUrl = 'http://localhost:8080/bookings';
+  private talkUrl = 'http://localhost:8080/talks';
 
   constructor(private http: HttpClient) {}
 
