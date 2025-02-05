@@ -2,11 +2,14 @@
 .about-section {
   padding: 80px;
   background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
   text-align: center;
+  justify-content: center;
 }
 
 .hero-header {
-  margin-bottom: 60px;
+  margin-bottom: 30px;
 }
 
 .label {
@@ -36,6 +39,24 @@ h1 .highlight {
   margin: 10px 0 40px;
 }
 
+.animated-content {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fade-in 1s ease forwards;
+}
+
+.animated-content:nth-child(1) {
+  animation-delay: 0.5s;
+}
+
+.animated-content:nth-child(2) {
+  animation-delay: 0.7s;
+}
+
+.animated-content:nth-child(3) {
+  animation-delay: 0.9s;
+}
+
 /* Step orizzontale */
 .horizontal-steps {
   display: flex;
@@ -49,7 +70,7 @@ h1 .highlight {
   display: flex;
   align-items: center;
   gap: 20px;
-  width: 80%;
+  width: 70%;
   position: relative;
 }
 
@@ -76,6 +97,7 @@ h1 .highlight {
 
 .step-year {
   font-size: 0.9rem;
+  letter-spacing: 0.1rem;
   color: inherit;
 }
 
@@ -88,14 +110,70 @@ h1 .highlight {
   transition: width 0.3s ease;
 }
 
-/* Animazioni */
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+/* Contenitore step */
+.step-content {
+  position: relative;
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  margin: auto;
+  z-index: 1;
 }
 
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
+.step-content-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: auto;
+}
+
+/* Contenitore dei dettagli */
+.step-detail {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+  border-radius: 16px;
+  padding: 40px;
+}
+
+/* Immagine a sinistra con ombra */
+.step-image img {
+  width: 350px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Testo a destra */
+.step-text {
+  text-align: left;
+  justify-content: center;
+  padding: 20px;
+}
+
+.step-date {
+  font-size: 1.2rem;
+  color: #16213e;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+/* Titolo */
+.step-text h3 {
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 0.1rem;
+  color: #16213e;
+  margin-bottom: 15px;
+}
+
+/* Descrizione */
+.step-text p {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.1rem;
+  color: #444;
+  line-height: 1.6;
 }
