@@ -11,6 +11,7 @@ import { AccountComponent } from './pages/auth/account/account.component';
 import { RelatoreDetailComponent } from './pages/talk-relatori/relatore-detail-component/relatore-detail-component.component';
 import { ForgotPasswordComponent } from './pages/auth/account/forgotten-password/forgotten-password.component';
 import { CreateTalkComponent } from './create-talk/create-talk.component';
+import {AdminDashboardComponent} from './pages/admin-dashboard/admin.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,6 +22,7 @@ export const routes: Routes = [
   { path: 'partner', component: PartnerComponent },
   { path: 'partner-details/:id', component: PartnerDetailsComponent },
   { path: 'prenotazione', component: PrenotazioneComponent },
+  { path: 'admin', component: AdminDashboardComponent },
   { path: 'area-utente', component: AreaUtenteComponent },
   { path: 'area-utente/:id', component: AreaUtenteComponent },
   { path: 'auth/account', component: AccountComponent },
