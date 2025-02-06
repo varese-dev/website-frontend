@@ -915,3 +915,175 @@ hr {
     width: 70%;
   }
 }
+
+/* Responsivity */
+@media (max-width: 768px) {
+  .cyberpunk-checkbox,
+  .cyberpunk-checkbox-register {
+    width: 18px;
+    height: 18px;
+    margin-bottom: 2rem;
+  }
+
+  .cyberpunk-checkbox:before,
+  .cyberpunk-checkbox-register:before {
+    width: 8px;
+    height: 8px;
+  }
+
+  .cyberpunk-checkbox-label,
+  .cyberpunk-checkbox-label-register {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cyberpunk-checkbox,
+  .cyberpunk-checkbox-register {
+    width: 16px;
+    height: 16px;
+    margin-bottom: 1.5rem;
+  }
+
+  .cyberpunk-checkbox:before,
+  .cyberpunk-checkbox-register:before {
+    width: 6px;
+    height: 6px;
+  }
+
+  .cyberpunk-checkbox-label,
+  .cyberpunk-checkbox-label-register {
+    font-size: 0.8rem;
+  }
+}
+
+/* Media Query specifico per iPhone sul "back home" */
+@media only screen and (device-width: 375px) {
+  /* Modifica l'hover underline per il back home */
+  .loginRight {
+   margin-bottom:  20px;
+  }
+}
+
+@media only screen and (device-width:1024px) {
+  /* Modifica l'hover underline per il back home */
+  .loginRight {
+   margin-bottom:  35px;
+  }
+}
+
+/* Allunga i pulsanti per dispositivi grandi come iPad, Surface Pro, etc */
+@media only screen and (min-width: 1024px) {
+  /* Allunga il pulsante di login */
+  .arr-1 {
+    padding: 16px 45px;
+   
+  }
+
+}
+
+/* Media queries per dispositivi specifici */
+@device-width (device-width: 1024px), /* iPad Air */
+@device-width (device-width: 1366px), /* iPad Pro e Surface Pro */
+@device-width (device-width: 1398px), /* ASUS Zenbook Fold */
+@device-width (device-width: 1024px) { /* Nest Hub */
+  .arr-1 {
+    padding: 16px 45px;
+   
+  }
+}
+
+/* Allunga il checkbox "Remember Me" su dispositivi specifici come iPad, Surface Pro, etc */
+@media only screen and (device-width: 1024px) {
+  /* iPad Air e Nest Hub */
+  .cyberpunk-checkbox,
+  .cyberpunk-checkbox-register {
+    width: 24px;
+    height: 24px;
+    margin-right: 15px;
+    margin-bottom: 2rem;
+  }
+
+  .cyberpunk-checkbox:before,
+  .cyberpunk-checkbox-register:before {
+    width: 12px;
+    height: 12px;
+  }
+
+  .cyberpunk-checkbox-label,
+  .cyberpunk-checkbox-label-register {
+    width: 100%;
+    margin-left: 10px;
+    padding: 0 5px;
+  }
+
+  .cyberpunk-checkbox-label span,
+  .cyberpunk-checkbox-label-register span {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (device-width: 1366px) {
+  /* iPad Pro e Surface Pro */
+  .cyberpunk-checkbox,
+  .cyberpunk-checkbox-register {
+    width: 24px;
+    height: 24px;
+    margin-right: 15px;
+    margin-bottom: 2rem;
+  }
+
+  .cyberpunk-checkbox:before,
+  .cyberpunk-checkbox-register:before {
+    width: 12px;
+    height: 12px;
+  }
+
+  .cyberpunk-checkbox-label,
+  .cyberpunk-checkbox-label-register {
+    width: 100%;
+    margin-left: 10px;
+    padding: 0 5px;
+  }
+
+  .cyberpunk-checkbox-label span,
+  .cyberpunk-checkbox-label-register span {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (device-width: 1398px) {
+  /* ASUS Zenbook Fold */
+  .cyberpunk-checkbox,
+  .cyberpunk-checkbox-register {
+    width: 24px;
+    height: 24px;
+    margin-right: 15px;
+    margin-bottom: 2rem;
+  }
+
+  .cyberpunk-checkbox:before,
+  .cyberpunk-checkbox-register:before {
+    width: 12px;
+    height: 12px;
+  }
+
+  .cyberpunk-checkbox-label,
+  .cyberpunk-checkbox-label-register {
+    width: 100%;
+    margin-left: 10px;
+    padding: 0 5px;
+  }
+
+  .cyberpunk-checkbox-label span,
+  .cyberpunk-checkbox-label-register span
+  {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1rem;
+  }
+}
