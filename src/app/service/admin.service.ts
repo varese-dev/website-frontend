@@ -25,6 +25,17 @@ interface Tag {
   name: string;
 }
 
+interface Partner {
+  id: string;
+  name: string;
+  description: string;
+  place: string;
+  website: string;
+  email: string;
+  image?: string;
+  value: string;
+}
+
 interface ModifyRequest {
   name?: string;
   surname?: string;
@@ -76,6 +87,7 @@ export class AdminService {
   private eventUrl = 'http://localhost:8080/events';
   private talkUrl = 'http://localhost:8080/talks';
   private tagUrl = 'http://localhost:8080/tags';
+  private partnerUrl = 'http://localhost:8080/partners';
 
   constructor(private http: HttpClient) {}
 
@@ -167,6 +179,26 @@ export class AdminService {
 
   updateEvent(id: string, event: Event): Observable<void> {
     return this.http.put<void>(`${this.eventUrl}/${id}`, event, {
+      withCredentials: true,
+    }).pipe(
+        catchError(this.handleError)
+    );
+  }
+
+  getAllPartners(): Observable<Partner[]> {
+    return this.http.get<Partner[]>(this.partnerUrl).pipe(
+        catchError(this.handleError)
+    );
+  }
+
+  createPartner(partner: Partner): Observable<Partner> {
+    return this.http.post<Partner>(this.partnerUrl, partner, { withCredentials: true }).pipe(
+        catchError(this.handleError)
+    );
+  }
+
+  updatePartner(id: string, partner: Partner): Observable<void> {
+    return this.http.put<void>(`${this.partnerUrl}/${id}`, partner, {
       withCredentials: true,
     }).pipe(
         catchError(this.handleError)

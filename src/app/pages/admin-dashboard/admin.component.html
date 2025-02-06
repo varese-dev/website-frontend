@@ -181,4 +181,45 @@
             <p>Non ci sono tag disponibili.</p>
         </div>
     </div>
+    <div class="button-group">
+        <h2>Partner</h2>
+        <button (click)="goToCreatePartner()" class="btn btn-primary">Crea Partner</button>
+    </div>
+
+    <div *ngIf="isLoading" class="loading-message">
+        <p>Caricamento in corso...</p>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+    <div *ngIf="!isLoading && partners.length > 0">
+        <h2>Partner</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Luogo</th>
+                <th>Email</th>
+                <th>Azioni</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let partner of partners">
+                <td>{{ partner.id }}</td>
+                <td>{{ partner.name }}</td>
+                <td>{{ partner.place }}</td>
+                <td>{{ partner.email }}</td>
+                <td>
+                    <button (click)="goToEditPartner(partner.id)" class="btn btn-secondary">Modifica</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="!isLoading && partners.length === 0" class="no-partners-message">
+        <p>Non ci sono partner disponibili.</p>
+    </div>
+
 </div>

@@ -49,6 +49,17 @@ interface Tag {
   name: string;
 }
 
+interface Partner {
+  id: string;
+  name: string;
+  description: string;
+  place: string;
+  website: string;
+  email: string;
+  image?: string;
+  value: string;
+}
+
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin.component.html',
@@ -65,6 +76,7 @@ export class AdminDashboardComponent implements OnInit {
   bookings: Bookings[] = [];
   talks: Talk[] = [];
   tags: Tag[] = [];
+  partners: Partner[] = [];
 
   name: string = '';
   surname: string = '';
@@ -109,6 +121,7 @@ export class AdminDashboardComponent implements OnInit {
     this.loadEvents();
     this.loadTalks();
     this.loadTags();
+    this.loadPartners();
   }
 
   loadEvents(): void {
@@ -179,6 +192,19 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
+  loadPartners(): void {
+    this.adminService.getAllPartners().subscribe({
+      next: (data) => {
+        this.partners = data;
+      },
+      error: (error) => {
+        this.errorMessage = 'Errore durante il recupero delle prenotazioni.';
+        console.error('Error fetching bookings:', error);
+      },
+      complete: () => (this.isLoading = false),
+    });
+  }
+
   toggleEditMode(): void {
     this.isEditMode = !this.isEditMode;
   }
@@ -189,6 +215,14 @@ export class AdminDashboardComponent implements OnInit {
 
   goToCreateEvent(): void {
     this.router.navigate(['/create-event']);
+  }
+
+  goToCreatePartner(): void {
+    this.router.navigate(['/create-partner']);
+  }
+
+  goToEditPartner(partnerId: string): void {
+    this.router.navigate(['/edit-partner', partnerId]);
   }
 
   updateName(): void {

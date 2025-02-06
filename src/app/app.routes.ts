@@ -17,6 +17,8 @@ import {AdminDashboardComponent} from './pages/admin-dashboard/admin.component';
 import {EditEventComponent} from './edit-event/edit-event.component';
 import {EditTalkComponent} from './edit-talk/edit-talk.component';
 import {EditTagComponent} from './edit-tag/edit-tag.component';
+import {CreatePartnerComponent} from './create-partner/create-partner.component';
+import {EditPartnerComponent} from './edit-partner/edit-partner.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -37,5 +39,7 @@ export const routes: Routes = [
   { path: 'create-tag', component: CreateTagComponent },
   { path: 'edit-event/:id', component: EditEventComponent },
   { path: 'edit-talk/:id', component: EditTalkComponent },
-  { path: 'edit-tag/:id', component: EditTagComponent }
+  { path: 'edit-tag/:id', component: EditTagComponent },
+  { path: 'edit-partner/:id', component: EditPartnerComponent },
+  { path: 'create-partner', component: CreatePartnerComponent },
 ];
