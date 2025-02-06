@@ -72,7 +72,7 @@ export class HeaderComponent implements AfterViewInit {
     gsap.from(this.mainHeader.nativeElement, {
       y: -100,
       opacity: 0,
-      duration: 1.5,
+      duration: 1,
       ease: 'power3.out',
     });
   }
@@ -81,7 +81,7 @@ export class HeaderComponent implements AfterViewInit {
     this.authService.getUserSession().subscribe({
       next: (sessionResponse) => {
         if (!sessionResponse || !sessionResponse.userId) {
-          this.router.navigate(['/auth/account']);
+          this.router.navigate(['/auth/account#login']);
           return;
         }
 
@@ -93,16 +93,16 @@ export class HeaderComponent implements AfterViewInit {
             } else if (role === 'USER') {
               this.router.navigate(['/area-utente']);
             } else {
-              this.router.navigate(['/auth/account']);
+              this.router.navigate(['/auth/account#login']);
             }
           },
           error: () => {
-            this.router.navigate(['/auth/account']);
+            this.router.navigate(['/auth/account#login']);
           }
         });
       },
       error: () => {
-        this.router.navigate(['/auth/account']);
+        this.router.navigate(['/auth/account#login']);
       }
     });
   }

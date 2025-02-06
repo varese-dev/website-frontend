@@ -1,4 +1,6 @@
 import { Component, AfterViewInit, HostListener, ElementRef, ViewChildren, QueryList } from '@angular/core';
+import Swiper, { EffectCards } from 'swiper';
+import 'swiper/swiper-bundle.css';
 import { Router } from '@angular/router';
 import gsap from 'gsap';
 
@@ -19,6 +21,15 @@ export class HeroComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initParticles();
+    this.initSwiper();
+  }
+
+  private initSwiper(): void {
+    Swiper.use([EffectCards]);
+    new Swiper('.swiper-cards-stack', {
+      effect: 'cards',
+      grabCursor: true,
+    });
   }
 
   private initParticles(): void {

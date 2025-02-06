@@ -4,20 +4,22 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  height: 80vh;
+  height: 64.3vh;
 }
 
 h1 {
   font-size: 2.5rem;
-  color: #ff4d4f;
+  color: #b22222;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
 }
 
 p {
   font-size: 1.2rem;
   color: #666;
+  letter-spacing: 0.1rem;
 }
 
-/* Centrare il contenuto nella pagina */
 body {
   display: flex;
   justify-content: center;
@@ -26,7 +28,6 @@ body {
   margin: 0;
 }
 
-/* Contenitore per il bottone */
 .container {
   display: flex;
   justify-content: center;
@@ -34,7 +35,6 @@ body {
   width: 100%;
 }
 
-/* Stile del bottone */
 .btn {
   align-items: center;
   background-color: transparent;
@@ -52,7 +52,6 @@ body {
   margin: 20px 0;
 }
 
-/* Effetto linea prima del testo */
 .btn:before {
   background-color: #b22222;
   content: "";
@@ -63,7 +62,6 @@ body {
   width: 0;
 }
 
-/* Effetto hover */
 .btn:hover:before {
   background-color: #b22222;
   width: 3rem;
