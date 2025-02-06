@@ -1,4 +1,9 @@
-<header class="main-header" [class.scrolled]="isScrolled">
+<header
+  #mainHeader
+  class="main-header"
+  [ngClass]="{ 'home-header': isHomePage, 'other-header': !isHomePage }"
+  [class.scrolled]="isScrolled"
+>
   <!-- Logo -->
   <div class="logo">
     <a href="/">
@@ -17,7 +22,7 @@
     <!-- Login Icon -->
     <a href="/auth/account">
       <button class="icon-button login-button">
-        <i class="fa-regular fa-user" style="color: #ffffff;"></i>
+        <i class="fa-regular fa-user" style="color: #ffffff"></i>
       </button>
     </a>
   </div>

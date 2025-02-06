@@ -11,6 +11,16 @@
   transition: all 0.5s ease;
 }
 
+/* Stili per la home: quando la header è trasparente, i link sono bianchi */
+.home-header .menu-item {
+  color: #ffffff;
+}
+
+/* Stili per le altre pagine: quando la header è trasparente, i link sono rossi */
+.other-header .menu-item {
+  color: #b22222;
+}
+
 .logo {
   display: flex;
   justify-content: flex-start;
@@ -22,10 +32,8 @@
   cursor: pointer;
 }
 
-
 .menu-item {
   position: relative;
-  color: #ffffff;
   font-size: 1rem;
   font-weight: 300;
   letter-spacing: 0.2rem;
@@ -58,6 +66,7 @@
   width: 100%;
 }
 
+/* Quando lo scroll è attivo, la header prende lo sfondo bianco e i link diventano rossi */
 .main-header.scrolled {
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

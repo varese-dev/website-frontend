@@ -1,5 +1,6 @@
 import { Component, ElementRef, AfterViewInit, ViewChild, HostListener } from '@angular/core';
-import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Router, NavigationEnd } from '@angular/router';
 import gsap from 'gsap';
 
 @Component({
@@ -7,12 +8,20 @@ import gsap from 'gsap';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
   standalone: true,
+  imports: [CommonModule]
 })
 export class HeaderComponent implements AfterViewInit {
   @ViewChild('mainHeader', { static: true }) mainHeader!: ElementRef;
   isScrolled = false;
+  isHomePage = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.isHomePage = event.urlAfterRedirects === '/';
+      }
+    });
+  }
 
   @HostListener('window:scroll', [])
   onScroll(): void {
