@@ -264,11 +264,6 @@ export class AdminDashboardComponent implements OnInit {
     }
   }
 
-  logout(): void {
-    // Da implementare
-    console.log('Logout eseguito');
-  }
-
   private refreshPage(): void {
     this.adminService.fetchUserData().subscribe({
       next: (data) => {
@@ -278,6 +273,19 @@ export class AdminDashboardComponent implements OnInit {
       error: (error) => {
         console.error('Errore durante il caricamento dei dati aggiornati:', error);
         this.errorMessage = 'Errore durante il caricamento dei dati aggiornati.';
+      }
+    });
+  }
+
+  logout(): void {
+    this.adminService.logout().subscribe({
+      next: (response) => {
+        console.log('Logout avvenuto:', response);
+        this.router.navigate(['/auth/account']);
+      },
+      error: (error) => {
+        this.errorMessage = 'Errore durante il logout. Riprova più tardi.';
+        console.error('Logout error:', error);
       }
     });
   }
