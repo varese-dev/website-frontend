@@ -12,8 +12,11 @@ import { RelatoreDetailComponent } from './pages/talk-relatori/relatore-detail-c
 import { ForgotPasswordComponent } from './pages/auth/account/forgotten-password/forgotten-password.component';
 import { CreateTalkComponent } from './create-talk/create-talk.component';
 import { CreateNewEventComponent } from './create-event/create-event.component';
+import { CreateTagComponent } from './create-tag/create-tag.component';
 import {AdminDashboardComponent} from './pages/admin-dashboard/admin.component';
 import {EditEventComponent} from './edit-event/edit-event.component';
+import {EditTalkComponent} from './edit-talk/edit-talk.component';
+import {EditTagComponent} from './edit-tag/edit-tag.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -31,5 +34,8 @@ export const routes: Routes = [
   { path: 'auth/account/forgotten-password', component: ForgotPasswordComponent },
   { path: 'create-talk', component: CreateTalkComponent },
   { path: 'create-event', component: CreateNewEventComponent },
+  { path: 'create-tag', component: CreateTagComponent },
   { path: 'edit-event/:id', component: EditEventComponent },
+  { path: 'edit-talk/:id', component: EditTalkComponent },
+  { path: 'edit-tag/:id', component: EditTagComponent }
 ];

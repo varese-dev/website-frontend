@@ -75,6 +75,7 @@ export class AdminService {
   private  bookingUrl = 'http://localhost:8080/bookings';
   private eventUrl = 'http://localhost:8080/events';
   private talkUrl = 'http://localhost:8080/talks';
+  private tagUrl = 'http://localhost:8080/tags';
 
   constructor(private http: HttpClient) {}
 
@@ -112,9 +113,43 @@ export class AdminService {
     );
   }
 
+  getAllTalks(): Observable<Talk[]> {
+    return this.http.get<Talk[]>(this.talkUrl).pipe(
+        catchError(this.handleError)
+    );
+  }
+
+  updateTalk(id: string, talk: Talk): Observable<void> {
+    return this.http.put<void>(`${this.talkUrl}/${id}`, talk, {
+      withCredentials: true,
+    }).pipe(
+        catchError(this.handleError)
+    );
+  }
+
+  createTag(tag: Tag): Observable<Tag> {
+    return this.http.post<Tag>(this.tagUrl, tag, { withCredentials: true }).pipe(
+        catchError(this.handleError)
+    );
+  }
+
   createTalk(request: CreateTalkRequest): Observable<Talk> {
     return this.http.post<Talk>(this.talkUrl, request, { withCredentials: true }).pipe(
       catchError(this.handleError)
+    );
+  }
+
+  getAllTags(): Observable<Tag[]> {
+    return this.http.get<Tag[]>(this.tagUrl).pipe(
+        catchError(this.handleError)
+    );
+  }
+
+  updateTag(id: string, tag: Tag): Observable<void> {
+    return this.http.put<void>(`${this.tagUrl}/${id}`, tag, {
+      withCredentials: true,
+    }).pipe(
+        catchError(this.handleError)
     );
   }
 

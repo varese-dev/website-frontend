@@ -1,0 +1,20 @@
+<div class="container">
+  <h1>Modifica Talk</h1>
+
+  <form [formGroup]="talkForm" (ngSubmit)="submitTalk()">
+    <div class="form-group">
+      <label for="title">Titolo</label>
+      <input id="title" formControlName="title" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="description">Descrizione</label>
+      <textarea id="description" formControlName="description" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salva Modifiche</button>
+  </form>
+
+  <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+</div>

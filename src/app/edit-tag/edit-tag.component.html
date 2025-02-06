@@ -1,0 +1,15 @@
+<div class="container">
+  <h1>Modifica Tag</h1>
+
+  <form [formGroup]="tagForm" (ngSubmit)="submitTag()">
+    <div class="form-group">
+      <label for="name">Nome</label>
+      <input id="name" formControlName="name" type="text" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salva Modifiche</button>
+  </form>
+
+  <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+</div>

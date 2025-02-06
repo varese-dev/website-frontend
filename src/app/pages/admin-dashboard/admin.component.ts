@@ -38,6 +38,17 @@ interface Event {
   sponsorId?: string;
 }
 
+interface Talk {
+  id?: string;
+  title: string;
+  description: string;
+}
+
+interface Tag {
+  id?: string;
+  name: string;
+}
+
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin.component.html',
@@ -52,6 +63,8 @@ export class AdminDashboardComponent implements OnInit {
   errorMessage: string | null = null;
 
   bookings: Bookings[] = [];
+  talks: Talk[] = [];
+  tags: Tag[] = [];
 
   name: string = '';
   surname: string = '';
@@ -94,6 +107,8 @@ export class AdminDashboardComponent implements OnInit {
 
     this.loadBookings();
     this.loadEvents();
+    this.loadTalks();
+    this.loadTags();
   }
 
   loadEvents(): void {
@@ -111,6 +126,44 @@ export class AdminDashboardComponent implements OnInit {
 
   goToEditEvent(eventId: string | undefined): void {
     this.router.navigate(['/edit-event', eventId]);
+  }
+
+  loadTalks(): void {
+    this.adminService.getAllTalks().subscribe({
+      next: (data) => {
+        this.talks = data;
+      },
+      error: (error) => {
+        this.errorMessage = 'Errore durante il recupero dei talk.';
+        console.error('Error fetching talks:', error);
+      },
+      complete: () => (this.isLoading = false),
+    });
+  }
+
+  goToEditTalk(talkId: string | undefined): void {
+    this.router.navigate(['/edit-talk', talkId]);
+  }
+
+  loadTags(): void {
+    this.adminService.getAllTags().subscribe({
+      next: (data) => {
+        this.tags = data;
+      },
+      error: (error) => {
+        this.errorMessage = 'Errore durante il recupero dei tag.';
+        console.error('Error fetching tags:', error);
+      },
+      complete: () => (this.isLoading = false),
+    });
+  }
+
+  goToEditTag(tagId: string | undefined): void {
+    this.router.navigate(['/edit-tag', tagId]);
+  }
+
+  goToCreateTag(): void {
+    this.router.navigate(['/create-tag']);
   }
 
   loadBookings(): void {

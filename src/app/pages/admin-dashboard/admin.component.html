@@ -44,9 +44,6 @@
             <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
             <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
         </div>
-        <div>
-            <button (click)="goToCreateTalk()" class="btn btn-primary create-talk-btn">Crea il tuo Talk</button>
-        </div>
     </div>
 
     <div class="container">
@@ -83,15 +80,13 @@
     </div>
 
     <div class="container">
-        <div class="button-group">
-            <button (click)="goToCreateEvent()" class="btn btn-primary">Crea Evento</button>
-        </div>
         <div *ngIf="isLoading" class="loading-message">
             <p>Caricamento in corso...</p>
         </div>
         <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
         <div *ngIf="!isLoading && events.length > 0">
             <h2>Eventi</h2>
+            <button (click)="goToCreateEvent()" class="btn btn-primary">Crea Evento</button>
             <table class="table">
                 <thead>
                 <tr>
@@ -117,6 +112,73 @@
         </div>
         <div *ngIf="!isLoading && events.length === 0" class="no-events-message">
             <p>Non ci sono eventi disponibili.</p>
+        </div>
+    </div>
+    <div class="container">
+        <h2>Talks</h2>
+        <button (click)="goToCreateTalk()" class="btn btn-primary create-talk-btn">Crea il tuo Talk</button>
+        <div *ngIf="isLoading" class="loading-message">
+            <p>Caricamento in corso...</p>
+        </div>
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+        <div *ngIf="!isLoading && talks.length > 0">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Titolo</th>
+                    <th>Descrizione</th>
+                    <th>Azioni</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let talk of talks">
+                    <td>{{ talk.id }}</td>
+                    <td>{{ talk.title }}</td>
+                    <td>{{ talk.description }}</td>
+                    <td>
+                        <button (click)="goToEditTalk(talk.id)" class="btn btn-secondary">Modifica</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="!isLoading && talks.length === 0" class="no-talks-message">
+            <p>Non ci sono talk disponibili.</p>
+        </div>
+    </div>
+    <div class="container">
+        <h2>Tag</h2>
+        <button (click)="goToCreateTag()" class="btn btn-primary">Crea Tag</button>
+        <div *ngIf="isLoading" class="loading-message">
+            <p>Caricamento in corso...</p>
+        </div>
+
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+        <div *ngIf="!isLoading && tags.length > 0">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Azioni</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let tag of tags">
+                    <td>{{ tag.id }}</td>
+                    <td>{{ tag.name }}</td>
+                    <td>
+                        <button (click)="goToEditTag(tag.id)" class="btn btn-secondary">Modifica</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div *ngIf="!isLoading && tags.length === 0" class="no-tags-message">
+            <p>Non ci sono tag disponibili.</p>
         </div>
     </div>
 </div>
