@@ -88,6 +88,7 @@ export class AdminService {
   private talkUrl = 'http://localhost:8080/talks';
   private tagUrl = 'http://localhost:8080/tags';
   private partnerUrl = 'http://localhost:8080/partners';
+  private authUrl = 'http://localhost:8080/auth';
 
   constructor(private http: HttpClient) {}
 
@@ -230,6 +231,15 @@ export class AdminService {
         responseType: 'text'
       }).pipe(
       catchError(this.handleError)
+    );
+  }
+
+  logout(): Observable<string> {
+    return this.http.delete(`${this.authUrl}/logout`, {
+      withCredentials: true,
+      responseType: 'text'
+    }).pipe(
+        catchError(this.handleError)
     );
   }
 

@@ -1,39 +1,10 @@
 <div class="speakersPage">
   <div class="grid-container">
     <div class="card" *ngFor="let relatore of relatori">
-      <div class="card__img">
-        <svg xmlns="http://www.w3.org/2000/svg" width="100%">
-          <rect fill="#ffffff" width="540" height="450"></rect>
-          <defs>
-            <linearGradient
-              id="a"
-              gradientUnits="userSpaceOnUse"
-              x1="0"
-              x2="0"
-              y1="0"
-              y2="100%"
-              gradientTransform="rotate(222,648,379)"
-            >
-              <stop offset="0" stop-color="#ffffff"></stop>
-              <stop offset="1" stop-color="#FC726E"></stop>
-            </linearGradient>
-            <pattern
-              patternUnits="userSpaceOnUse"
-              id="b"
-              width="300"
-              height="250"
-              x="0"
-              y="0"
-              viewBox="0 0 1080 900"
-            >
-              <g fill-opacity="0.5">
-                <polygon fill="#444" points="90 150 0 300 180 300"></polygon>
-              </g>
-            </pattern>
-          </defs>
-          <rect x="0" y="0" fill="#a90202" width="100%" height="100%"></rect>
-        </svg>
-      </div>
+      <!-- Sezione superiore della card: ora mostra l'immagine hero.png -->
+      <div class="card__img"></div>
+      
+      <!-- Avatar del relatore -->
       <div class="card__avatar">
         <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -47,18 +18,23 @@
             y="-60"
             width="240"
             height="240"
-            [attr.clip-path]="'url(#clipCircle-' + relatore.id + ')'"
-          ></image>
+            [attr.clip-path]="'url(#clipCircle-' + relatore.id + ')'">
+          </image>
         </svg>
       </div>
 
-      <div class="card__title">{{ relatore.name }}</div>
-      <div class="card__subtitle">{{ relatore.surname }}</div>
+      <!-- Titoli e pulsanti -->
+      <div class="card__name-wrapper">
+        <div class="card__title">{{ relatore.name }} {{ relatore.surname }}</div>
+      </div>
+
+      <!-- Biografia del relatore -->
+      <div class="card__biography">
+        <p>{{ relatore.biography }}</p>
+      </div>
+
       <div class="card__wrapper">
-        <button
-          class="card__btn card__btn-solid"
-          [routerLink]="['/meeting', relatore.id]"
-        >
+        <button class="card__btn card__btn-solid" [routerLink]="['/meeting', relatore.id]">
           Scopri il relatore
         </button>
       </div>

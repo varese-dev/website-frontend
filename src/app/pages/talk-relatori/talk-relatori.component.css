@@ -1,3 +1,4 @@
+/* Container per l'introduzione (opzionale) */
 .containerIntroduction {
   display: flex;
   flex-direction: column;
@@ -15,13 +16,14 @@ h2 {
   color: #a90202;
 }
 
+/* Pagina relatori */
 .speakersPage {
   background-color: #f9f9f9;
   padding: 40px 20px;
   padding-top: 10vh;
 }
 
-/* Stile per il carousel */
+/* Stile per il carousel (se necessario) */
 .carousel {
   position: relative;
   width: 100%;
@@ -55,7 +57,7 @@ h2 {
   font-size: 1.2em;
 }
 
-/* Stile per la card */
+/* Stile per le card */
 .card {
   --main-color: #000;
   --submain-color: #78858F;
@@ -74,16 +76,16 @@ h2 {
   border: 1px solid #000;
 }
 
+/* Sezione superiore della card: ora utilizza l'immagine hero.png */
 .card__img {
   height: 192px;
   width: 100%;
-}
-
-.card__img svg {
-  height: 100%;
+  background: url('/images/eventcard.png') no-repeat center center;
+  background-size: cover;
   border-radius: 20px 20px 0 0;
 }
 
+/* Avatar del relatore */
 .card__avatar {
   position: absolute;
   width: 114px;
@@ -101,6 +103,7 @@ h2 {
   height: 100px;
 }
 
+/* Titolo e sottotitolo */
 .card__title {
   margin-top: 60px;
   font-weight: 500;
@@ -115,39 +118,45 @@ h2 {
   color: var(--submain-color);
 }
 
+/* Pulsante */
 .card__btn {
-  margin-top: 15px;
-  width: 76px;
-  height: 31px;
+  margin-top: auto; /* Assicura che il pulsante resti in fondo alla card */
+  width: 120px; /* Larghezza migliorata per un aspetto più equilibrato */
+  padding: 10px 20px; /* Rimosso height fisso, reso più armonico */
   border: 2px solid var(--main-color);
-  border-radius: 4px;
+  border-radius: 25px; /* Bordo più arrotondato per un look moderno */
   font-weight: 700;
-  font-size: 11px;
+  font-size: 12px; /* Leggermente più grande per una lettura ottimale */
+  letter-spacing: 1px; /* Spaziatura tra lettere per migliorare la leggibilità */
   color: var(--main-color);
   background: var(--bg-color);
   text-transform: uppercase;
-  transition: all 0.3s;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap; /* Impedisce al testo di andare a capo */
 }
 
+/* Stile del pulsante in versione colorata */
 .card__btn-solid {
   background-color: #a90202;
   color: white;
   border: none;
   cursor: pointer;
-
 }
 
-.card__btn:hover {
+/* Effetto hover per un aspetto interattivo */
+.card__btn:hover, .card__btn-solid:hover {
   background-color: #C22C1E;
   color: white;
+  transform: scale(1.05); /* Leggero ingrandimento al passaggio del mouse */
 }
 
-.card__btn-solid:hover {
-  background-color: #C22C1E;
-  color: white;
-}
 
-/* Stile per il bottone di navigazione */
+/* Pulsante di navigazione (se utilizzato) */
 .arrow {
   font-size: 30px;
   color: black;
@@ -160,6 +169,7 @@ h2 {
   z-index: 10;
 }
 
+/* Grid container per le card */
 .grid-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -178,11 +188,9 @@ h2 {
 
 .card__btn {
   width: 100%;
-
 }
 
-
-/* Media Queries per Dispositivi Mobili */
+/* Media Queries per dispositivi */
 @media (max-width: 1200px) {
   .grid-container {
     grid-template-columns: repeat(3, 1fr);
@@ -248,6 +256,5 @@ h2 {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
-
   }
 }

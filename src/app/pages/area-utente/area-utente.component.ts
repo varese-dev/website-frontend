@@ -125,6 +125,22 @@ export class AreaUtenteComponent implements OnInit {
     });
   }
 
+  logout(): void {
+    this.areaUtenteService.logout().subscribe({
+      next: (response) => {
+        console.log('Logout avvenuto:', response);
+
+        localStorage.removeItem('userRole');
+
+        this.router.navigate(['/auth/account']);
+      },
+      error: (error) => {
+        this.errorMessage = 'Errore durante il logout. Riprova più tardi.';
+        console.error('Logout error:', error);
+      }
+    });
+  }
+
   private handleSuccess(message: string): void {
     this.successMessage = message;
     setTimeout(() => (this.successMessage = null), 5000);

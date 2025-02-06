@@ -1,0 +1,67 @@
+.not-found-container {
+  text-align: center;
+  margin-top: 10%;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #ff4d4f;
+}
+
+p {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Centrare il contenuto nella pagina */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Contenitore per il bottone */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Stile del bottone */
+.btn {
+  align-items: center;
+  background-color: transparent;
+  color: #b22222;
+  cursor: pointer;
+  display: flex;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.2rem;
+  line-height: 1.5;
+  text-decoration: none;
+  text-transform: uppercase;
+  outline: 0;
+  border: 0;
+  margin: 20px 0;
+}
+
+/* Effetto linea prima del testo */
+.btn:before {
+  background-color: #b22222;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  margin-right: 10px;
+  transition: all 0.42s cubic-bezier(0.25, 0.8, 0.25, 1);
+  width: 0;
+}
+
+/* Effetto hover */
+.btn:hover:before {
+  background-color: #b22222;
+  width: 3rem;
+}

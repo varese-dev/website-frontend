@@ -19,6 +19,8 @@ import {EditTalkComponent} from './edit-talk/edit-talk.component';
 import {EditTagComponent} from './edit-tag/edit-tag.component';
 import {CreatePartnerComponent} from './create-partner/create-partner.component';
 import {EditPartnerComponent} from './edit-partner/edit-partner.component';
+import { AuthGuard } from './guards/auth.guard';
+import {NotFoundComponent} from './pages/not-found/not-found.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -29,7 +31,7 @@ export const routes: Routes = [
   { path: 'partner', component: PartnerComponent },
   { path: 'partner-details/:id', component: PartnerDetailsComponent },
   { path: 'prenotazione', component: PrenotazioneComponent },
-  { path: 'admin', component: AdminDashboardComponent },
+  { path: 'admin', component: AdminDashboardComponent, canActivate: [AuthGuard] },
   { path: 'area-utente', component: AreaUtenteComponent },
   { path: 'area-utente/:id', component: AreaUtenteComponent },
   { path: 'auth/account', component: AccountComponent },
@@ -42,4 +44,7 @@ export const routes: Routes = [
   { path: 'edit-tag/:id', component: EditTagComponent },
   { path: 'edit-partner/:id', component: EditPartnerComponent },
   { path: 'create-partner', component: CreatePartnerComponent },
+  { path: '404', component: NotFoundComponent },
+  { path: '**', redirectTo: '/404' },
 ];
+

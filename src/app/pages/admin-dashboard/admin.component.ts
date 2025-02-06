@@ -264,11 +264,6 @@ export class AdminDashboardComponent implements OnInit {
     }
   }
 
-  logout(): void {
-    // Da implementare
-    console.log('Logout eseguito');
-  }
-
   private refreshPage(): void {
     this.adminService.fetchUserData().subscribe({
       next: (data) => {
@@ -281,6 +276,23 @@ export class AdminDashboardComponent implements OnInit {
       }
     });
   }
+
+  logout(): void {
+    this.adminService.logout().subscribe({
+      next: (response) => {
+        console.log('Logout avvenuto:', response);
+
+        localStorage.removeItem('userRole');
+
+        this.router.navigate(['/auth/account']);
+      },
+      error: (error) => {
+        this.errorMessage = 'Errore durante il logout. Riprova più tardi.';
+        console.error('Logout error:', error);
+      }
+    });
+  }
+
 
   private handleSuccess(message: string): void {
     this.successMessage = message;
