@@ -23,6 +23,7 @@ body {
   justify-content: center;
   margin: 30px auto;
   width: 50%;
+  padding-top: 15vh;
 }
 
 .search-bar input {

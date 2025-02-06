@@ -1,72 +1,67 @@
-.tabs {
+.dashboard-container {
+  display: grid;
+  grid-template-areas:
+        "header header"
+        "sidebar content";
+  grid-template-rows: 80px auto;
+  grid-template-columns: 250px 1fr;
+  height: 100vh;
+}
+
+.header {
+  grid-area: header;
+  background-color: #007bff;
+  color: #fff;
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
 }
 
-.tabs button {
+.sidebar {
+  grid-area: sidebar;
+  background-color: #f8f9fa;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #dee2e6;
+}
+
+.sidebar-item {
+  padding: 15px;
+  margin: 5px 0;
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  font-size: 16px;
   cursor: pointer;
-  background-color: #C22C1E;
-  color: white;
-  border:none;
-  border-radius: 35px;
-}
-
-.tabs button.active {
-  background-color: #C22C1E;
-  color: white;
-  border:none;
-}
-
-.success {
-  color: green;
-}
-
-.error {
-  color: red;
-}
-
-.admin-dashboard {
-  margin-left: 20px;
-  margin-top: 70px;
-  margin-bottom: 70px;
-}
-input {
-  width: 50%;
   border: none;
-  border-bottom: 2px solid #7f7f7f;
-  border-radius: 0 !important;
-  outline: 0;
-  font-size: 17px;
-  font-weight: 300;
-  letter-spacing: 0.1rem;
-  color: #7f7f7f;
-  padding: 7px 0;
-  background: transparent;
-  transition: border-color 0.2s;
 }
 
-button{
+.sidebar-item:hover {
+  background-color: #0056b3;
+}
+
+.logout-button {
+  margin-top: auto;
+  background-color: #dc3545;
+}
+
+.content-area {
+  grid-area: content;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.table.centered-table {
+  margin: 0 auto;
+  width: 80%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  border: 1px solid #dee2e6;
   padding: 10px;
-  cursor: pointer;
-  background-color: #C22C1E;
-  color: white;
-  border:none;
-  border-radius: 35px;
-}
-
-textarea{
-  width: 50%;
-  border: none;
-  border-bottom: 2px solid #7f7f7f;
-  border-radius: 0 !important;
-  outline: 0;
-  font-size: 17px;
-  font-weight: 300;
-  letter-spacing: 0.1rem;
-  color: #7f7f7f;
-  padding: 7px 0;
-  background: transparent;
-  transition: border-color 0.2s;
 }

@@ -1,10 +1,15 @@
-<header class="main-header" [class.scrolled]="isScrolled">
-  <!-- Logo -->
+<header
+  #mainHeader
+  class="main-header"
+  [ngClass]="{ 'home-header': isHomePage, 'other-header': !isHomePage }"
+  [class.scrolled]="isScrolled"
+>
   <div class="logo">
-    <img src="/images/logo/logoVDGminimal.png" alt="Logo" />
+    <a href="/">
+      <img src="/images/logo/logoVDGminimal.png" alt="Logo" />
+    </a>
   </div>
 
-  <!-- Menu Items -->
   <div class="actions">
     <a href="/eventi" class="menu-item">Eventi</a>
     <a href="/meeting" class="menu-item">Relatori</a>
@@ -12,11 +17,8 @@
 
     <div class="divider"></div>
 
-    <!-- Login Icon -->
-    <a href="/auth/account">
-      <button class="icon-button login-button">
-        <i class="fa-regular fa-user" style="color: #ffffff;"></i>
-      </button>
-    </a>
+    <button class="icon-button login-button" (click)="navigateToAccount()">
+      <i class="fa-regular fa-user" style="color: #ffffff"></i>
+    </button>
   </div>
 </header>

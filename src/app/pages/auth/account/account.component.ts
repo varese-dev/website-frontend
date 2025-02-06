@@ -1,11 +1,20 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef, ViewChild, HostListener, Renderer2 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  AfterViewInit,
+  ElementRef,
+  ViewChild,
+  HostListener,
+  Renderer2
+} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import gsap from 'gsap';
 import * as THREE from 'three';
 import Lenis from '@studio-freight/lenis';
-import { AuthService } from '../../../service/auth.service';
+import {AuthService} from '../../../service/auth.service';
 
 @Component({
   selector: 'app-account',
@@ -293,11 +302,10 @@ export class AccountComponent implements OnInit, OnDestroy, AfterViewInit {
 
   login(): void {
     if (!this.contact || !this.password) {
-      this.errorMessage = 'Email/Cellurare e password sono obbligatori';
+      this.errorMessage = 'Email o cellulare e password sono obbligatori.';
       return;
     }
 
-    // Esegui la chiamata API di login tramite AuthService (dal vecchio login.component.ts)
     const credentials = {
       emailOrPhone: this.contact,
       password: this.password,
@@ -305,9 +313,44 @@ export class AccountComponent implements OnInit, OnDestroy, AfterViewInit {
     };
 
     this.authService.login(credentials).subscribe({
-      next: (response) => {
-        console.log('Login riuscito:', response);
-        this.router.navigate(['/area-utente']); // Navigazione alla pagina utente
+      next: () => {
+        console.log('Login avvenuto con successo');
+        this.authService.getUserSession().subscribe({
+          next: (sessionResponse) => {
+            console.log('Session Response:', sessionResponse);
+
+            if (!sessionResponse || !sessionResponse.userId) {
+              this.errorMessage = 'Sessione non valida. Nessun ID utente trovato.';
+              return;
+            }
+
+            // Richiama getUserRole con il nuovo formato di risposta
+            this.authService.getUserRole(sessionResponse.userId).subscribe({
+              next: (userRoleResponse) => {
+                const role = userRoleResponse?.role?.toUpperCase();
+
+                if (!role) {
+                  this.errorMessage = 'Ruolo utente non definito.';
+                  return;
+                }
+
+                if (role === 'ADMIN') {
+                  this.router.navigate(['/admin']);
+                } else if (role === 'USER') {
+                  this.router.navigate(['/area-utente']);
+                } else {
+                  this.errorMessage = 'Ruolo utente non riconosciuto.';
+                }
+              },
+              error: () => {
+                this.errorMessage = 'Errore nel recupero delle informazioni utente.';
+              }
+            });
+          },
+          error: () => {
+            this.errorMessage = 'Sessione non valida.';
+          }
+        });
       },
       error: (err) => {
         console.error('Errore di login:', err);
@@ -316,13 +359,19 @@ export class AccountComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  validateRegisterInput(): void {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phonePattern = /^\d{10,15}$/;
+    validateRegisterInput()
+  :
+    void {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const phonePattern = /^\d{10,15}$/;
 
-    if (emailPattern.test(this.registerEmail)) {
+      if(emailPattern.test(this.registerEmail)
+  )
+    {
       console.log('Email valida inserita');
-    } else if (phonePattern.test(this.registerPhone)) {
+    }
+  else
+    if (phonePattern.test(this.registerPhone)) {
       console.log('Numero di telefono valido inserito');
     } else {
       this.registrationErrorMessage = 'Inserisci un\'email o un numero di telefono valido';
@@ -335,8 +384,13 @@ export class AccountComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  register(): void {
-    if (!this.firstName || !this.lastName || !this.registerEmail || !this.registerPhone || !this.password || !this.confirmPassword) {
+    register()
+  :
+    void {
+      if(!
+    this.firstName || !this.lastName || !this.registerEmail || !this.registerPhone || !this.password || !this.confirmPassword
+  )
+    {
       this.errorMessage = 'All fields are required';
       return;
     }
@@ -360,7 +414,7 @@ export class AccountComponent implements OnInit, OnDestroy, AfterViewInit {
         console.log('Registration successful:', response);
         this.animateSwitchToLogin();
         this.router.navigate([], {fragment: 'login'});
-        },
+      },
       error: (err) => {
         console.error('Registration error:', err);
         this.errorMessage = 'Registration failed. Please try again.';
@@ -368,10 +422,15 @@ export class AccountComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  forgottenPasswordEmailOrPhone: string = '';
+    forgottenPasswordEmailOrPhone: string = '';
 
-  forgottenPassword(): void {
-    if (!this.forgottenPasswordEmailOrPhone) {
+    forgottenPassword()
+  :
+    void {
+      if(!
+    this.forgottenPasswordEmailOrPhone
+  )
+    {
       this.errorMessage = 'Email or phone number is required';
       return;
     }
@@ -387,4 +446,4 @@ export class AccountComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     });
   }
-}
+  }
