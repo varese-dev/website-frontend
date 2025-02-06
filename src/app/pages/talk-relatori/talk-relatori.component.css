@@ -1,10 +1,8 @@
-/* Container per l'introduzione (opzionale) */
 .containerIntroduction {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 70px;
 }
 
 p {
@@ -21,6 +19,7 @@ h2 {
   text-align: center;
   color: white;
   height: 450px;
+  margin-top: 14.1vh;
 }
 
 .hero-image {
@@ -59,13 +58,6 @@ h2 {
   max-width: 600px;
   margin: 0 auto;
   color: #f5f5f5;
-}
-
-/* Pagina relatori */
-.speakersPage {
-  background-color: #f9f9f9;
-  padding: 40px 20px;
-  padding-top: 10vh;
 }
 
 /* Stile per il carousel (se necessario) */
