@@ -15,8 +15,21 @@
   color: #ffffff;
 }
 
-.other-header .menu-item .divider .icon-button .login-button {
-  color: #b22222;
+.other-header .actions a {
+  text-decoration: none;
+  color: #b22222 !important;
+}
+
+.other-header .divider {
+  background-color: #b22222 !important;
+}
+
+.other-header .icon-button i {
+  color: #b22222 !important;
+}
+
+.other-header .line {
+  stroke: #b22222;
 }
 
 .logo {
