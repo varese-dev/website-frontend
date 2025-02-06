@@ -1,16 +1,14 @@
 .event-section {
   padding: 80px;
-  background: linear-gradient(to right, #1a1a2e, #16213e, #0f3460);;
+  background: linear-gradient(to right, #1a1a2e, #16213e, #0f3460);
   display: flex;
   flex-direction: column;
   text-align: center;
   justify-content: center;
 }
-
 .hero-header {
   margin-bottom: 30px;
 }
-
 .label {
   font-size: 1rem;
   font-weight: 600;
@@ -18,7 +16,6 @@
   text-transform: uppercase;
   letter-spacing: 0.1rem;
 }
-
 h1 {
   font-size: 2rem;
   font-weight: 700;
@@ -27,36 +24,29 @@ h1 {
   margin: 10px 0;
   text-transform: uppercase;
 }
-
 h1 .highlight {
   color: #ff6666;
 }
-
 .subtitle {
   font-size: 1.2rem;
   color: #ffffff;
   width: 40%;
   margin: auto;
 }
-
 .animated-content {
   opacity: 0;
   transform: translateY(-20px);
   animation: fade-in 1s ease forwards;
 }
-
 .animated-content:nth-child(1) {
   animation-delay: 0.5s;
 }
-
 .animated-content:nth-child(2) {
   animation-delay: 0.7s;
 }
-
 .animated-content:nth-child(3) {
   animation-delay: 0.9s;
 }
-
 .carousel-container {
   position: relative;
   width: 90%;
@@ -66,9 +56,8 @@ h1 .highlight {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 60vh;
+  height: 70vh;
 }
-
 .carousel {
   width: 100%;
   min-width: 65vw;
@@ -76,21 +65,18 @@ h1 .highlight {
   position: relative;
   margin-bottom: 20px;
 }
-
 .slides {
   display: flex;
   transition: transform 0.6s ease-in-out;
 }
-
 .slide {
   flex: 0 0 100%;
 }
-
 .card {
   width: 50vw;
   height: 380px;
   background: linear-gradient(100deg, white 55%, transparent 45%),
-    url('/images/about/pyvarese.png');
+    url("/images/about/pyvarese.png");
   border-radius: 20px;
   padding: 30px;
   display: flex;
@@ -102,7 +88,6 @@ h1 .highlight {
   position: relative;
   flex-shrink: 0;
 }
-
 .card-content {
   width: 45%;
   margin-left: 3vh;
@@ -111,12 +96,10 @@ h1 .highlight {
   justify-content: space-between;
   min-height: 250px;
 }
-
 .card h2 {
   margin: 0;
   font-size: 28px;
 }
-
 .card p {
   font-size: 18px;
   color: #555;
@@ -124,77 +107,64 @@ h1 .highlight {
   flex-grow: 1;
   padding-bottom: 5px;
 }
-
 .details-button {
   padding: 10px 20px;
-  background-color: #C22C1E;
+  background-color: #c22c1e;
   color: white;
   border: none;
   max-width: 7vw;
   border-radius: 34px;
+  text-decoration: none;
   cursor: pointer;
   font-size: 16px;
   margin-bottom: 2vh;
 }
-
 .details-button:hover {
-  background-color: #AE3025;
+  background-color: #ae3025;
 }
-
 .card-info {
   position: absolute;
-  bottom: 15px; 
-  left: 25px; 
+  bottom: 15px;
+  left: 25px;
   display: flex;
   flex-direction: column;
   gap: 2px;
-}
-
-/* Countdown */
+} /* Countdown */
 .countdown {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
-
 .countdown h3 {
   font-size: 16px;
-  margin-bottom: -8px; 
+  margin-bottom: -8px;
 }
-
 .countdown p {
-  font-size: 16px; 
+  font-size: 16px;
 }
-
 .remaining-slots {
   display: flex;
-  align-items: center; 
-  gap: 10px; 
-  flex-direction: row; 
+  align-items: center;
+  gap: 10px;
+  flex-direction: row;
 }
-
 .remaining-slots h3 {
   margin: 0;
   font-size: 18px;
   white-space: nowrap;
 }
-
 .remaining-slots p {
   margin: 0;
   font-size: 18px;
   margin-top: 7px;
   font-weight: bold;
-  color: #C22C1E;
-}
-
-
-/* Indicators */
+  color: #c22c1e;
+} /* Indicators */
 .indicators {
   display: flex;
   gap: 8px;
   margin-top: 15px;
 }
-
 .indicator {
   width: 12px;
   height: 12px;
@@ -203,12 +173,9 @@ h1 .highlight {
   cursor: pointer;
   transition: background 0.3s;
 }
-
 .indicator.active {
   background: #333;
-}
-
-/* Frecce senza sfondo */
+} /* Frecce senza sfondo */
 .nav-button {
   color: #ffffff;
   font-size: 30px;
@@ -226,43 +193,35 @@ h1 .highlight {
   background: none;
   border: none;
 }
-
 .nav-button.prev {
   left: 10%;
 }
-
 .nav-button.next {
   right: 10%;
 }
-
 .nav-button:hover {
   opacity: 0.8;
   transform: translateY(-50%) scale(1.1);
 }
-
 @media (max-width: 1440px) {
   .subtitle {
     width: 60%;
     margin: auto;
   }
 }
-
 @media (max-width: 1024px) {
   .label {
     font-size: 0.8rem;
   }
-  
   h1 {
     font-size: 1.8rem;
   }
-  
   .subtitle {
     font-size: 1rem;
     width: unset;
     margin: 0;
   }
 }
-
 @media (max-width: 768px) {
   .event-section {
     padding: 80px 30px;
