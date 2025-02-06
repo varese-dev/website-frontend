@@ -13,6 +13,7 @@ import { ForgotPasswordComponent } from './pages/auth/account/forgotten-password
 import { CreateTalkComponent } from './create-talk/create-talk.component';
 import { CreateNewEventComponent } from './create-event/create-event.component';
 import {AdminDashboardComponent} from './pages/admin-dashboard/admin.component';
+import {EditEventComponent} from './edit-event/edit-event.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,7 +21,7 @@ export const routes: Routes = [
   { path: 'eventi/:id', component: EventiDetailsComponent },
   { path: 'meeting', component: TalkRelatoriComponent },
   { path: 'meeting/:id', component: RelatoreDetailComponent },
-  // { path: 'partner', component: PartnerComponent },
+  { path: 'partner', component: PartnerComponent },
   { path: 'partner-details/:id', component: PartnerDetailsComponent },
   { path: 'prenotazione', component: PrenotazioneComponent },
   { path: 'admin', component: AdminDashboardComponent },
@@ -30,4 +31,5 @@ export const routes: Routes = [
   { path: 'auth/account/forgotten-password', component: ForgotPasswordComponent },
   { path: 'create-talk', component: CreateTalkComponent },
   { path: 'create-event', component: CreateNewEventComponent },
+  { path: 'edit-event/:id', component: EditEventComponent },
 ];

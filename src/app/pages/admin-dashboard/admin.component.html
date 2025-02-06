@@ -45,35 +45,78 @@
             <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
         </div>
         <div>
-            <button (click)="goToCreateEvent()" class="btn btn-primary">Crea Evento</button>
             <button (click)="goToCreateTalk()" class="btn btn-primary create-talk-btn">Crea il tuo Talk</button>
         </div>
     </div>
-    <div *ngIf="activeBookings.length > 0" class="bookings-section">
-        <h2>Prenotazioni attive</h2>
-        <ul class="booking-list">
-            <li *ngFor="let booking of activeBookings" class="booking-item">
-                <h3>{{ booking.title }}</h3>
-                <p><strong>Data:</strong> {{ booking.date | date: 'longDate' }}</p>
-                <p><strong>Stato:</strong> {{ booking.status }}</p>
-                <button (click)="cancelBooking(booking.bookingId)" class="btn btn-danger">Cancella Prenotazione</button>
-            </li>
-        </ul>
+
+    <div class="container">
+        <div *ngIf="isLoading" class="loading-message">
+            <p>Caricamento in corso...</p>
+        </div>
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+        <div *ngIf="!isLoading && bookings.length > 0">
+            <h2>Prenotazioni</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Evento</th>
+                    <th>Utente</th>
+                    <th>Data</th>
+                    <th>Stato</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let booking of bookings">
+                    <td>{{ booking.id }}</td>
+                    <td>{{ booking.eventId }}</td>
+                    <td>{{ booking.userId }}</td>
+                    <td>{{ booking.date | date: 'short' }}</td>
+                    <td>{{ booking.status }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="!isLoading && bookings.length === 0" class="no-bookings-message">
+            <p>Non ci sono prenotazioni disponibili.</p>
+        </div>
     </div>
 
-    <div *ngIf="activeBookings.length === 0 && !isLoading" class="no-bookings">
-        <h2>Prenotazioni attive</h2>
-        <p>Non ci sono prenotazioni attive.</p>
-    </div>
-
-    <div *ngIf="!isLoading && !errorMessage">
-        <h2>Altre prenotazioni</h2>
-        <ul class="booking-list">
-            <li *ngFor="let booking of otherBookings" class="booking-item">
-                <h3>{{ booking.title }}</h3>
-                <p><strong>Data:</strong> {{ booking.date | date: 'longDate' }}</p>
-                <p><strong>Stato:</strong> {{ booking.status }}</p>
-            </li>
-        </ul>
+    <div class="container">
+        <div class="button-group">
+            <button (click)="goToCreateEvent()" class="btn btn-primary">Crea Evento</button>
+        </div>
+        <div *ngIf="isLoading" class="loading-message">
+            <p>Caricamento in corso...</p>
+        </div>
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+        <div *ngIf="!isLoading && events.length > 0">
+            <h2>Eventi</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Titolo</th>
+                    <th>Descrizione</th>
+                    <th>Data</th>
+                    <th>Azioni</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let event of events">
+                    <td>{{ event.id }}</td>
+                    <td>{{ event.title }}</td>
+                    <td>{{ event.description }}</td>
+                    <td>{{ event.date | date: 'short' }}</td>
+                    <td>
+                        <button (click)="goToEditEvent(event.id)" class="btn btn-secondary">Modifica</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="!isLoading && events.length === 0" class="no-events-message">
+            <p>Non ci sono eventi disponibili.</p>
+        </div>
     </div>
 </div>

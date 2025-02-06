@@ -19,6 +19,25 @@ interface Booking {
   status: string;
 }
 
+interface Bookings {
+  id: string;
+  eventId: string;
+  userId: string;
+  date: string;
+  status: string;
+}
+
+interface Event {
+  id?: string;
+  title: string;
+  description: string;
+  date: string;
+  address: string;
+  maxParticipants: number;
+  partnerId?: string;
+  sponsorId?: string;
+}
+
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin.component.html',
@@ -32,6 +51,8 @@ export class AdminDashboardComponent implements OnInit {
   isLoading: boolean = true;
   errorMessage: string | null = null;
 
+  bookings: Bookings[] = [];
+
   name: string = '';
   surname: string = '';
   oldPassword: string = '';
@@ -39,6 +60,8 @@ export class AdminDashboardComponent implements OnInit {
   repeatNewPassword: string = '';
   successMessage: string | null = null;
   isEditMode: boolean = false;
+
+  events: Event[] = [];
 
   constructor(private adminService: AdminService, private router: Router) {}
 
@@ -67,6 +90,39 @@ export class AdminDashboardComponent implements OnInit {
         console.error('Error fetching bookings:', error);
         this.isLoading = false;
       },
+    });
+
+    this.loadBookings();
+    this.loadEvents();
+  }
+
+  loadEvents(): void {
+    this.adminService.getAllEvents().subscribe({
+      next: (data) => {
+        this.events = data;
+      },
+      error: (error) => {
+        this.errorMessage = 'Errore durante il recupero degli eventi.';
+        console.error('Error fetching events:', error);
+      },
+      complete: () => (this.isLoading = false),
+    });
+  }
+
+  goToEditEvent(eventId: string | undefined): void {
+    this.router.navigate(['/edit-event', eventId]);
+  }
+
+  loadBookings(): void {
+    this.adminService.getAllBookings().subscribe({
+      next: (data) => {
+        this.bookings = data;
+      },
+      error: (error) => {
+        this.errorMessage = 'Errore durante il recupero delle prenotazioni.';
+        console.error('Error fetching bookings:', error);
+      },
+      complete: () => (this.isLoading = false),
     });
   }
 

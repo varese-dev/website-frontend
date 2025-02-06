@@ -52,6 +52,14 @@ interface User {
   phone: string;
 }
 
+interface Bookings {
+  id: string;
+  eventId: string;
+  userId: string;
+  date: string;
+  status: string;
+}
+
 interface Booking {
   bookingId: string;
   title: string;
@@ -89,6 +97,12 @@ export class AdminService {
     );
   }
 
+  getAllBookings(): Observable<Bookings[]> {
+    return this.http.get<Bookings[]>(this.bookingUrl).pipe(
+        catchError(this.handleError)
+    );
+  }
+
   cancelBooking(bookingId: string): Observable<string> {
     return this.http.put(`${this.bookingUrl}/${bookingId}/cancel`, null, {
       withCredentials: true,
@@ -106,6 +120,20 @@ export class AdminService {
 
   createEvent(request: EventRequest): Observable<Event> {
     return this.http.post<Event>(this.eventUrl, request, { withCredentials: true }).pipe(
+        catchError(this.handleError)
+    );
+  }
+
+  getAllEvents(): Observable<Event[]> {
+    return this.http.get<Event[]>(this.eventUrl).pipe(
+        catchError(this.handleError)
+    );
+  }
+
+  updateEvent(id: string, event: Event): Observable<void> {
+    return this.http.put<void>(`${this.eventUrl}/${id}`, event, {
+      withCredentials: true,
+    }).pipe(
         catchError(this.handleError)
     );
   }
