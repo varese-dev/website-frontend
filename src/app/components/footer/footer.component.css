@@ -10,6 +10,7 @@
   align-items: start;
   border-bottom: 1px solid #ddd;
   padding: 20px;
+  gap: 2rem;
 }
 
 .logo-varese {
@@ -32,24 +33,6 @@
   text-decoration: none; 
 }
 
-.contact-btn {
-  background-color: #C22C1E;
-  color: white;
-  padding: 12px 25px;
-  text-decoration: none;
-  border-radius: 34px;
-  font-size: 18px;
-  transition: background-color 0.3s ease;
-  cursor: pointer;
-  margin-top: 5%;
-  border: none; /* Rimosso il bordo */
-}
-
-.contact-btn:hover {
-  background-color: #ae3025;
-}
-
-/* Posizione dei social */
 .container-btn {
   display: flex;
   flex-direction: column;
@@ -200,29 +183,12 @@
   width: 3rem;
 }
 
-/* Responsiveness */
-@media (max-width: 768px) {
-  .footer-container {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .footer-section {
-    margin-bottom: 15px;
-  }
-
-  .social-item {
-    justify-content: center;
-  }
-}
-
-/* Testi "Termini" e "Privacy" al centro */
 .footer-bottom {
   display: flex;
   justify-content: center;
   margin-top: 20px;
-  font-size: 12px; /* Più piccoli */
-  color: #555; /* Grigio scuro */
+  font-size: 12px; 
+  color: #555; 
 }
 
 .footer-bottom a {
@@ -232,5 +198,85 @@
 }
 
 .footer-bottom a:hover {
-  text-decoration: underline; /* Sottolineatura al passaggio del mouse */
+  text-decoration: underline;
+}
+
+@media (max-width: 1300px) {
+  .footer-section h3 {
+    font-size: 0.8rem;
+  }
+  
+  .footer-section p,
+  .footer-section a {
+    font-size: 0.7rem;
+  }
+
+  .btn-discord {
+    font-size: 12px;
+  }
+
+  .btn-telegram {
+    font-size: 12px;
+  }
+
+  .btn-contact {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .footer-container {
+    padding: 10px;
+    gap: 4rem;
+  }
+
+  .logo-varese {
+    width: 200px;
+  }
+}
+
+@media (max-width: 800px) {
+  .footer-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+  }
+
+  .footer-section {
+    margin-bottom: 15px;
+  }
+
+  .btn-contact {
+    margin: 20px auto;
+  }
+
+  .social-item {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 660px) {
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-container {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 425px) {
+  .footer-container {
+    grid-template-columns: repeat(1, 1fr);
+    text-align: start;
+  }
+
+  .logo-varese {
+    transform: translateX(-30px);
+  }
+
+  .btn-contact {
+    padding: 0;
+    margin: 20px 0;
+  }
 }
