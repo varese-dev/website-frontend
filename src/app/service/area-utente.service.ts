@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {catchError, map, switchMap} from 'rxjs/operators';
 
 interface ModifyRequest {
   name?: string;
@@ -42,26 +42,28 @@ interface Booking {
 })
 export class AreaUtenteService {
   private apiUrl = 'http://localhost:8080/user';
-  private  bookingUrl = 'http://localhost:8080/bookings';
+  private bookingUrl = 'http://localhost:8080/bookings';
   private talkUrl = 'http://localhost:8080/talks';
+  private authUrl = 'http://localhost:8080/auth';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   fetchUserId(): Observable<string> {
-    return this.http.get<{ userId: string }>(`${this.apiUrl}/session`, { withCredentials: true }).pipe(
+    return this.http.get<{ userId: string }>(`${this.apiUrl}/session`, {withCredentials: true}).pipe(
       map(response => response.userId)
     );
   }
 
   fetchUserData(): Observable<User> {
     return this.fetchUserId().pipe(
-      switchMap(userId => this.http.get<User>(`${this.apiUrl}/${userId}`, { withCredentials: true })),
+      switchMap(userId => this.http.get<User>(`${this.apiUrl}/${userId}`, {withCredentials: true})),
       catchError(this.handleError)
     );
   }
 
   fetchUserActiveBookings(): Observable<Booking[]> {
-    return this.http.get<Booking[]>(`${this.bookingUrl}/user/details`, { withCredentials: true }).pipe(
+    return this.http.get<Booking[]>(`${this.bookingUrl}/user/details`, {withCredentials: true}).pipe(
       catchError(this.handleError)
     );
   }
@@ -76,13 +78,13 @@ export class AreaUtenteService {
   }
 
   createTalk(request: CreateTalkRequest): Observable<Talk> {
-    return this.http.post<Talk>(this.talkUrl, request, { withCredentials: true }).pipe(
+    return this.http.post<Talk>(this.talkUrl, request, {withCredentials: true}).pipe(
       catchError(this.handleError)
     );
   }
 
   modifyName(name: string): Observable<string> {
-    return this.http.put(`${this.apiUrl}/modify/name`, { name }, {
+    return this.http.put(`${this.apiUrl}/modify/name`, {name}, {
       withCredentials: true,
       responseType: 'text'  // Accetta risposta come testo
     }).pipe(
@@ -91,7 +93,7 @@ export class AreaUtenteService {
   }
 
   modifySurname(surname: string): Observable<string> {
-    return this.http.put(`${this.apiUrl}/modify/surname`, { surname }, {
+    return this.http.put(`${this.apiUrl}/modify/surname`, {surname}, {
       withCredentials: true,
       responseType: 'text'
     }).pipe(
@@ -101,10 +103,19 @@ export class AreaUtenteService {
 
   modifyPassword(oldPassword: string, newPassword: string, repeatNewPassword: string): Observable<string> {
     return this.http.put(`${this.apiUrl}/modify/password`,
-      { oldPassword, newPassword, repeatNewPassword }, {
+      {oldPassword, newPassword, repeatNewPassword}, {
         withCredentials: true,
         responseType: 'text'
       }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  logout(): Observable<string> {
+    return this.http.delete(`${this.authUrl}/logout`, {
+      withCredentials: true,
+      responseType: 'text'
+    }).pipe(
       catchError(this.handleError)
     );
   }
