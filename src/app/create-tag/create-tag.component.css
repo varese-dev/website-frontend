@@ -2,20 +2,25 @@
   margin: 20px auto;
   padding: 20px;
   max-width: 600px;
-  background-color: #f9f9f9;
+  background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  margin-top: 15vh;
+  margin-bottom: 10vh;
 }
 
 h1 {
-  color: #007bff;
+  color: #9E0201; /* Colore principale */
   text-align: center;
   font-size: 1.8rem;
   margin-bottom: 20px;
+  font-weight: bold;
 }
 
 .form-group {
   margin-bottom: 20px;
+  text-align: left;
 }
 
 label {
@@ -23,13 +28,13 @@ label {
   display: block;
   margin-bottom: 8px;
   font-size: 0.9rem;
-  color: #333;
+  color: #000;
 }
 
 input {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 5px;
   box-sizing: border-box;
   font-size: 1rem;
@@ -38,23 +43,24 @@ input {
 }
 
 input:focus {
-  border-color: #007bff;
+  border-color: #9E0201;
 }
 
 button {
   width: 100%;
-  background-color: #007bff;
+  background-color: #9E0201; /* Colore principale */
   color: #fff;
   border: none;
   padding: 12px;
   font-size: 1rem;
   border-radius: 5px;
+  font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #7a0101; /* Colore hover */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -62,12 +68,48 @@ button:hover {
   text-align: center;
   font-weight: bold;
   margin-top: 20px;
+  font-size: 1rem;
 }
 
 .success-message {
-  color: green;
+  color: #28a745; /* Verde per messaggi di successo */
 }
 
 .error-message {
-  color: red;
+  color: #dc3545; /* Rosso per messaggi di errore */
+}
+
+/* Adattamenti per dispositivi mobili */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  input {
+    padding: 8px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  button {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+
+  input {
+    padding: 6px;
+  }
 }
