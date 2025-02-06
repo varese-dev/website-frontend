@@ -73,6 +73,8 @@ export class AdminDashboardComponent implements OnInit {
   isLoading: boolean = true;
   errorMessage: string | null = null;
 
+  activeSection: string | null = null;
+
   bookings: Bookings[] = [];
   talks: Talk[] = [];
   tags: Tag[] = [];
@@ -192,6 +194,10 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
+  toggleSection(section: string): void {
+    this.activeSection = this.activeSection === section ? null : section;
+  }
+
   loadPartners(): void {
     this.adminService.getAllPartners().subscribe({
       next: (data) => {
@@ -258,6 +264,10 @@ export class AdminDashboardComponent implements OnInit {
     }
   }
 
+  logout(): void {
+    // Da implementare
+    console.log('Logout eseguito');
+  }
 
   private refreshPage(): void {
     this.adminService.fetchUserData().subscribe({
