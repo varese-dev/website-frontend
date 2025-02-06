@@ -1,0 +1,57 @@
+<div class="container">
+  <h1>Crea un nuovo Evento</h1>
+
+  <form [formGroup]="eventForm" (ngSubmit)="submitEvent()">
+    <div class="form-group">
+      <label for="title">Titolo</label>
+      <input id="title" formControlName="title" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="description">Descrizione</label>
+      <textarea id="description" formControlName="description" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="date">Data e Ora</label>
+      <input id="date" formControlName="date" type="datetime-local" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="address">Indirizzo</label>
+      <input id="address" formControlName="address" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="maxParticipants">Numero massimo di partecipanti</label>
+      <input id="maxParticipants" formControlName="maxParticipants" type="number" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="tags">Tag (separati da virgole)</label>
+      <input id="tags" formControlName="tags" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="talks">Talks (titoli separati da virgole)</label>
+      <input id="talks" formControlName="talks" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="partnerId">Partner Ospitante</label>
+      <input id="partnerId" formControlName="partnerId" type="text" class="form-control" />
+      <small class="text-muted">Inserisci l'ID del partner ospitante, se applicabile.</small>
+    </div>
+
+    <div class="form-group">
+      <label for="sponsorId">Sponsor</label>
+      <input id="sponsorId" formControlName="sponsorId" type="text" class="form-control" />
+      <small class="text-muted">Inserisci l'ID dello sponsor, se applicabile.</small>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Crea Evento</button>
+  </form>
+
+  <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+</div>

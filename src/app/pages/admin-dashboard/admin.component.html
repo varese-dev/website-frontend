@@ -1,117 +1,225 @@
-<div class="admin-dashboard">
-  <h2>Gestione Admin</h2>
-  <div class="tabs">
-    <button (click)="setActiveTab('events')" [class.active]="activeTab === 'events'">Eventi</button>
-    <button (click)="setActiveTab('partners')" [class.active]="activeTab === 'partners'">Partner</button>
-    <button (click)="setActiveTab('speakers')" [class.active]="activeTab === 'speakers'">Speaker</button>
-    <button (click)="setActiveTab('tags')" [class.active]="activeTab === 'tags'">Tag</button>
-    <button (click)="setActiveTab('talks')" [class.active]="activeTab === 'talks'">Talk</button>
-  </div>
+<div class="container">
+    <div>
+        <h1>Dettagli Utente</h1>
+        <p><strong>Nome:</strong> {{ user?.name }}</p>
+        <p><strong>Cognome:</strong> {{ user?.surname }}</p>
+        <p><strong>Email:</strong> {{ user?.email }}</p>
+        <p><strong>Telefono:</strong> {{ user?.phone }}</p>
+    </div>
+    <div class="row">
+        <div>
+            <button (click)="toggleEditMode()"
+                    class="btn btn-secondary">{{ isEditMode ? 'Nascondi Modifiche' : 'Modifica Dati' }}
+            </button>
 
-  <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
-  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+            <div *ngIf="isEditMode" class="edit-form">
+                <h2>Modifica dati utente</h2>
 
-  <!-- Form Eventi -->
-  <div *ngIf="activeTab === 'events'">
-    <h3>{{ selectedEventId ? 'Modifica Evento' : 'Crea Evento' }}</h3>
-    <form [formGroup]="eventForm" (ngSubmit)="submitForm('event')">
-      <label>Titolo</label>
-      <input formControlName="title" type="text"><br><br>
-      <label>Descrizione</label>
-      <textarea formControlName="description"></textarea><br><br>
-      <label>Data</label>
-      <input formControlName="date" type="datetime-local"><br><br>
-      <label>ID Host (Partner)</label>
-      <input formControlName="partnerId" type="text"><br><br>
-      <label>ID Sponsor</label>
-      <input formControlName="sponsorId" type="text"><br><br>
-      <label>Massimo Partecipanti</label>
-      <input formControlName="maxParticipants" type="number" min="1"><br><br>
-      <label>Indirizzo</label>
-      <input formControlName="address" type="text"><br><br>
+                <div class="form-group">
+                    <label for="name">Nome</label>
+                    <input id="name" [(ngModel)]="name" type="text" class="form-control"/>
+                    <button (click)="updateName()" class="btn btn-primary">Aggiorna Nome</button>
+                </div>
 
-      <!-- Tag Section -->
-      <label>Tags</label>
-      <input #tagInput type="text"> <br><br>
-      <button (click)="addTag(tagInput.value); tagInput.value='';">Aggiungi Tag</button>
+                <div class="form-group">
+                    <label for="surname">Cognome</label>
+                    <input id="surname" [(ngModel)]="surname" type="text" class="form-control"/>
+                    <button (click)="updateSurname()" class="btn btn-primary">Aggiorna Cognome</button>
+                </div>
 
-      <ul>
-        <li *ngFor="let tag of tags.controls; let i = index">
-          {{ tag.value }} <button (click)="removeTag(i)">Rimuovi</button>
-        </li>
-      </ul>
+                <div class="form-group">
+                    <label for="oldPassword">Vecchia Password</label>
+                    <input id="oldPassword" [(ngModel)]="oldPassword" type="password" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">Nuova Password</label>
+                    <input id="newPassword" [(ngModel)]="newPassword" type="password" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label for="repeatNewPassword">Ripeti Nuova Password</label>
+                    <input id="repeatNewPassword" [(ngModel)]="repeatNewPassword" type="password" class="form-control"/>
+                </div>
+                <button (click)="updatePassword()" class="btn btn-primary">Aggiorna Password</button>
+            </div>
+            <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+            <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+        </div>
+    </div>
 
-      <!-- Talk Section -->
-      <label>Talks</label>
-      <div>
-        <input #talkTitle type="text" placeholder="Titolo Talk"><br><br>
-        <textarea #talkDesc placeholder="Descrizione Talk"></textarea><br><br>
-        <button (click)="addTalk(talkTitle.value, talkDesc.value); talkTitle.value=''; talkDesc.value='';">Aggiungi Talk</button>
-      </div>
+    <div class="container">
+        <div *ngIf="isLoading" class="loading-message">
+            <p>Caricamento in corso...</p>
+        </div>
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+        <div *ngIf="!isLoading && bookings.length > 0">
+            <h2>Prenotazioni</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Evento</th>
+                    <th>Utente</th>
+                    <th>Data</th>
+                    <th>Stato</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let booking of bookings">
+                    <td>{{ booking.id }}</td>
+                    <td>{{ booking.eventId }}</td>
+                    <td>{{ booking.userId }}</td>
+                    <td>{{ booking.date | date: 'short' }}</td>
+                    <td>{{ booking.status }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="!isLoading && bookings.length === 0" class="no-bookings-message">
+            <p>Non ci sono prenotazioni disponibili.</p>
+        </div>
+    </div>
 
-      <ul>
-        <li *ngFor="let talk of talks.controls; let i = index">
-          <strong>{{ talk.value.title }}</strong> - {{ talk.value.description }}
-          <button (click)="removeTalk(i)">Rimuovi</button>
-        </li>
-      </ul>
+    <div class="container">
+        <div *ngIf="isLoading" class="loading-message">
+            <p>Caricamento in corso...</p>
+        </div>
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+        <div *ngIf="!isLoading && events.length > 0">
+            <h2>Eventi</h2>
+            <button (click)="goToCreateEvent()" class="btn btn-primary">Crea Evento</button>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Titolo</th>
+                    <th>Descrizione</th>
+                    <th>Data</th>
+                    <th>Azioni</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let event of events">
+                    <td>{{ event.id }}</td>
+                    <td>{{ event.title }}</td>
+                    <td>{{ event.description }}</td>
+                    <td>{{ event.date | date: 'short' }}</td>
+                    <td>
+                        <button (click)="goToEditEvent(event.id)" class="btn btn-secondary">Modifica</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="!isLoading && events.length === 0" class="no-events-message">
+            <p>Non ci sono eventi disponibili.</p>
+        </div>
+    </div>
+    <div class="container">
+        <h2>Talks</h2>
+        <button (click)="goToCreateTalk()" class="btn btn-primary create-talk-btn">Crea il tuo Talk</button>
+        <div *ngIf="isLoading" class="loading-message">
+            <p>Caricamento in corso...</p>
+        </div>
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+        <div *ngIf="!isLoading && talks.length > 0">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Titolo</th>
+                    <th>Descrizione</th>
+                    <th>Azioni</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let talk of talks">
+                    <td>{{ talk.id }}</td>
+                    <td>{{ talk.title }}</td>
+                    <td>{{ talk.description }}</td>
+                    <td>
+                        <button (click)="goToEditTalk(talk.id)" class="btn btn-secondary">Modifica</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="!isLoading && talks.length === 0" class="no-talks-message">
+            <p>Non ci sono talk disponibili.</p>
+        </div>
+    </div>
+    <div class="container">
+        <h2>Tag</h2>
+        <button (click)="goToCreateTag()" class="btn btn-primary">Crea Tag</button>
+        <div *ngIf="isLoading" class="loading-message">
+            <p>Caricamento in corso...</p>
+        </div>
 
-      <button type="submit">{{ selectedEventId ? 'Aggiorna Evento' : 'Crea Evento' }}</button>
-    </form>
-  </div>
-  <!-- Form Partner -->
-  <div *ngIf="activeTab === 'partners'">
-    <h3>Crea Partner</h3>
-    <form [formGroup]="partnerForm" (ngSubmit)="submitForm('partner')">
-      <label>Nome</label>
-      <input formControlName="name" type="text"><br><br>
-      <label>Descrizione</label>
-      <textarea formControlName="description"></textarea><br><br>
-      <label>Luogo</label>
-      <input formControlName="place" type="text"><br><br>
-      <label>Website</label>
-      <input formControlName="website" type="text"><br><br>
-      <label>Email</label>
-      <input formControlName="email" type="email"><br><br>
-      <button type="submit">Crea Partner</button>
-    </form>
-  </div>
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 
-  <!-- Form Speaker -->
-  <div *ngIf="activeTab === 'speakers'">
-    <h3>Crea Speaker</h3>
-    <form [formGroup]="speakerForm" (ngSubmit)="submitForm('speaker')">
-      <label>Nome</label>
-      <input formControlName="name" type="text"><br><br>
-      <label>Cognome</label>
-      <input formControlName="surname" type="text"><br><br>
-      <label>Biografia</label>
-      <textarea formControlName="biography"></textarea><br><br>
-      <label>LinkedIn</label>
-      <input formControlName="linkedin" type="text"><br><br>
-      <button type="submit">Crea Speaker</button>
-    </form>
-  </div>
+        <div *ngIf="!isLoading && tags.length > 0">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Azioni</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let tag of tags">
+                    <td>{{ tag.id }}</td>
+                    <td>{{ tag.name }}</td>
+                    <td>
+                        <button (click)="goToEditTag(tag.id)" class="btn btn-secondary">Modifica</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
-  <!-- Form Tag -->
-  <div *ngIf="activeTab === 'tags'">
-    <h3>Crea Tag</h3>
-    <form [formGroup]="tagForm" (ngSubmit)="submitForm('tag')">
-      <label>Nome</label>
-      <input formControlName="name" type="text"><br><br>
-      <button type="submit">Crea Tag</button>
-    </form>
-  </div>
+        <div *ngIf="!isLoading && tags.length === 0" class="no-tags-message">
+            <p>Non ci sono tag disponibili.</p>
+        </div>
+    </div>
+    <div class="button-group">
+        <h2>Partner</h2>
+        <button (click)="goToCreatePartner()" class="btn btn-primary">Crea Partner</button>
+    </div>
 
-  <!-- Form Talk -->
-  <div *ngIf="activeTab === 'talks'">
-    <h3>Crea Talk</h3>
-    <form [formGroup]="talkForm" (ngSubmit)="submitForm('talk')">
-      <label>Titolo</label>
-      <input formControlName="title" type="text"><br><br>
-      <label>Descrizione</label>
-      <textarea formControlName="description"></textarea><br><br>
-      <button type="submit">Crea Talk</button>
-    </form>
-  </div>
+    <div *ngIf="isLoading" class="loading-message">
+        <p>Caricamento in corso...</p>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+    <div *ngIf="!isLoading && partners.length > 0">
+        <h2>Partner</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Luogo</th>
+                <th>Email</th>
+                <th>Azioni</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let partner of partners">
+                <td>{{ partner.id }}</td>
+                <td>{{ partner.name }}</td>
+                <td>{{ partner.place }}</td>
+                <td>{{ partner.email }}</td>
+                <td>
+                    <button (click)="goToEditPartner(partner.id)" class="btn btn-secondary">Modifica</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="!isLoading && partners.length === 0" class="no-partners-message">
+        <p>Non ci sono partner disponibili.</p>
+    </div>
+
 </div>
