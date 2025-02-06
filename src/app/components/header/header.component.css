@@ -11,14 +11,25 @@
   transition: all 0.5s ease;
 }
 
-/* Stili per la home: quando la header è trasparente, i link sono bianchi */
 .home-header .menu-item {
   color: #ffffff;
 }
 
-/* Stili per le altre pagine: quando la header è trasparente, i link sono rossi */
-.other-header .menu-item {
-  color: #b22222;
+.other-header .actions a {
+  text-decoration: none;
+  color: #b22222 !important;
+}
+
+.other-header .divider {
+  background-color: #b22222 !important;
+}
+
+.other-header .icon-button i {
+  color: #b22222 !important;
+}
+
+.other-header .line {
+  stroke: #b22222;
 }
 
 .logo {
@@ -66,7 +77,6 @@
   width: 100%;
 }
 
-/* Quando lo scroll è attivo, la header prende lo sfondo bianco e i link diventano rossi */
 .main-header.scrolled {
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -118,4 +128,124 @@
 
 .fa-regular {
   transition: color 0.7s ease;
+}
+
+.hamburger {
+  display: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.hamburger input {
+  display: none;
+}
+
+.hamburger svg {
+  height: 2.5rem;
+  transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line {
+  fill: none;
+  stroke: white;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1;
+  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.main-header.scrolled .line {
+  stroke: #b22222;
+}
+
+.line-top-bottom {
+  stroke-dasharray: 12 63;
+}
+
+.hamburger input:checked+svg {
+  transform: rotate(-45deg);
+}
+
+.hamburger input:checked+svg .line-top-bottom {
+  stroke-dasharray: 20 300;
+  stroke-dashoffset: -32.42;
+}
+
+nav {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .menu-item {
+    display: none;
+  }
+
+  .hamburger input:checked~nav {
+    display: block;
+  }
+
+  nav {
+    overflow: hidden;
+    height: 0;
+    opacity: 0;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: white;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    z-index: 100;
+  }
+
+  nav.show-menu {
+    display: flex;
+  }
+
+  nav .menu-item-hamburger {
+    padding: 0.5rem;
+    position: relative;
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.2rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.5s ease;
+    color: #b22222;
+  }
+
+  .divider,
+  .login-button {
+    display: block;
+  }
+
+  .divider {
+    height: 1.5rem;
+    width: 1px;
+    background-color: #ffffff;
+    opacity: 0.5;
+  }
+
+  .main-header.scrolled .divider {
+    background-color: #b22222;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-header {
+    padding: 2rem 0.5rem;
+  }
 }

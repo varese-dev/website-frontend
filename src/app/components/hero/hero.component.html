@@ -1,7 +1,6 @@
 <section class="hero-section">
-  <!-- Hero Content -->
+  <canvas id="particleCanvas"></canvas>
   <div class="hero-content">
-    <!-- Text Section -->
     <div class="hero-text-section">
       <span class="mini-text">Benvenuto nel futuro</span>
       <h1 class="hero-title">Varese Developer Group</h1>
@@ -12,7 +11,32 @@
     </div>
 
     <!-- Cards Section -->
-     
+    <section class="cards-section">
+      <div class="demo-slider-container">
+        <div class="demo-slider-wrap">
+          <div class="demo-slider swiper swiper-cards-stack">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <img src="images/digital-f.jpg" alt="Digital Card">
+              </div>
+              <div class="swiper-slide">
+                <img src="images/gold-f.jpg" alt="Gold Card">
+              </div>
+              <div class="swiper-slide">
+                <img src="images/platinum-f.jpg" alt="Platinum Card">
+              </div>
+              <div class="swiper-slide">
+                <img src="images/gaming-f.jpg" alt="Gaming Card">
+              </div>
+              <div class="swiper-slide">
+                <img src="images/shopping-f.jpg" alt="Shopping Card">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </div>
   <!-- Scroll Indicator -->
   <div class="scroll-indicator" (click)="scrollToAbout()">
