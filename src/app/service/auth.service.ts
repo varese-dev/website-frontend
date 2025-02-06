@@ -65,7 +65,17 @@ export class AuthService {
       responseType: 'text',
     });
   }
+
+  getUserSession(): Observable<{ userId: string }> {
+    return this.http.get<{ userId: string }>('http://localhost:8080/user/session', { withCredentials: true });
+  }
+
+  getUserRole(userId: string): Observable<{ role: string,name:string }> {
+    return this.http.get<{ role: string,name:string }>(`http://localhost:8080/user/${userId}`, { withCredentials: true });
+  }
 }
+
+
 
 export interface LoginData {
   emailOrPhone: string;

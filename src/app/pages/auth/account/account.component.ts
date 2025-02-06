@@ -1,11 +1,20 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef, ViewChild, HostListener, Renderer2 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  AfterViewInit,
+  ElementRef,
+  ViewChild,
+  HostListener,
+  Renderer2
+} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import gsap from 'gsap';
 import * as THREE from 'three';
 import Lenis from '@studio-freight/lenis';
-import { AuthService } from '../../../service/auth.service';
+import {AuthService} from '../../../service/auth.service';
 
 @Component({
   selector: 'app-account',
@@ -305,15 +314,42 @@ export class AccountComponent implements OnInit, OnDestroy, AfterViewInit {
     };
 
     this.authService.login(credentials).subscribe({
-      next: (response) => {
-        console.log('Login riuscito:', response);
-        this.router.navigate(['/area-utente']); // Navigazione alla pagina utente
+      next: () => {
+        this.authService.getUserSession().subscribe({
+          next: (sessionResponse) => {
+              console.log(sessionResponse)
+            this.authService.getUserRole(sessionResponse.userId).subscribe({
+              next: (userResponse) => {
+
+                  console.log(userResponse)
+                if (userResponse.name.toLocaleLowerCase() === 'admin') {
+                  this.router.navigate(['/admin']);
+                } else if (userResponse.name.toLocaleLowerCase() === 'user') {
+                  this.router.navigate(['/area-utente']);
+                } else {
+
+                  this.errorMessage = 'Tipo utente non riconosciuto.';
+                }
+              },
+              error: (err) => {
+
+                this.errorMessage = 'Errore nel recupero delle informazioni utente.';
+              }
+            });
+          },
+          error: (err) => {
+
+            this.errorMessage = 'Sessione non valida.';
+          }
+        });
       },
       error: (err) => {
         console.error('Errore di login:', err);
         this.errorMessage = 'Credenziali errate o errore di connessione.';
       }
     });
+
+
   }
 
   validateRegisterInput(): void {
@@ -360,7 +396,7 @@ export class AccountComponent implements OnInit, OnDestroy, AfterViewInit {
         console.log('Registration successful:', response);
         this.animateSwitchToLogin();
         this.router.navigate([], {fragment: 'login'});
-        },
+      },
       error: (err) => {
         console.error('Registration error:', err);
         this.errorMessage = 'Registration failed. Please try again.';
