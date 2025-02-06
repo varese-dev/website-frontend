@@ -281,6 +281,9 @@ export class AdminDashboardComponent implements OnInit {
     this.adminService.logout().subscribe({
       next: (response) => {
         console.log('Logout avvenuto:', response);
+
+        localStorage.removeItem('userRole');
+
         this.router.navigate(['/auth/account']);
       },
       error: (error) => {
@@ -289,6 +292,7 @@ export class AdminDashboardComponent implements OnInit {
       }
     });
   }
+
 
   private handleSuccess(message: string): void {
     this.successMessage = message;

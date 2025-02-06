@@ -129,6 +129,9 @@ export class AreaUtenteComponent implements OnInit {
     this.areaUtenteService.logout().subscribe({
       next: (response) => {
         console.log('Logout avvenuto:', response);
+
+        localStorage.removeItem('userRole');
+
         this.router.navigate(['/auth/account']);
       },
       error: (error) => {

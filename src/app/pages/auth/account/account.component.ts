@@ -314,48 +314,42 @@ export class AccountComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.authService.login(credentials).subscribe({
       next: () => {
-        console.log('Login avvenuto con successo');
         this.authService.getUserSession().subscribe({
           next: (sessionResponse) => {
-            console.log('Session Response:', sessionResponse);
+            const userId = sessionResponse.userId;
 
-            if (!sessionResponse || !sessionResponse.userId) {
+            if (userId) {
+              this.authService.getUserRole(userId).subscribe({
+                next: (userRoleResponse) => {
+                  const role = userRoleResponse.role?.toUpperCase();
+                  localStorage.setItem('userRole', role);
+                  localStorage.setItem('userId', userId);
+
+                  if (role === 'ADMIN') {
+                    this.router.navigate(['/admin']);
+                  } else if (role === 'USER') {
+                    this.router.navigate(['/area-utente']);
+                  } else {
+                    this.errorMessage = 'Ruolo utente non riconosciuto.';
+                  }
+                },
+                error: () => {
+                  this.errorMessage = 'Errore nel recupero delle informazioni utente.';
+                },
+              });
+            } else {
               this.errorMessage = 'Sessione non valida. Nessun ID utente trovato.';
-              return;
             }
-
-            // Richiama getUserRole con il nuovo formato di risposta
-            this.authService.getUserRole(sessionResponse.userId).subscribe({
-              next: (userRoleResponse) => {
-                const role = userRoleResponse?.role?.toUpperCase();
-
-                if (!role) {
-                  this.errorMessage = 'Ruolo utente non definito.';
-                  return;
-                }
-
-                if (role === 'ADMIN') {
-                  this.router.navigate(['/admin']);
-                } else if (role === 'USER') {
-                  this.router.navigate(['/area-utente']);
-                } else {
-                  this.errorMessage = 'Ruolo utente non riconosciuto.';
-                }
-              },
-              error: () => {
-                this.errorMessage = 'Errore nel recupero delle informazioni utente.';
-              }
-            });
           },
           error: () => {
             this.errorMessage = 'Sessione non valida.';
-          }
+          },
         });
       },
       error: (err) => {
         console.error('Errore di login:', err);
         this.errorMessage = 'Credenziali errate o errore di connessione.';
-      }
+      },
     });
   }
 
