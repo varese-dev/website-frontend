@@ -1,13 +1,14 @@
-import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private authUrl = 'http://localhost:8080/auth'; // Endpoint base
-  private userUrl = 'http://localhost:8080/user'; // Endpoint base
+  private authUrl = 'http://localhost:8080/auth';
+  private userUrl = 'http://localhost:8080/user';
 
   constructor(private http: HttpClient) {}
 
@@ -23,7 +24,6 @@ export class AuthService {
     });
   }
 
-  // API per inviare il codice di verifica
   forgottenPassword(emailOrPhone: string): Observable<any> {
     return this.http.post(`${this.userUrl}/forgottenPassword`, { emailOrPhone }, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -31,7 +31,6 @@ export class AuthService {
     });
   }
 
-  // API per verificare il codice di verifica
   verifyCode(emailOrPhone: string, verificationCode: string): Observable<any> {
     return this.http.post(
       `${this.userUrl}/verifyCode?emailOrPhone=${encodeURIComponent(emailOrPhone)}`,
@@ -43,7 +42,6 @@ export class AuthService {
     );
   }
 
-  // API per aggiornare la password
   updatePassword(emailOrPhone: string, newPassword: string, repeatNewPassword: string): Observable<any> {
     return this.http.post(
       `${this.userUrl}/updatePassword?emailOrPhone=${encodeURIComponent(emailOrPhone)}`,
@@ -70,12 +68,10 @@ export class AuthService {
     return this.http.get<{ userId: string }>('http://localhost:8080/user/session', { withCredentials: true });
   }
 
-  getUserRole(userId: string): Observable<{ role: string,name:string }> {
-    return this.http.get<{ role: string,name:string }>(`http://localhost:8080/user/${userId}`, { withCredentials: true });
+  getUserRole(userId: string): Observable<{ role: string }> {
+    return this.http.get<{ role: string }>(`http://localhost:8080/user/${userId}/role`, { withCredentials: true });
   }
 }
-
-
 
 export interface LoginData {
   emailOrPhone: string;

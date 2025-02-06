@@ -73,6 +73,8 @@ export class AdminDashboardComponent implements OnInit {
   isLoading: boolean = true;
   errorMessage: string | null = null;
 
+  activeSection: string | null = null;
+
   bookings: Bookings[] = [];
   talks: Talk[] = [];
   tags: Tag[] = [];
@@ -192,6 +194,10 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
+  toggleSection(section: string): void {
+    this.activeSection = this.activeSection === section ? null : section;
+  }
+
   loadPartners(): void {
     this.adminService.getAllPartners().subscribe({
       next: (data) => {
@@ -258,7 +264,6 @@ export class AdminDashboardComponent implements OnInit {
     }
   }
 
-
   private refreshPage(): void {
     this.adminService.fetchUserData().subscribe({
       next: (data) => {
@@ -271,6 +276,23 @@ export class AdminDashboardComponent implements OnInit {
       }
     });
   }
+
+  logout(): void {
+    this.adminService.logout().subscribe({
+      next: (response) => {
+        console.log('Logout avvenuto:', response);
+
+        localStorage.removeItem('userRole');
+
+        this.router.navigate(['/auth/account']);
+      },
+      error: (error) => {
+        this.errorMessage = 'Errore durante il logout. Riprova più tardi.';
+        console.error('Logout error:', error);
+      }
+    });
+  }
+
 
   private handleSuccess(message: string): void {
     this.successMessage = message;

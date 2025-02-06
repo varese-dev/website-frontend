@@ -177,3 +177,109 @@ h1 .highlight {
   color: #444;
   line-height: 1.6;
 }
+
+@media (max-width: 1440px) {
+  .about-section {
+    padding: 80px 50px;
+  }
+
+  .step-year {
+    font-size: 0.8rem;
+  }
+
+  .step-content {
+    width: unset;
+  }
+}
+
+@media (max-width: 1024px) {
+  .label {
+    font-size: 0.8rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .step-track {
+    width: unset;
+  }
+
+  .step-content {
+    padding: 20px;
+  }
+
+  .step-content-wrapper {
+    height: 300px;
+  }
+
+  .step-detail {
+    padding: 0;
+  }
+
+  .step-image img {
+    width: 250px;
+  }
+
+  .step-date {
+    font-size: 1rem;
+  }
+
+  .step-text h3 {
+    font-size: 1.8rem;
+  }
+
+  .step-text p {
+    font-size: 0.8rem;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .about-section {
+    padding: 80px 30px;
+  }
+
+  .horizontal-steps {
+    overflow-x: scroll;
+    white-space: nowrap;
+    padding-bottom: 20px;
+  }
+
+  .step-track {
+    display: inline-flex;
+    white-space: nowrap;
+  }
+
+  .step {
+    text-align: center;
+  }
+
+  .step-content {
+    padding: 0;
+  }
+
+  .step-content-wrapper {
+    height: 400px;
+  }
+
+  .step-detail {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 20px;
+  }
+
+  .step-text {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .step-content-wrapper {
+    height: 500px;
+  }
+}

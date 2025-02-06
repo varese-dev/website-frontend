@@ -302,11 +302,10 @@ export class AccountComponent implements OnInit, OnDestroy, AfterViewInit {
 
   login(): void {
     if (!this.contact || !this.password) {
-      this.errorMessage = 'Email/Cellurare e password sono obbligatori';
+      this.errorMessage = 'Email o cellulare e password sono obbligatori.';
       return;
     }
 
-    // Esegui la chiamata API di login tramite AuthService (dal vecchio login.component.ts)
     const credentials = {
       emailOrPhone: this.contact,
       password: this.password,
@@ -317,48 +316,56 @@ export class AccountComponent implements OnInit, OnDestroy, AfterViewInit {
       next: () => {
         this.authService.getUserSession().subscribe({
           next: (sessionResponse) => {
-              console.log(sessionResponse)
-            this.authService.getUserRole(sessionResponse.userId).subscribe({
-              next: (userResponse) => {
+            const userId = sessionResponse.userId;
 
-                  console.log(userResponse)
-                if (userResponse.name.toLocaleLowerCase() === 'admin') {
-                  this.router.navigate(['/admin']);
-                } else if (userResponse.name.toLocaleLowerCase() === 'user') {
-                  this.router.navigate(['/area-utente']);
-                } else {
+            if (userId) {
+              this.authService.getUserRole(userId).subscribe({
+                next: (userRoleResponse) => {
+                  const role = userRoleResponse.role?.toUpperCase();
+                  localStorage.setItem('userRole', role);
+                  localStorage.setItem('userId', userId);
 
-                  this.errorMessage = 'Tipo utente non riconosciuto.';
-                }
-              },
-              error: (err) => {
-
-                this.errorMessage = 'Errore nel recupero delle informazioni utente.';
-              }
-            });
+                  if (role === 'ADMIN') {
+                    this.router.navigate(['/admin']);
+                  } else if (role === 'USER') {
+                    this.router.navigate(['/area-utente']);
+                  } else {
+                    this.errorMessage = 'Ruolo utente non riconosciuto.';
+                  }
+                },
+                error: () => {
+                  this.errorMessage = 'Errore nel recupero delle informazioni utente.';
+                },
+              });
+            } else {
+              this.errorMessage = 'Sessione non valida. Nessun ID utente trovato.';
+            }
           },
-          error: (err) => {
-
+          error: () => {
             this.errorMessage = 'Sessione non valida.';
-          }
+          },
         });
       },
       error: (err) => {
         console.error('Errore di login:', err);
         this.errorMessage = 'Credenziali errate o errore di connessione.';
-      }
+      },
     });
-
-
   }
 
-  validateRegisterInput(): void {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phonePattern = /^\d{10,15}$/;
+    validateRegisterInput()
+  :
+    void {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const phonePattern = /^\d{10,15}$/;
 
-    if (emailPattern.test(this.registerEmail)) {
+      if(emailPattern.test(this.registerEmail)
+  )
+    {
       console.log('Email valida inserita');
-    } else if (phonePattern.test(this.registerPhone)) {
+    }
+  else
+    if (phonePattern.test(this.registerPhone)) {
       console.log('Numero di telefono valido inserito');
     } else {
       this.registrationErrorMessage = 'Inserisci un\'email o un numero di telefono valido';
@@ -371,8 +378,13 @@ export class AccountComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  register(): void {
-    if (!this.firstName || !this.lastName || !this.registerEmail || !this.registerPhone || !this.password || !this.confirmPassword) {
+    register()
+  :
+    void {
+      if(!
+    this.firstName || !this.lastName || !this.registerEmail || !this.registerPhone || !this.password || !this.confirmPassword
+  )
+    {
       this.errorMessage = 'All fields are required';
       return;
     }
@@ -404,10 +416,15 @@ export class AccountComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  forgottenPasswordEmailOrPhone: string = '';
+    forgottenPasswordEmailOrPhone: string = '';
 
-  forgottenPassword(): void {
-    if (!this.forgottenPasswordEmailOrPhone) {
+    forgottenPassword()
+  :
+    void {
+      if(!
+    this.forgottenPasswordEmailOrPhone
+  )
+    {
       this.errorMessage = 'Email or phone number is required';
       return;
     }
@@ -423,4 +440,4 @@ export class AccountComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     });
   }
-}
+  }
