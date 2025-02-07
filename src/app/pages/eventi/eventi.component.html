@@ -10,13 +10,13 @@
 <div class="search-bar">
   <input
     type="text"
-    placeholder="Search by title or tag"
+    placeholder="Cerca per titolo o tag"
     [(ngModel)]="searchTerm"
     (ngModelChange)="filterEvents()"
   />
 </div>
 
-<h2 class="h2">Future Events</h2>
+<h2 class="h2">Eventi Futuri</h2>
 <div class="h2" *ngIf="futureEvents.length === 0">Nessun evento futuro</div>
 <div class="cards-container" *ngIf="futureEvents.length > 0">
   <div class="card clickable-card" *ngFor="let event of futureEvents">
@@ -55,7 +55,7 @@
   </div>
 </div>
 
-<h2 class="h2">Past Events</h2>
+<h2 class="h2">Eventi Passati</h2>
 <div class="h2" *ngIf="pastEvents.length === 0">Nessun evento passato</div>
 <div class="cards-container" *ngIf="pastEvents.length > 0">
   <div class="card clickable-card" *ngFor="let event of pastEvents">
