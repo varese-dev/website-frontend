@@ -787,28 +787,21 @@ hr {
 }
 
 
-
-/* Responsività */
-
 @media (max-width: 1200px) {
   .loginBox, .registerBox {
-    width: 90%;
-  }
-}
-
-@media (max-width: 768px) {
-  .loginBox, .registerBox {
+    width: 60%;
     flex-direction: column;
     height: auto;
   }
 
   .loginRight, .registerRight {
-    width: 100%;
+    margin: auto;
+    width: 70%;
     padding: 20px;
   }
 
   .loginLeft, .registerLeft {
-    width: 100%;
+    margin: auto;
     padding: 20px;
   }
 
@@ -834,7 +827,8 @@ hr {
   }
 
   .loginForm, .registerForm {
-    width: 100%;
+    width: 80%;
+    margin-top: 20px;
   }
 
   .input-group {
@@ -862,6 +856,8 @@ hr {
 
   .buttonContainer {
     flex-direction: column;
+    margin: auto;
+    width: 60%;
   }
 
   .animated-button-login, .animated-button-register, .animated-button {
@@ -875,6 +871,23 @@ hr {
 
   .backHome .homeLink, .backHome-register .homeLink-register {
     width: 50%;
+  }
+
+  .cyberpunk-checkbox-label {
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .loginBox, .registerBox {
+    width: 80%;
+  }
+
+  .loginRight, .registerRight {
+    margin: auto;
+    width: 90%;
+    padding: 20px;
   }
 }
 
@@ -907,8 +920,8 @@ hr {
     font-size: 14px;
   }
 
-  .animated-button-login, .animated-button-register, .animated-button {
-    padding: 8px 20px;
+  .buttonContainer {
+    width: 70%;
   }
 
   .backHome .homeLink, .backHome-register .homeLink-register {
@@ -916,7 +929,6 @@ hr {
   }
 }
 
-/* Responsivity */
 @media (max-width: 768px) {
   .cyberpunk-checkbox,
   .cyberpunk-checkbox-register {
