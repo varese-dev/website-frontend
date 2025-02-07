@@ -318,19 +318,8 @@ export class AccountComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   login(): void {
-    this.loginErrors.contact = '';
-    this.loginErrors.password = '';
-
-    // Validazioni
-    if (!this.contact) {
-      this.loginErrors.contact = 'Email o cellulare è obbligatorio.';
-    }
-
-    if (!this.password) {
-      this.loginErrors.password = 'La password è obbligatoria.';
-    }
-
-    if (this.loginErrors.contact || this.loginErrors.password) {
+    if (!this.contact || !this.password) {
+      this.errorMessage = 'Email o cellulare e password sono obbligatori.';
       return;
     }
 
@@ -342,13 +331,44 @@ export class AccountComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.authService.login(credentials).subscribe({
       next: () => {
+        this.authService.getUserSession().subscribe({
+          next: (sessionResponse) => {
+            const userId = sessionResponse.userId;
+
+            if (userId) {
+              this.authService.getUserRole(userId).subscribe({
+                next: (userRoleResponse) => {
+                  const role = userRoleResponse.role?.toUpperCase();
+                  localStorage.setItem('userRole', role);
+                  localStorage.setItem('userId', userId);
+
+                  if (role === 'ADMIN') {
+                    this.router.navigate(['/admin']);
+                  } else if (role === 'USER') {
+                    this.router.navigate(['/area-utente']);
+                  } else {
+                    this.errorMessage = 'Ruolo utente non riconosciuto.';
+                  }
+                },
+                error: () => {
+                  this.errorMessage = 'Errore nel recupero delle informazioni utente.';
+                },
+              });
+            } else {
+              this.errorMessage = 'Sessione non valida. Nessun ID utente trovato.';
+            }
+          },
+          error: () => {
+            this.errorMessage = 'Sessione non valida.';
+          },
+        });
       },
-      error: () => {
-        this.loginErrors.contact = 'Credenziali errate o errore di connessione.';
-      }
+      error: (err) => {
+        console.error('Errore di login:', err);
+        this.errorMessage = 'Credenziali errate o errore di connessione.';
+      },
     });
   }
-
   validateRegisterInput(): void {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phonePattern = /^\d{10,15}$/;
