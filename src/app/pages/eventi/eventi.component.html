@@ -44,7 +44,6 @@
       <span class="remaining-spots">
         {{ event.remaining }} posti mancanti
       </span>
-      <!-- Il pulsante utilizza stopPropagation per evitare la navigazione -->
       <button
         class="participate-button"
         (click)="participate(event.id); $event.stopPropagation(); $event.preventDefault()"

@@ -2,11 +2,29 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  width: 100%;
   padding-left: 50px;
   margin-top: 15vh;
   margin-bottom: 10vh;
-  max-width: 350px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  height: 3rem;
+  align-items: center;
+}
+
+.full-row  {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  align-items: center;
+}
+
+.edit-title {
+  padding-left: 70px;
 }
 
 /* Corpo generale */
@@ -37,6 +55,26 @@ p {
   font-style: italic;
 }
 
+.updates {
+  display: flex;
+  flex-direction: row;
+  gap: 70px;
+}
+
+.pass {
+ display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.divider {
+  height: 7rem;
+  width: 1px;
+  background-color: #b22222;
+  opacity: 0.5;
+}
+
+
 /* Messaggio di errore */
 .error-message {
   color: #dc3545; /* Rosso per messaggi di errore */
@@ -63,6 +101,9 @@ p {
 
 /* Lista delle prenotazioni */
 .booking-list {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
   list-style: none;
   padding: 0;
   margin: 20px 0;
@@ -126,7 +167,19 @@ button.cancel-button:hover {
 
 /* Gruppo di input del modulo */
 .form-group {
+  width: 100%;
+  max-width: 250px;
   margin-bottom: 15px;
+
+}
+
+.form-control {
+  width: 100%;
+  max-width: 250px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
 }
 
 label {
