@@ -10,6 +10,7 @@ export interface Event {
   timeRemaining?: string;
   maxParticipants: number;
   participantsCount: number;
+  address: string;
 }
 
 @Injectable({
@@ -32,6 +33,7 @@ export class EventService {
           console.log(`Max Participants: ${maxParticipants}`);
           console.log(`Participants Count: ${participantsCount}`);
           console.log(`Remaining Slots: ${maxParticipants - participantsCount}`);
+          console.log(`Data e Ora: ${event.date}`);
 
           return {
             ...event,

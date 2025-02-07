@@ -1,16 +1,10 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  AfterViewInit,
-  ElementRef,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EventService, Event } from '../../service/event-card.service';
 import { format, toZonedTime } from 'date-fns-tz';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
 gsap.registerPlugin(ScrollTrigger);
 export interface ExtendedEvent extends Event {
   formattedDate: string;
@@ -28,21 +22,24 @@ export class EventCardComponent implements OnInit, AfterViewInit, OnDestroy {
   events: ExtendedEvent[] = [];
   currentIndex = 0;
   countdownInterval: any;
-  constructor(private eventService: EventService, private el: ElementRef) {}
+
+  constructor(private eventService: EventService, private el: ElementRef) { }
+
   ngOnInit() {
     this.loadEvents();
   }
+
   ngAfterViewInit(): void {
     this.initParticles();
     this.initAnimations();
   }
-
+  
   private initParticles(): void {
     const canvas: HTMLCanvasElement = document.getElementById('particleCanvasEvent') as HTMLCanvasElement;
     const ctx = canvas.getContext('2d')!;
 
     let particlesArray: Particle[] = [];
-    let numParticles = window.innerWidth < 768 ? 50 : 100; 
+    let numParticles = window.innerWidth < 768 ? 50 : 100;
 
     class Particle {
       x: number;
@@ -80,7 +77,7 @@ export class EventCardComponent implements OnInit, AfterViewInit, OnDestroy {
 
     function init() {
       particlesArray = [];
-      numParticles = window.innerWidth < 768 ? 50 : 100;  
+      numParticles = window.innerWidth < 768 ? 50 : 100;
       for (let i = 0; i < numParticles; i++) {
         particlesArray.push(new Particle());
       }
@@ -114,6 +111,7 @@ export class EventCardComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
   }
+
   loadEvents() {
     this.eventService.getEvents().subscribe((data) => {
       console.log('Event data received:', data);
@@ -126,6 +124,7 @@ export class EventCardComponent implements OnInit, AfterViewInit, OnDestroy {
       this.startCountdown();
     });
   }
+
   initAnimations() {
     gsap.to('.event-section .animated-content', {
       opacity: 1,
@@ -140,6 +139,7 @@ export class EventCardComponent implements OnInit, AfterViewInit, OnDestroy {
       },
     });
   }
+
   formatDate(date: Date): string {
     const timeZone = 'Europe/Rome';
     const zonedDate = toZonedTime(date, timeZone);
@@ -150,28 +150,36 @@ export class EventCardComponent implements OnInit, AfterViewInit, OnDestroy {
     const minutes = String(zonedDate.getMinutes()).padStart(2, '0');
     return `${day}/${month}/${year}, ore: ${hours}:${minutes}`;
   }
+
   get visibleSlides() {
     return this.events.slice(this.currentIndex, this.currentIndex + 1);
   }
+
   getTotalPages(): number[] {
     return Array.from({ length: this.events.length });
   }
+
   get currentPage(): number {
     return this.currentIndex;
   }
+
   nextSlide() {
     this.currentIndex = (this.currentIndex + 1) % this.events.length;
   }
+
   previousSlide() {
     this.currentIndex =
       this.currentIndex === 0 ? this.events.length - 1 : this.currentIndex - 1;
   }
+
   goToSlide(pageIndex: number) {
     this.currentIndex = pageIndex;
   }
+
   trackByFn(index: number, item: any) {
     return index;
   }
+
   startCountdown() {
     this.countdownInterval = setInterval(() => {
       this.events = this.events.map((event) => ({
@@ -180,6 +188,7 @@ export class EventCardComponent implements OnInit, AfterViewInit, OnDestroy {
       }));
     }, 1000);
   }
+  
   getTimeRemaining(date: Date): string {
     const now = new Date();
     const timeDiff = date.getTime() - now.getTime();

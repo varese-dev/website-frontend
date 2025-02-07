@@ -4,40 +4,76 @@
     <div class="hero-text-section">
       <span class="mini-text">Benvenuto nel futuro</span>
       <h1 class="hero-title">Varese Developer Group</h1>
-      <p class="hero-description">Scopri il nostro calendario di eventi dal vivo e online: talk tecnici, workshop e
-        incontri con esperti. Unisciti a noi e fai parte di una community dove le idee si trasformano in innovazione.
+      <p class="hero-description">
+        Scopri il nostro calendario di eventi dal vivo e online: talk tecnici, workshop e incontri con esperti.
+        Unisciti a noi e fai parte di una community dove le idee prendono vita e diventano innovazione.
       </p>
       <button class="cta-button" (click)="onGetStarted()">Scopri di più</button>
     </div>
 
     <!-- Cards Section -->
     <section class="cards-section">
-      <div class="demo-slider-container">
+      <div class="demo-slider-container" *ngIf="events.length > 0">
         <div class="demo-slider-wrap">
           <div class="demo-slider swiper swiper-cards-stack">
             <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <img src="images/digital-f.jpg" alt="Digital Card">
-              </div>
-              <div class="swiper-slide">
-                <img src="images/gold-f.jpg" alt="Gold Card">
-              </div>
-              <div class="swiper-slide">
-                <img src="images/platinum-f.jpg" alt="Platinum Card">
-              </div>
-              <div class="swiper-slide">
-                <img src="images/gaming-f.jpg" alt="Gaming Card">
-              </div>
-              <div class="swiper-slide">
-                <img src="images/shopping-f.jpg" alt="Shopping Card">
+              <div class="swiper-slide" *ngFor="let slide of events; trackBy: trackByFn">
+                <div class="card new-design">
+                  <div class="card-left">
+                    <img src="/images/logo/logoVDGminimal.png" alt="Logo Image" class="logo-image" />
+                    <h1>Varese Developer Group</h1>
+                    <h3>Benvenuto nel futuro</h3>
+                    <img src="/images/account/imageAccount.png" alt="Event Image" class="event-image" />
+                  </div>
+                  <div class="divider"></div>
+                  <div class="card-right">
+                    <div class="card-title">
+                      <h2>{{ slide.title }}</h2>
+                      <p>{{ slide.description }}</p>
+                    </div>
+                    <div class="card-details">
+                      <div class="detail-item">
+                        <span class="icon"><i class="fas fa-calendar-alt"></i></span>
+                        <div class="detail-text">
+                          <h3>Data e Ora</h3>
+                          <p>{{ slide.date | date: 'dd MMMM yyyy, HH:mm' }}</p>
+                        </div>
+                      </div>
+
+                      <div class="detail-item">
+                        <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
+                        <div class="detail-text">
+                          <h3>Vieni a Trovarci</h3>
+                          <p>{{ slide.address}}</p>
+                        </div>
+                      </div>
+
+                      <div class="detail-item">
+                        <span class="icon"><i class="fas fa-phone"></i></span>
+                        <div class="detail-text">
+                          <h3>Per Informazioni</h3>
+                          <p>123 4567890</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-final-info">
+                      <a class="btn" href="/eventi">Vai all'evento</a>
+                      <div class="card-info">
+                        <h3>Tempo Rimanente</h3>
+                        <p>{{ slide.timeRemaining }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
+            <div class="swiper-pagination"></div>
           </div>
         </div>
       </div>
     </section>
-
   </div>
+
   <!-- Scroll Indicator -->
   <div class="scroll-indicator" (click)="scrollToAbout()">
     <i class="fa-solid fa-arrow-down"></i>

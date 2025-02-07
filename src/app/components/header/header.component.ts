@@ -81,7 +81,7 @@ export class HeaderComponent implements AfterViewInit {
     this.authService.getUserSession().subscribe({
       next: (sessionResponse) => {
         if (!sessionResponse || !sessionResponse.userId) {
-          this.router.navigate(['/auth/account#login']);
+          this.router.navigate(['/auth/account']);
           return;
         }
 
@@ -93,16 +93,16 @@ export class HeaderComponent implements AfterViewInit {
             } else if (role === 'USER') {
               this.router.navigate(['/area-utente']);
             } else {
-              this.router.navigate(['/auth/account#login']);
+              this.router.navigate(['/auth/account']);
             }
           },
           error: () => {
-            this.router.navigate(['/auth/account#login']);
+            this.router.navigate(['/auth/account']);
           }
         });
       },
       error: () => {
-        this.router.navigate(['/auth/account#login']);
+        this.router.navigate(['/auth/account']);
       }
     });
   }
