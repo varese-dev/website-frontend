@@ -19,7 +19,12 @@
 .full-row  {
   display: flex;
   flex-direction: row;
-  gap: 70px;
+  gap: 50px;
+  align-items: center;
+}
+
+.edit-title {
+  padding-left: 70px;
 }
 
 /* Corpo generale */
