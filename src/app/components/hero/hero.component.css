@@ -200,6 +200,7 @@
   left: 45%;
   border-radius: 50px;
   transform: rotate(25deg);
+  opacity: 0%;
 }
 
 .card-right {
