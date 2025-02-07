@@ -58,8 +58,8 @@ export class AreaUtenteComponent implements OnInit {
 
     this.areaUtenteService.fetchUserActiveBookings().subscribe({
       next: (data) => {
-        this.activeBookings = data.filter(booking => booking.status === 'confirmed');
-        this.otherBookings = data.filter(booking => booking.status !== 'confirmed');
+        this.activeBookings = data.filter(booking => booking.status === 'CONFIRMED');
+        this.otherBookings = data.filter(booking => booking.status !== 'CONFIRMED');
         this.isLoading = false;
       },
       error: (error) => {
