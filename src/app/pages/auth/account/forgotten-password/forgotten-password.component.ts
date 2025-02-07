@@ -1,16 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild, HostListener, Renderer2, AfterViewInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../../service/auth.service';
 import { CommonModule } from '@angular/common';
+import gsap from 'gsap';
+import * as THREE from 'three';
+import Lenis from '@studio-freight/lenis';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgotten-password.component.html',
   styleUrls: ['./forgotten-password.component.css'],
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterModule],
 })
-export class ForgotPasswordComponent {
+export class ForgotPasswordComponent implements OnInit, OnDestroy, AfterViewInit {
   currentStep: number = 1;
   email: string = '';
   verificationCode: string = '';
@@ -22,7 +26,87 @@ export class ForgotPasswordComponent {
   isPasswordTyped: boolean = false;
   isEmailValid: boolean = true;
 
-  constructor(private authService: AuthService) { }
+  private renderer!: THREE.WebGLRenderer;
+  private camera!: THREE.PerspectiveCamera;
+  private animationId: number = 0;
+  private lenis!: Lenis;
+
+  @ViewChild('rendererContainer', { static: true }) rendererContainer!: ElementRef;
+  @ViewChild('resetBox') resetBox!: ElementRef;
+  @ViewChild('resetLeft') resetLeft!: ElementRef;
+  @ViewChild('resetRight') resetRight!: ElementRef;
+
+  constructor(private renderer2: Renderer2, private route: ActivatedRoute, private router: Router, private authService: AuthService) { }
+
+  ngOnInit(): void {
+    this.initLenis();
+  }
+
+  ngAfterViewInit(): void {
+    this.animateEntrance();
+  }
+
+  private initLenis(): void {
+    this.lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+    const raf = (time: number) => {
+      this.lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
+  }
+
+  private animateEntrance(): void {
+    if (!this.resetLeft || !this.resetRight) {
+      console.error('Gli elementi non sono stati inizializzati correttamente!');
+      return;
+    }
+
+    const leftElement = this.resetLeft.nativeElement;
+    const rightElement = this.resetRight.nativeElement;
+
+    if (!leftElement || !rightElement) {
+      console.error('Elementi ViewChild non trovati!');
+      return;
+    }
+
+    gsap.set(leftElement, { x: '-100%', opacity: 0 });
+    gsap.set(rightElement, { x: '100%', opacity: 0 });
+
+    gsap.to(leftElement, {
+      x: '0%',
+      opacity: 1,
+      duration: 2,
+      ease: 'power3.out',
+      delay: 0.7
+    });
+
+    gsap.to(rightElement, {
+      x: '0%',
+      opacity: 1,
+      duration: 2,
+      ease: 'power3.out',
+      delay: 0.7
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.renderer) {
+      this.renderer.dispose();
+      this.renderer.domElement.remove();
+    }
+    if (this.animationId) {
+      cancelAnimationFrame(this.animationId);
+    }
+  }
+
+  @HostListener('window:resize')
+  onResize(): void {
+    if (this.camera && this.renderer) {
+      this.camera.aspect = window.innerWidth / window.innerHeight;
+      this.camera.updateProjectionMatrix();
+      this.renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+  }
 
   validateEmail() {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
