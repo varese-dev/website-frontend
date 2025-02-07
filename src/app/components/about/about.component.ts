@@ -114,11 +114,11 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
   private animateStepChange(): void {
     if (this.isAnimating) return;
     this.isAnimating = true;
-  
+
     const current = document.querySelector('.step-content') as HTMLElement;
     const stepElements = Array.from(document.querySelectorAll('.step-block')) as HTMLElement[];
     const activeStepElement = stepElements[this.currentIndex];
-  
+
     // Aggiorna il contenuto del nuovo step
     const newContent = current.cloneNode(true) as HTMLElement;
     newContent.querySelector('h3')!.textContent = this.currentEvent.title;
@@ -127,13 +127,13 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
     const newImage = newContent.querySelector('img')!;
     newImage.src = this.currentEvent.image;
     newImage.alt = this.currentEvent.title;
-  
+
     // Posiziona il nuovo contenuto sopra l'attuale
     current.insertAdjacentElement('afterend', newContent);
     newContent.style.position = 'absolute';
     newContent.style.zIndex = '2';
     gsap.set(newContent, { opacity: 0 });
-  
+
     // Anima la transizione del contenuto
     gsap.to(current, {
       opacity: 0,
@@ -141,7 +141,7 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
       ease: 'power3.inOut',
       onComplete: () => current.remove(),
     });
-  
+
     gsap.to(newContent, {
       opacity: 1,
       duration: 0.5,
@@ -152,34 +152,40 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
         this.isAnimating = false;
       },
     });
-  
-    // **Animazione scroll graduale della barra**
-    this.scrollToCenter(activeStepElement);
-  }
-  
-  /**
-   * Funzione per scorrere gradualmente al centro
-   */
-  private scrollToCenter(element: HTMLElement): void {
+
+    // **Scroll automatico della barra**
     const stepsContainer = document.querySelector('.horizontal-steps') as HTMLElement;
-  
-    // Calcola la posizione target per centrare l'elemento
-    const stepOffset = element.offsetLeft - (stepsContainer.offsetWidth / 2) + (element.offsetWidth / 2);
-  
-    // Ottieni la posizione attuale di scroll
-    const currentScroll = stepsContainer.scrollLeft;
-  
-    // Animazione incrementale dello scroll
-    gsap.to(stepsContainer, {
-      scrollLeft: currentScroll + (stepOffset - currentScroll) / 2, // Scorrimento graduale
-      duration: 1.2, // Durata più lunga per uno scorrimento fluido
-      ease: 'power2.out',
-      onComplete: () => {
-        // Ripeti finché non è centrato
-        if (Math.abs(stepsContainer.scrollLeft - stepOffset) > 5) {
-          this.scrollToCenter(element);
-        }
-      },
-    });
+
+    // Calcola offset e larghezza dello step attivo
+    const stepOffset = activeStepElement.offsetLeft;
+    const stepWidth = activeStepElement.offsetWidth;
+
+    // Larghezza e posizione massima scrollabile del contenitore
+    const containerWidth = stepsContainer.offsetWidth;
+    const maxScrollLeft = stepsContainer.scrollWidth - containerWidth;
+
+    // Calcola il nuovo target di scroll centrando lo step attivo
+    let targetScrollLeft = stepOffset - (containerWidth / 2) + (stepWidth / 2);
+
+    // Correggi i limiti dello scroll per i casi estremi (inizio e fine)
+    if (targetScrollLeft < 0) targetScrollLeft = 0;
+    if (targetScrollLeft > maxScrollLeft) targetScrollLeft = maxScrollLeft;
+
+    // Rileva se siamo su mobile o tablet
+    const isMobileOrTablet = window.innerWidth <= 768;
+
+    // Sincronizza lo scroll (mobile o desktop)
+    if (isMobileOrTablet) {
+      stepsContainer.scrollTo({
+        left: targetScrollLeft,
+        behavior: 'smooth',
+      });
+    } else {
+      gsap.to(stepsContainer, {
+        scrollLeft: targetScrollLeft,
+        duration: 0.8,
+        ease: 'power3.inOut',
+      });
+    }
   }
 }
