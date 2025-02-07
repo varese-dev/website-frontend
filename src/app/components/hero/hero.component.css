@@ -1,6 +1,6 @@
 .hero-section {
   position: relative;
-  height: 95vh;
+  height: 130vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -135,9 +135,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 5rem;
 }
 
-.card.new-design {
+.card.new-design-mobile {
+  display: none !important;
+}
+
+.card.new-design,
+.card.new-design-mobile {
   display: flex;
   flex-direction: row;
   width: 75%;
@@ -204,7 +210,6 @@
   justify-content: space-around;
 }
 
-
 .card-title {
   display: flex;
   flex-direction: column;
@@ -219,6 +224,10 @@
   letter-spacing: 0.2rem;
   color: #7e1717;
   text-transform: uppercase;
+  width: 70%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis
 }
 
 .card-title p {
@@ -226,6 +235,10 @@
   color: #313131;
   font-size: 1rem;
   letter-spacing: 0.1rem;
+  width: 70%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   margin: 0 0 20px 0;
 }
 
@@ -422,6 +435,11 @@
   .cards-section {
     width: 100%;
   }
+
+  .demo-slider-container {
+    height: 500px;
+  }
+
 }
 
 @media (max-width: 768px) {
@@ -453,10 +471,88 @@
   .swiper-slide {
     width: 250px;
     height: 250px;
+    border-radius: unset;
+  }
+
+  .card-left {
+    display: none;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .card-right {
+    width: 100%;
+    justify-content: space-evenly;
+    padding: 40px 20px;
+  }
+
+  .card-title {
+    align-items: center;
+  }
+
+  .card-title h2 {
+    font-size: 1.7rem;
+  }
+
+  .card-title p {
+    font-size: 0.8rem;
+    margin: 0;
+  }
+
+  .card-details {
+    flex-direction: row;
+  }
+
+  .detail-item {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .detail-text {
+    align-items: center;
+  }
+
+  .detail-text h3 {
+    font-size: 0.8rem;
+  }
+
+  .detail-text p {
+    font-size: 0.7rem;
+  }
+
+  .card-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .card-info h3 {
+    font-size: 0.8rem;
+  }
+
+  .card-info p {
+    font-size: 0.7rem;
+  }
+
+  .btn {
+    font-size: 0.7rem;
   }
 
   .scroll-indicator {
     font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .card-final-info {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn {
+    transform: translateX(0);
   }
 }
 
@@ -486,6 +582,44 @@
   .swiper-slide {
     width: 200px;
     height: 200px;
+  }
+
+  .card-right {
+    justify-content: center;
+  }
+
+  .card-title h2 {
+    font-size: 1.5rem;
+  }
+
+  .card-title p {
+    font-size: 0.6rem;
+  }
+
+  .detail-text h3 {
+    font-size: 0.7rem;
+  }
+
+  .detail-text p {
+    font-size: 0.6rem;
+  }
+
+  .icon {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+  }
+
+  .card-info h3 {
+    font-size: 0.7rem;
+  }
+
+  .card-info p {
+    font-size: 0.6rem;
+  }
+
+  .btn {
+    font-size: 0.6rem;
   }
 
   .scroll-indicator {

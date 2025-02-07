@@ -1,10 +1,10 @@
 import { Component, AfterViewInit, HostListener, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
 import { EventService, Event } from '../../service/event-card.service';
 import { format, toZonedTime } from 'date-fns-tz';
 import Swiper, { EffectCards, Navigation, Pagination, Keyboard, Mousewheel } from 'swiper';
 import 'swiper/swiper-bundle.css';
-import { Router } from '@angular/router';
 import gsap from 'gsap';
 
 export interface ExtendedEvent extends Event {
@@ -17,7 +17,7 @@ export interface ExtendedEvent extends Event {
   templateUrl: './hero.component.html',
   styleUrls: ['./hero.component.css'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
 })
 export class HeroComponent implements AfterViewInit {
   @ViewChildren('section') sections!: QueryList<ElementRef>;

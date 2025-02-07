@@ -15,7 +15,7 @@
   <div class="carousel-container animated-content">
     <button class="nav-button prev" (click)="previousSlide()">&#10094;</button>
     <div class="carousel">
-      <div class="slides">
+      <div #slideContainer class="slides">
         <div *ngFor="let slide of visibleSlides; trackBy: trackByFn" class="slide">
           <div class="card new-design">
             <div class="card-left">
@@ -56,7 +56,7 @@
                 </div>
               </div>
               <div class="card-final-info">
-                <a class="btn" href="/eventi">Vai all'evento</a>
+                <a class="btn" [routerLink]="['/eventi', slide.id]">Vai all'evento</a>
                 <div class="card-info">
                   <h3>Tempo Rimanente</h3>
                   <p>{{ slide.timeRemaining }}</p>
@@ -67,9 +67,9 @@
 
           <div class="card new-design-mobile">
             <div class="card-left">
-                <img src="/images/logo/logoVDGminimal.png" alt="Logo Image" class="logo-image" />
-                <h1>Varese Developer Group</h1>
-                <h3>Benvenuto nel futuro</h3>
+              <img src="/images/logo/logoVDGminimal.png" alt="Logo Image" class="logo-image" />
+              <h1>Varese Developer Group</h1>
+              <h3>Benvenuto nel futuro</h3>
               <img src="/images/account/imageAccount.png" alt="Event Image" class="event-image" />
             </div>
             <hr class="hr" />
@@ -104,7 +104,7 @@
                 </div>
               </div>
               <div class="card-final-info">
-                <a class="btn" href="/eventi">Vai all'evento</a>
+                <a class="btn" [routerLink]="['/eventi', slide.id]">Vai all'evento</a>
                 <div class="card-info">
                   <h3>Tempo Rimanente: </h3>
                   <p>{{ slide.timeRemaining }}</p>
@@ -122,5 +122,8 @@
         (click)="goToSlide(idx)">
       </span>
     </div>
+  </div>
+  <div class="animated-content">
+      <button class="btn-all" href="/eventi">Scopri tutti gli eventi</button>
   </div>
 </section>

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export interface Event {
+  id: string;
   title: string;
   description: string;
   date: Date;
@@ -29,6 +30,7 @@ export class EventService {
           const maxParticipants = event.maxParticipants;
           const participantsCount = event.participantsCount;
 
+          console.log(`Event id: ${event.id}`);
           console.log(`Event Title: ${event.title}`);
           console.log(`Max Participants: ${maxParticipants}`);
           console.log(`Participants Count: ${participantsCount}`);

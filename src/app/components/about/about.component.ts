@@ -112,50 +112,73 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
   private isAnimating: boolean = false;
 
   private animateStepChange(): void {
-    if (this.isAnimating) return; // Blocca se c'è già un'animazione in corso
+    if (this.isAnimating) return;
     this.isAnimating = true;
-
+  
     const current = document.querySelector('.step-content') as HTMLElement;
-
-    // Crea una nuova card
+    const stepElements = Array.from(document.querySelectorAll('.step-block')) as HTMLElement[];
+    const activeStepElement = stepElements[this.currentIndex];
+  
+    // Aggiorna il contenuto del nuovo step
     const newContent = current.cloneNode(true) as HTMLElement;
-
-    // Aggiorna il contenuto della nuova card
     newContent.querySelector('h3')!.textContent = this.currentEvent.title;
     newContent.querySelector('p')!.textContent = this.currentEvent.description;
     newContent.querySelector('.step-date')!.textContent = this.currentEvent.year;
     const newImage = newContent.querySelector('img')!;
     newImage.src = this.currentEvent.image;
     newImage.alt = this.currentEvent.title;
-
-    // Posiziona la nuova card sopra l'attuale nel layout
+  
+    // Posiziona il nuovo contenuto sopra l'attuale
     current.insertAdjacentElement('afterend', newContent);
-
-    // Aggiungi uno stile temporaneo per la nuova card
     newContent.style.position = 'absolute';
     newContent.style.zIndex = '2';
     gsap.set(newContent, { opacity: 0 });
-
-    // Anima la scomparsa della card attuale
+  
+    // Anima la transizione del contenuto
     gsap.to(current, {
       opacity: 0,
       duration: 0.5,
       ease: 'power3.inOut',
-      onComplete: () => {
-        current.remove(); // Rimuove la card dopo l'animazione
-      },
+      onComplete: () => current.remove(),
     });
-
-    // Anima l'entrata della nuova card
+  
     gsap.to(newContent, {
       opacity: 1,
       duration: 0.5,
       ease: 'power3.inOut',
       onComplete: () => {
-        // Rimuovi z-index e flag temporanei dopo l'animazione
         newContent.style.position = '';
         newContent.style.zIndex = '';
-        this.isAnimating = false; // Libera il flag dopo l'animazione
+        this.isAnimating = false;
+      },
+    });
+  
+    // **Animazione scroll graduale della barra**
+    this.scrollToCenter(activeStepElement);
+  }
+  
+  /**
+   * Funzione per scorrere gradualmente al centro
+   */
+  private scrollToCenter(element: HTMLElement): void {
+    const stepsContainer = document.querySelector('.horizontal-steps') as HTMLElement;
+  
+    // Calcola la posizione target per centrare l'elemento
+    const stepOffset = element.offsetLeft - (stepsContainer.offsetWidth / 2) + (element.offsetWidth / 2);
+  
+    // Ottieni la posizione attuale di scroll
+    const currentScroll = stepsContainer.scrollLeft;
+  
+    // Animazione incrementale dello scroll
+    gsap.to(stepsContainer, {
+      scrollLeft: currentScroll + (stepOffset - currentScroll) / 2, // Scorrimento graduale
+      duration: 1.2, // Durata più lunga per uno scorrimento fluido
+      ease: 'power2.out',
+      onComplete: () => {
+        // Ripeti finché non è centrato
+        if (Math.abs(stepsContainer.scrollLeft - stepOffset) > 5) {
+          this.scrollToCenter(element);
+        }
       },
     });
   }

@@ -247,6 +247,7 @@ h1 .highlight {
   .horizontal-steps {
     overflow-x: scroll;
     white-space: nowrap;
+    scroll-behavior: smooth;
     padding-bottom: 20px;
   }
 
