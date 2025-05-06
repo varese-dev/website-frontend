@@ -1,0 +1,15 @@
+<div class="hero">
+  <div class="hero-overlay"></div>
+  <img src="images/strettadimano.png" alt="Hero Image" class="hero-image">
+  <div class="hero-text">
+    <h1>Partner Aziendali</h1>
+    <p>Collaboriamo con le migliori aziende del settore per offrire soluzioni di alta qualità.</p>
+  </div>
+</div>
+
+<div class="partners" *ngIf="partners && partners.length > 0">
+  <div class="partner" *ngFor="let partner of partners">
+    <img [src]="'/images/partners/' + partner.image" [alt]="partner.name + ' Logo'" class="partner-logo">
+    <button class="discover-button" (click)="onDiscoverClick(partner.id)">DETTAGLI</button>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<div class="event-details-container">
+  <ng-container *ngIf="loading; else content">
+    <p class="loading">Caricamento dettagli evento...</p>
+  </ng-container>
+
+  <ng-template #content>
+    <ng-container *ngIf="error; else eventDetails">
+      <p class="error">{{ error }}</p>
+    </ng-container>
+  </ng-template>
+
+  <!-- Mostra i dettagli dell'evento e i talk -->
+  <ng-template #eventDetails>
+    <div class="details-cards-container">
+      <!-- Card dettagli evento -->
+      <div class="card event-card" *ngIf="event">
+        <div class="event-header">
+          <img src="images/hero.png" alt="Immagine Evento" class="event-image" />
+          <div class="event-date">{{ event.date | date: 'dd MMM yyyy' }}</div>
+        </div>
+        <div class="event-content">
+          <h1>{{ event.title }}</h1>
+          <p class="description">{{ event.description }}</p>
+          <p><strong>Data:</strong> {{ event.date | date: 'longDate' }}</p>
+          <p><strong>Posti disponibili:</strong> {{ event.remaining }}</p>
+        </div>
+      </div>
+
+      <!-- Talks e dettagli -->
+      <div class="card talks-card" *ngIf="talks && talks.length">
+        <h2>Talks</h2>
+        <table class="talks-table">
+          <thead>
+          <tr>
+            <th>Talk</th>
+            <th>Relatori</th>
+            <th>Tags</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let talk of talks">
+            <td>
+              <strong>{{ talk.title }}</strong>
+              <p>{{ talk.description }}</p>
+            </td>
+            <td>
+              {{ getSpeakerNames(talk) }}
+            </td>
+            <td>
+              {{ getTalkTags(talk) }}
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,158 @@
+<div class="dashboard-container">
+  
+    <aside class="sidebar">
+      <button (click)="toggleSection('userDetails')" class="sidebar-item">Dettagli Utente</button>
+      <button (click)="toggleSection('bookings')" class="sidebar-item">Prenotazioni</button>
+      <button (click)="toggleSection('events')" class="sidebar-item">Eventi</button>
+      <button (click)="toggleSection('tags')" class="sidebar-item">Tag</button>
+      <button (click)="toggleSection('talks')" class="sidebar-item">Talk</button>
+      <button (click)="toggleSection('partners')" class="sidebar-item">Partner</button>
+      <button (click)="logout()" class="sidebar-item logout-button">Logout</button>
+    </aside>
+  
+    <main class="content-area">
+      <!-- Dettagli Utente -->
+      <div *ngIf="activeSection === 'userDetails'">
+        <h2>Dettagli Utente</h2>
+        <div class="card">
+          <p><strong>Nome:</strong> {{ user?.name }}</p>
+          <p><strong>Cognome:</strong> {{ user?.surname }}</p>
+          <p><strong>Email:</strong> {{ user?.email }}</p>
+          <p><strong>Telefono:</strong> {{ user?.phone }}</p>
+        </div>
+      </div>
+  
+      <!-- Prenotazioni -->
+      <div *ngIf="activeSection === 'bookings'">
+        <h2>Prenotazioni</h2>
+        <table class="table centered-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Evento</th>
+              <th>Utente</th>
+              <th>Data</th>
+              <th>Stato</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let booking of bookings">
+              <td>{{ booking.id }}</td>
+              <td>{{ booking.eventId }}</td>
+              <td>{{ booking.userId }}</td>
+              <td>{{ booking.date | date: 'short' }}</td>
+              <td>{{ booking.status }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <!-- Eventi -->
+      <div *ngIf="activeSection === 'events'">
+        <h2>Eventi</h2>
+        <button (click)="goToCreateEvent()" class="btn btn-primary">Crea Evento</button>
+        <table class="table centered-table events-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Titolo</th>
+              <th>Descrizione</th>
+              <th>Data</th>
+              <th>Azioni</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let event of events">
+              <td>{{ event.id }}</td>
+              <td>{{ event.title }}</td>
+              <td>{{ event.description }}</td>
+              <td>{{ event.date | date: 'short' }}</td>
+              <td>
+                <button (click)="goToEditEvent(event.id)" class="btn btn-secondary">Modifica</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <!-- Tag -->
+      <div *ngIf="activeSection === 'tags'">
+        <h2>Tag</h2>
+        <button (click)="goToCreateTag()" class="btn btn-primary">Crea Tag</button>
+        <table class="table centered-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Azioni</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tag of tags">
+              <td>{{ tag.id }}</td>
+              <td>{{ tag.name }}</td>
+              <td>
+                <button (click)="goToEditTag(tag.id)" class="btn btn-secondary">Modifica</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <!-- Talks -->
+      <div *ngIf="activeSection === 'talks'">
+        <h2>Talks</h2>
+        <button (click)="goToCreateTalk()" class="btn btn-primary">Crea Talk</button>
+        <table class="table centered-table talks-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Titolo</th>
+              <th>Descrizione</th>
+              <th>Azioni</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let talk of talks">
+              <td>{{ talk.id }}</td>
+              <td>{{ talk.title }}</td>
+              <td>{{ talk.description }}</td>
+              <td>
+                <button (click)="goToEditTalk(talk.id)" class="btn btn-secondary">Modifica</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <!-- Partner -->
+      <div *ngIf="activeSection === 'partners'">
+        <h2>Partner</h2>
+        <button (click)="goToCreatePartner()" class="btn btn-primary">Crea Partner</button>
+        <table class="table centered-table partners-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Luogo</th>
+              <th>Email</th>
+              <th>Azioni</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let partner of partners">
+              <td>{{ partner.id }}</td>
+              <td>{{ partner.name }}</td>
+              <td>{{ partner.place }}</td>
+              <td>{{ partner.email }}</td>
+              <td>
+                <button (click)="goToEditPartner(partner.id)" class="btn btn-secondary">Modifica</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+    </main>
+  </div>
+  

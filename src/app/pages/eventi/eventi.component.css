@@ -1,0 +1,297 @@
+/* ---------------------------- */
+/*         General Styles       */
+/* ---------------------------- */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+.hero {
+  position: relative;
+  text-align: center;
+  color: white;
+  height: 450px;
+  margin-top: 14.1vh;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(50%);
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.hero-text p {
+  font-size: 1.25rem;
+  max-width: 600px;
+  margin: 0 auto;
+  color: #f5f5f5;
+}
+
+.h2 {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 2rem;
+  color: #333;
+}
+
+/* ---------------------------- */
+/*         Search Bar           */
+/* ---------------------------- */
+.search-bar {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto;
+  width: 50%;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.search-bar input:focus {
+  border-color: #A90202;
+  box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
+  outline: none;
+}
+
+/* ---------------------------- */
+/*       Cards Container        */
+/* ---------------------------- */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 40px 100px;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .cards-container {
+    padding: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+/* ---------------------------- */
+/*           Card               */
+/* ---------------------------- */
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Rende tutta la card cliccabile */
+.card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Sezione Immagine */
+.card-image-container {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .card-image {
+  transform: scale(1.05);
+}
+
+/* Data dell'Evento */
+.event-date {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
+  padding: 5px 8px;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/* Sezione Dettagli */
+.card-details {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  padding-bottom: 50px; /* Spazio per il footer */
+}
+
+.event-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.event-time {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 5px;
+}
+
+.router-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.event-description {
+  font-size: 0.9rem;
+  color: #555;
+  flex-grow: 1;
+  margin-bottom: 10px;
+}
+
+/* Tags */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.tag {
+  background-color: #A90202;
+  color: white;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+/* Booking Message */
+.booking-message {
+  margin-top: 10px;
+  padding: 8px;
+  color: white;
+  background-color: #A90202;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  animation: fade-in 0.3s ease-in-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---------------------------- */
+/*          Card Footer         */
+/* ---------------------------- */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  border-top: 1px solid #ddd;
+  padding: 10px 15px;
+  box-sizing: border-box;
+}
+
+/* Posti rimanenti fissi in basso a sinistra */
+.remaining-spots {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #e74c3c;
+  flex-grow: 1;
+  text-align: left;
+}
+
+/* Bottone Partecipa fisso in basso a destra */
+.participate-button {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  background-color: #A90202;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  white-space: nowrap; /* Evita che il testo vada a capo */
+}
+
+.participate-button:hover {
+  background-color: #870202;
+}
+
+.participate-button:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(169, 2, 2, 0.5);
+}
+
+
+/* ---------------------------- */
+/*           Responsiveness     */
+/* ---------------------------- */
+@media (max-width: 768px) {
+  .search-bar {
+    width: 80%;
+  }
+
+  .cards-container {
+    padding: 20px;
+  }
+}

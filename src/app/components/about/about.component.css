@@ -1,0 +1,286 @@
+/* Sezione principale */
+.about-section {
+  padding: 80px;
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+}
+
+.hero-header {
+  margin-bottom: 30px;
+}
+
+.label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #16213e;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+  color: #333;
+  margin: 10px 0;
+  text-transform: uppercase;
+}
+
+h1 .highlight {
+  color: #b22222;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #555;
+  margin: 10px 0 40px;
+}
+
+.animated-content {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fade-in 1s ease forwards;
+}
+
+.animated-content:nth-child(1) {
+  animation-delay: 0.5s;
+}
+
+.animated-content:nth-child(2) {
+  animation-delay: 0.7s;
+}
+
+.animated-content:nth-child(3) {
+  animation-delay: 0.9s;
+}
+
+/* Step orizzontale */
+.horizontal-steps {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 40px 0;
+}
+
+.step-track {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 70%;
+  position: relative;
+}
+
+.step-block {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.step {
+  padding: 15px 20px;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.step.active {
+  background-color: #16213e;
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.step-year {
+  font-size: 0.9rem;
+  letter-spacing: 0.1rem;
+  color: inherit;
+}
+
+.progress-line {
+  position: absolute;
+  bottom: -10px;
+  height: 4px;
+  background-color: #16213e;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+/* Contenitore step */
+.step-content {
+  position: relative;
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  margin: auto;
+  z-index: 1;
+}
+
+.step-content-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 400px;
+}
+
+/* Contenitore dei dettagli */
+.step-detail {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+  border-radius: 16px;
+  padding: 40px;
+}
+
+/* Immagine a sinistra con ombra */
+.step-image img {
+  width: 350px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Testo a destra */
+.step-text {
+  text-align: left;
+  justify-content: center;
+  padding: 20px;
+}
+
+.step-date {
+  font-size: 1.2rem;
+  color: #16213e;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+/* Titolo */
+.step-text h3 {
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 0.1rem;
+  color: #16213e;
+  margin-bottom: 15px;
+}
+
+/* Descrizione */
+.step-text p {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.1rem;
+  color: #444;
+  line-height: 1.6;
+}
+
+@media (max-width: 1440px) {
+  .about-section {
+    padding: 80px 50px;
+  }
+
+  .step-year {
+    font-size: 0.8rem;
+  }
+
+  .step-content {
+    width: unset;
+  }
+}
+
+@media (max-width: 1024px) {
+  .label {
+    font-size: 0.8rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .step-track {
+    width: unset;
+  }
+
+  .step-content {
+    padding: 20px;
+  }
+
+  .step-content-wrapper {
+    height: 300px;
+  }
+
+  .step-detail {
+    padding: 0;
+  }
+
+  .step-image img {
+    width: 250px;
+  }
+
+  .step-date {
+    font-size: 1rem;
+  }
+
+  .step-text h3 {
+    font-size: 1.8rem;
+  }
+
+  .step-text p {
+    font-size: 0.8rem;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .about-section {
+    padding: 80px 30px;
+  }
+
+  .horizontal-steps {
+    overflow-x: scroll;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    padding-bottom: 20px;
+  }
+
+  .step-track {
+    display: inline-flex;
+    white-space: nowrap;
+  }
+
+  .step {
+    text-align: center;
+  }
+
+  .step-content {
+    padding: 0;
+  }
+
+  .step-content-wrapper {
+    height: 400px;
+  }
+
+  .step-detail {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 20px;
+  }
+
+  .step-text {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .step-content-wrapper {
+    height: 550px;
+  }
+}

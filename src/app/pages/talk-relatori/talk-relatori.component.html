@@ -1,0 +1,56 @@
+<div class="speakersPage">
+  <div class="hero">
+    <div class="hero-overlay"></div>
+    <img src="talk.jpg" alt="Hero Image" class="hero-image">
+    <div class="hero-text">
+      <h1>SCOPRI I RELATORI IN EVIDENZIA</h1>
+      <p>Scopri i relatori che rendono i nostri eventi un’esperienza unica!<br>Professionisti del settore e sviluppatori
+        di
+        talento condividono le loro conoscenze su argomenti innovativi,<br> strumenti e best practice per ispirare e
+        formare
+        la
+        community.</p>
+    </div>
+  </div>
+  <div class="grid-container">
+    <div class="card" *ngFor="let relatore of relatori">
+      <!-- Sezione superiore della card: ora mostra l'immagine hero.png -->
+      <div class="card__img"></div>
+
+      <!-- Avatar del relatore -->
+      <div class="card__avatar">
+        <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="clipCircle-{{ relatore.id }}">
+              <circle cx="64" cy="64" r="60"></circle>
+            </clipPath>
+          </defs>
+          <image
+            [attr.href]="relatore.image"
+            x="-60"
+            y="-60"
+            width="240"
+            height="240"
+            [attr.clip-path]="'url(#clipCircle-' + relatore.id + ')'">
+          </image>
+        </svg>
+      </div>
+
+      <!-- Titoli e pulsanti -->
+      <div class="card__name-wrapper">
+        <div class="card__title">{{ relatore.name }} {{ relatore.surname }}</div>
+      </div>
+
+      <!-- Biografia del relatore -->
+      <div class="card__biography">
+        <p>{{ relatore.biography }}</p>
+      </div>
+
+      <div class="card__wrapper">
+        <button class="card__btn card__btn-solid" [routerLink]="['/meeting', relatore.id]">
+          Scopri il relatore
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
