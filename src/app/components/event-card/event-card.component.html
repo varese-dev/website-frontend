@@ -1,0 +1,129 @@
+<section id="event" class="event-section">
+  <canvas id="particleCanvasEvent"></canvas>
+  <div class="hero-header">
+    <div class="label animated-content">Our Events</div>
+    <h1 class="animated-content">
+      Quando: <span class="highlight">Scopri il nostro calendario</span>
+    </h1>
+    <p class="subtitle animated-content">
+      Scopri le tappe fondamentali del nostro gruppo: un percorso fatto di
+      eventi, incontri e collaborazioni. Attraverso talk tecnici, workshop e
+      momenti di networking, costruiamo una community dove le idee prendono vita
+      e diventano innovazione.
+    </p>
+  </div>
+  <div class="carousel-container animated-content">
+    <button class="nav-button prev" (click)="previousSlide()">&#10094;</button>
+    <div class="carousel">
+      <div #slideContainer class="slides">
+        <div *ngFor="let slide of visibleSlides; trackBy: trackByFn" class="slide">
+          <div class="card new-design">
+            <div class="card-left">
+              <img src="/images/logo/logoVDGminimal.png" alt="Logo Image" class="logo-image" />
+              <h1>Varese Developer Group</h1>
+              <h3>Benvenuto nel futuro</h3>
+              <img src="/images/account/imageAccount.png" alt="Event Image" class="event-image" />
+            </div>
+            <div class="divider"></div>
+            <div class="card-right">
+              <div class="card-title">
+                <h2>{{ slide.title }}</h2>
+                <p>{{ slide.description }}</p>
+              </div>
+              <div class="card-details">
+                <div class="detail-item">
+                  <span class="icon"><i class="fas fa-calendar-alt"></i></span>
+                  <div class="detail-text">
+                    <h3>Data e Ora</h3>
+                    <p>{{ slide.date | date: 'dd MMMM yyyy, HH:mm' }}</p>
+                  </div>
+                </div>
+
+                <div class="detail-item">
+                  <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
+                  <div class="detail-text">
+                    <h3>Vieni a Trovarci</h3>
+                    <p>{{ slide.address}}</p>
+                  </div>
+                </div>
+
+                <div class="detail-item">
+                  <span class="icon"><i class="fas fa-phone"></i></span>
+                  <div class="detail-text">
+                    <h3>Per Informazioni</h3>
+                    <p>123 4567890</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-final-info">
+                <a class="btn" [routerLink]="['/eventi', slide.id]">Vai all'evento</a>
+                <div class="card-info">
+                  <h3>Tempo Rimanente</h3>
+                  <p>{{ slide.timeRemaining }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card new-design-mobile">
+            <div class="card-left">
+              <img src="/images/logo/logoVDGminimal.png" alt="Logo Image" class="logo-image" />
+              <h1>Varese Developer Group</h1>
+              <h3>Benvenuto nel futuro</h3>
+              <img src="/images/account/imageAccount.png" alt="Event Image" class="event-image" />
+            </div>
+            <hr class="hr" />
+            <div class="card-right">
+              <div class="card-title">
+                <h2>{{ slide.title }}</h2>
+                <p>{{ slide.description }}</p>
+              </div>
+              <div class="card-details">
+                <div class="detail-item">
+                  <span class="icon"><i class="fas fa-calendar-alt"></i></span>
+                  <div class="detail-text">
+                    <h3>Data e Ora: </h3>
+                    <p>{{ slide.date | date: 'dd MMMM yyyy, HH:mm' }}</p>
+                  </div>
+                </div>
+
+                <div class="detail-item">
+                  <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
+                  <div class="detail-text">
+                    <h3>Vieni a Trovarci: </h3>
+                    <p>{{ slide.address}}</p>
+                  </div>
+                </div>
+
+                <div class="detail-item">
+                  <span class="icon"><i class="fas fa-phone"></i></span>
+                  <div class="detail-text">
+                    <h3>Per Informazioni: </h3>
+                    <p>123 4567890</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-final-info">
+                <a class="btn" [routerLink]="['/eventi', slide.id]">Vai all'evento</a>
+                <div class="card-info">
+                  <h3>Tempo Rimanente: </h3>
+                  <p>{{ slide.timeRemaining }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <button class="nav-button next" (click)="nextSlide()">&#10095;</button>
+    <div class="indicators">
+      <span *ngFor="let _ of getTotalPages(); let idx = index" class="indicator" [class.active]="idx === currentPage"
+        (click)="goToSlide(idx)">
+      </span>
+    </div>
+  </div>
+  <div class="animated-content">
+      <button class="btn-all" href="/eventi">Scopri tutti gli eventi</button>
+  </div>
+</section>

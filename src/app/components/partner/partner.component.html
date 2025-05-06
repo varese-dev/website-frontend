@@ -1,0 +1,31 @@
+<section id="partners" class="partners-section">
+  <div class="partners-container">
+    <div class="hero-header">
+      <div class="label animated-content">Our Partners</div>
+      <h1 class="animated-content">Insieme: <span class="highlight">Collaboriamo con i migliori</span></h1>
+      <p class="subtitle animated-content">Al Varese Developers Group amiamo dare vita a progetti innovativi e
+        sappiamo che le migliori idee nascono dalla collaborazione. Per questo
+        siamo sempre alla ricerca di partner con cui condividere competenze e
+        ambizioni. Lavorare con professionisti che puntano all'eccellenza ci
+        permette di creare soluzioni di alta qualità, affrontare nuove sfide con
+        entusiasmo e costruire qualcosa di davvero significativo.</p>
+      <div class="animated-content">
+        <a href="/partner">
+          <button class="btn">Scopri di più</button>
+        </a>
+      </div>
+    </div>
+
+    <!-- Carosello immagini -->
+    <div class="carousel-container animated-content">
+      <div class="carousel">
+        <div class="slides">
+          <div *ngFor="let slide of slides; let i = index" class="slide" [class.active]="i === currentIndex()"
+            [style.transform]="'translateX(' + -100 * currentIndex() + '%)'">
+            <img [src]="slide.image" [alt]="slide.alt" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
